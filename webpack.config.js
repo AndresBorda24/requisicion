@@ -1,5 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 const dotenv = require('dotenv-webpack');
+const resolve = require("path").resolve;
 
 require("dotenv").config();
 
@@ -11,7 +12,7 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath(process.env.APP_URL + 'build')
     .setManifestKeyPrefix('build/')
-    .addEntry('TH/app', './assets/TH/index.js')
+    .addEntry('jefes/app', './assets/jefes/index.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()
@@ -27,4 +28,9 @@ Encore
     }))
 ;
 
-module.exports = Encore.getWebpackConfig();
+let config = Encore.getWebpackConfig();
+config.resolve.alias = {
+    '@': resolve(__dirname, './assets')
+};
+
+module.exports = config;
