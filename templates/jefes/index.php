@@ -8,8 +8,8 @@
 </head>
 <body>
     <?= $this->fetch("./partials/header.php") ?>
-    <main>
-
+    <main class="container my-5">
+        <?= $this->fetch("./jefes/comp/grilla.php") ?>
     </main>
     <?= $this->fetch("./partials/footer.php") ?>
 </body>
