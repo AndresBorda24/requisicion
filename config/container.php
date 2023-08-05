@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Views;
 use DI\ContainerBuilder;
 use Medoo\Medoo;
 use Psr\Container\ContainerInterface;

@@ -1,21 +1,20 @@
 <?php
 declare(strict_types=1);
 
-use function DI\env;
-
 return [
-    "app.name" => env("APP_NAME", "Mi app"),
-    "app.path" => env("APP_BASE", ""),
-    "app.url"  => env("APP_URL", "localhost"),
-    "app.api"  => env("APP_API", "localhost/api"),
+    "app.name" => $_ENV["APP_NAME"] ?? "Mi app",
+    "app.path" => $_ENV["APP_BASE"] ?? "",
+    "app.url"  => $_ENV["APP_URL"] ?? "localhost",
+    "app.api"  => $_ENV["APP_API"] ?? "localhost/api",
+    "app.ver"  => $_ENV["APP_VER"] ?? "0.0.0",
 
-    "app.templates"   => env("TEMPLATES", "/templates"),
-    "app.entrypoints" => env("ENTRYPOINTS_PATH", "/public"),
+    "app.templates"   => __DIR__ . '/..' . $_ENV["TEMPLATES"] ?? "/templates",
+    "app.entrypoints" => __DIR__ . '/..' . $_ENV["ENTRYPOINTS_PATH"] ?? "/public",
 
-    "db.host" => env("DB_HOST", "localhost"),
-    "db.type" => env("DB_TYPE", "mysql"),
-    "db.user" => env("DB_USER", "root"),
-    "db.port" => env("DB_PORT", 3306),
-    "db.pass" => env("DB_PASS", ""),
-    "db.name" => env("DB_NAME", "mi_app"),
+    "db.host" => $_ENV["DB_HOST"] ?? "localhost",
+    "db.type" => $_ENV["DB_TYPE"] ?? "mysql",
+    "db.user" => $_ENV["DB_USER"] ?? "root",
+    "db.port" => $_ENV["DB_PORT"] ?? 3306,
+    "db.pass" => $_ENV["DB_PASS"] ?? "",
+    "db.name" => $_ENV["DB_NAME"] ?? "mi_app",
 ];
