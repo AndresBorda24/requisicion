@@ -4,8 +4,8 @@ declare(strict_types = 1);
 namespace App\Http\Middleware;
 
 use App\Auth;
-use App\Config;
-use Slim\Psr7\Response;
+use Laminas\Diactoros\Response;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -14,11 +14,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 class AuthMiddleware implements MiddlewareInterface
 {
     private Auth $auth;
-    private Config $config;
+    private ContainerInterface $config;
 
     public function __construct(
         Auth $auth,
-        Config $config
+        ContainerInterface $config
     ) {
         $this->auth = $auth;
         $this->config = $config;
@@ -36,7 +36,7 @@ class AuthMiddleware implements MiddlewareInterface
         return $response->withHeader(
             'Location',
             'https://intranet.asotrauma.com.co/iniciosesion.php?ruta=' .
-            $this->config->get("app.base")
+            $this->config->get("app.path")
         );
     }
 }
