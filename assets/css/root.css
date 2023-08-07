@@ -1,5 +1,6 @@
 @import "./bootstrap.css";
-@import "tabulator-tables/dist/css/tabulator_simple.min.css";
+/*@import "tabulator-tables/dist/css/tabulator_simple.min.css";*/
+@import "awesome-notifications/dist/style.css";
 
 :root {
     --bs-primary: #077E9D;

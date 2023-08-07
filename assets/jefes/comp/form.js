@@ -1,23 +1,28 @@
+import { errorAlert } from "@/partials/alerts"
+import { createRequisicion } from "@/jefes/requests/RequisicionRequests";
+
 export default () => ({
     state: {},
     showForm: false,
-
-    /** Abre el modal y 'Resetea' el estado */
-    openForm() {
-        this.state = {};
-        this.showForm = true;
-    },
 
     /**
      * Guarda la requisicion en la base de datos.
     */
     async save() {
-        const data = JSON.parse(JSON.stringify(this.state));
-        data.state = "Pendiente";
-        data.created_at = "2023-08-07 10:20";
+        try {
+            const data = await createRequisicion(this.state);
+            this.$dispatch("new-requisicion", data.data);
+            this.closeForm();
+        } catch(e) {
+            errorAlert("No se pudo realizar la solicitud");
+            console.error("Create Req: ", e);
+        }
+    },
 
-        this.$dispatch("new-requisicion", data);
-        this.closeForm();
+    /** Abre el modal y 'Resetea' el estado */
+    openForm() {
+        this.state = {};
+        this.showForm = true;
     },
 
     /** Cierra el modal */
