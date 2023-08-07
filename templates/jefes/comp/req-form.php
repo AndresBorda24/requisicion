@@ -13,13 +13,13 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   </template>
 
 
-  <form class="m-auto d-flex flex-column rounded overflow-auto" style="
+  <form class="small m-auto d-flex flex-column rounded overflow-auto" style="
     width: 70vw;
-    height: 70vh;
+    height: 80vh;
     max-width: 800px;
   ">
-    <section class="bg-primary p-3">
-      <span class="text-light fw-bold">
+    <section class="bg-primary p-2">
+      <span class="text-light fw-bold ms-3">
         Solicitar Nueva Requisici&oacute;n
       </span>
       <button
@@ -28,13 +28,13 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       class="btn btn-sm btn-close btn-close-white float-end"></button>
     </section>
 
-    <section class="p-3 flex-grow-1 overflow-auto bg-body small">
+    <section class="p-3 flex-grow-1 overflow-auto bg-body small text-primary-emphasis">
       <p class="text-muted small">
         Todos los campos con (*) son requeridos.
       </p>
 
-      <h6 class="border-bottom">Informaci&oacute;n General</h6>
-      <div class="mb-3">
+      <h6>Informaci&oacute;n General</h6>
+      <div class="mb-2">
         <label for="cargo" class="form-label text-muted small">Cargo*:</label>
         <input
         type="text"
@@ -44,7 +44,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         class="form-control form-control-sm" id="cargo">
       </div>
 
-      <div class="mb-3 row row-cold-1 row-cols-md-2 g-0">
+      <div class="mb-2 row row-cols-1 row-cols-md-2 g-0">
         <div class="p-1">
           <label for="motivo" class="form-label text-muted small">Motivo*:</label>
           <select
@@ -77,7 +77,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-4 row row-cold-1 row-cols-md-2 g-0">
+      <div class="mb-4 row row-cols-1 row-cols-md-2 g-0">
         <div class="p-1">
           <label for="horario" class="form-label text-muted small">Horario*:</label>
           <input
@@ -102,35 +102,102 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <h6 class="border-bottom">Cargo Nuevo</h6>
-      <select
-      x-model="state.nivel_educativo"
-      class="form-select form-select-sm mb-2"
-      id="conv-nivel-educativo"
-      required>
-        <option selected="" hidden="" value="">-- Seleccionar --</option>
-        <option value="BACHILLER">Bachiller</option>
-        <option value="TECNICO">Técnico</option>
-        <option value="TECNOLOGO">Tecnólogo</option>
-        <option value="PROFESIONAL">Profesional</option>
-        <option value="ESPECIALIZACION">Especialización</option>
-      </select>
-      <div class="mb-3">
+      <h6>Cargo Nuevo</h6>
+      <div class="mb-2">
+        <label class="form-label text-muted small" for="nivel_educativo">
+          Educaci&oacute;n en (Nivel Acad&eacute;mico):
+        </label>
+        <select
+        x-model="state.nivel_educativo"
+        class="form-select form-select-sm"
+        id="nivel_educativo"
+        required>
+          <option selected="" hidden="" value="">-- Seleccionar --</option>
+          <option value="BACHILLER">Bachiller</option>
+          <option value="TECNICO">Técnico</option>
+          <option value="TECNOLOGO">Tecnólogo</option>
+          <option value="PROFESIONAL">Profesional</option>
+          <option value="ESPECIALIZACION">Especialización</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
         <label for="conv-conocimientos"
-        class="form-label small text-muted">Conocimientos:*</label>
+        class="form-label small text-muted">Conocimientos:</label>
         <textarea
         x-model="state.conocimientos"
         id="conv-conocimientos"
+        style="height: 110px;"
         class="form-control form-control-sm"
-        required=""
-        style="height: 150px;"></textarea>
+        placeholder="Detalla los conocimientos necesarios..."></textarea>
       </div>
 
 
+      <h6>Experiencia Laboral</h6>
+      <div class="mb-2 row g-0">
+        <div class="p-1 col-12 col-md-7">
+          <label for="sector" class="form-label text-muted small">Sector*:</label>
+          <input
+          type="text"
+          id="sector"
+          x-model="state.sector"
+          required
+          class="form-control form-control-sm">
+        </div>
+
+        <div class="p-1 col-12 col-md-5">
+          <label for="sector_anios" class="form-label text-muted small">A&ntilde;os*:</label>
+          <input
+          min="0"
+          required
+          type="number"
+          id="sector_anios"
+          x-model="state.sector_anios"
+          class="form-control form-control-sm">
+        </div>
+      </div>
+
+      <div class="mb-2 row g-0">
+        <div class="p-1 col-12 col-md-7">
+          <label for="area" class="form-label text-muted small">Area*:</label>
+          <input
+          id="area"
+          required
+          type="text"
+          x-model="state.area"
+          class="form-control form-control-sm">
+        </div>
+
+        <div class="p-1 col-12 col-md-5">
+          <label for="area_anios" class="form-label text-muted small">A&ntilde;os*:</label>
+          <input
+          min="0"
+          required
+          type="number"
+          id="area_anios"
+          x-model="state.area_anios"
+          class="form-control form-control-sm">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label small text-muted" for="funciones">
+          Funciones principales del cargo
+        </label>
+        <textarea
+        required
+        id="funciones"
+        style="height: 110px;"
+        x-model="state.funciones"
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
     </section>
 
     <section class="bg-secondary d-flex justify-content-end p-2">
-      <button class="btn btn-sm btn-warning">Solicitar</button>
+      <button
+      type="submit"
+      class="btn btn-sm btn-warning">Solicitar</button>
     </section>
   </form>
 </div>
