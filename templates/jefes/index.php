@@ -7,10 +7,16 @@
     <?= $this->loadAssets("jefes/app") ?>
 </head>
 <body>
-    <?= $this->fetch("./partials/header.php") ?>
-    <main class="container my-5">
-        <?= $this->fetch("./jefes/comp/grilla.php") ?>
-    </main>
-    <?= $this->fetch("./partials/footer.php") ?>
+  <?= $this->fetch("./partials/header.php") ?>
+  <main class="container my-5">
+    <section
+    class="mb-3"
+    id="buttons-container"></section>
+
+    <?= $this->fetch("./jefes/comp/grilla.php") ?>
+  </main>
+  <?= $this->fetch("./partials/footer.php") ?>
+
+  <?= $this->fetch("./jefes/comp/req-form.php") ?>
 </body>
 </html>
