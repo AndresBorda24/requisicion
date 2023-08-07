@@ -13,7 +13,9 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   </template>
 
 
-  <form class="small m-auto d-flex flex-column rounded overflow-auto" style="
+  <form
+  @submit.prevent="save"
+  class="small m-auto d-flex flex-column rounded overflow-auto" style="
     width: 70vw;
     height: 80vh;
     max-width: 800px;
