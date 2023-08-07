@@ -26,9 +26,10 @@ class Requisicion
         try {
             $_ = $this->db->insert(static::TABLE, [
                 "area" => $data["area"],
-                "cargo" => $data["cargo"],
                 "tipo" => $data["tipo"],
-                "horas" => $data["horas"],,
+                "horas" => $data["horas"],
+                "cargo" => $data["cargo"],
+                "state" => "PENDIENTE",
                 "motivo" => $data["motivo"],
                 "sector" => $data["sector"],
                 "horario" => $data["horario"],
@@ -40,7 +41,7 @@ class Requisicion
                 "nivel_educativo" => $data["nivel_educativo"],
             ], 'id');
 
-            return (int) $_;
+            return (int) $this->db->id();
         } catch(\Exception $e) {
             throw $e;
         }

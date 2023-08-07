@@ -25,7 +25,7 @@ class RequisicionController
     public function create(Request $request): Response
     {
         try {
-            $body = $request->getParsedBody() || [];
+            $body = $request->getParsedBody() ?? [];
             $data = $this->validator
                 ->validateInsert($body + ["jefe_id" => 12]);
 
