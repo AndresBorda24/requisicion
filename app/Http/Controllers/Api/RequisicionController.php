@@ -44,6 +44,18 @@ class RequisicionController
         }
     }
 
+    public function find(int $id): Response
+    {
+        try {
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->find($id)
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
     public function getTh(Request $request): Response
     {
         try {
