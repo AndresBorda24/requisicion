@@ -31,7 +31,7 @@ class Auth
         $id = $this->session->get("usu_id", 133); // 133 // 617
         if(! $id) return null;
 
-        $this->user = $this->userDb->find($id);
+        $this->user = $this->userDb->find((int) $id);
         return $this->user;
     }
 }

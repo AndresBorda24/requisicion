@@ -4,12 +4,12 @@ declare(strict_types = 1);
 namespace App\Http\Middleware;
 
 use App\Auth;
-use Laminas\Diactoros\Response;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Laminas\Diactoros\Response\EmptyResponse;
 
 class AuthMiddleware implements MiddlewareInterface
 {
@@ -32,7 +32,7 @@ class AuthMiddleware implements MiddlewareInterface
             return $handler->handle($request->withAttribute('user', $user));
         }
 
-        $response = new Response(302);
+        $response = new EmptyResponse(302);
         return $response->withHeader(
             'Location',
             'https://intranet.asotrauma.com.co/iniciosesion.php?ruta=' .
