@@ -41,7 +41,8 @@ class User
                         `usuario_nombre2`
                 )")
             ], [
-                "usuario_id" => $id
+                "U.usuario_id" => $id,
+                "J.jefe_estado" => "A"
             ]);
 
             if (!$u) return null;
