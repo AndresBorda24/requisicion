@@ -56,7 +56,16 @@ class Requisicion
     public function find(int $id): array
     {
         try {
-            $_ = $this->db->get(static::TABLE, "*", ["id" => $id ]);
+            $_ = $this->db->get(static::TABLE." (R)", [
+                "[<]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            ], [
+                "A.area_servicio_nombre (area_nombre)",
+                "R.area", "R.tipo", "R.horas", "R.cargo",
+                "R.state", "R.motivo", "R.sector", "R.horario",
+                "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
+                "R.conocimientos", "R.nivel_educativo"
+            ], ["id" => $id ]);
+
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
             return $_;
@@ -69,13 +78,24 @@ class Requisicion
      * Obtiene todas las requisiciones dependiendo de `$state`.
      *
      * @param string $state Si es vacio toma TODAS las requisiciones.
+     * @return array
     */
-    public function getAll(string $state = ""): array
+    public function getAll(string $state = "")
     {
         try {
-            return $this->db->select(static::TABLE, "*", [
-                "state[~]" => $state
-            ]);
+            $_ = $this->db->select(static::TABLE."(R)", [
+                "[<]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            ], [
+                "A.area_servicio_nombre (area_nombre)",
+                "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
+                "R.state", "R.motivo", "R.sector", "R.horario",
+                "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
+                "R.conocimientos", "R.nivel_educativo", "R.created_at"
+            ], ["state[~]" => $state]);
+
+            if ($_ === null) throw new \Exception("No requisiciones encontradas");
+
+            return $_;
         } catch(\Exception $e) {
             throw $e;
         }
