@@ -26,6 +26,6 @@ export default () => ({
      * Despacha el evento para ver la informacion de la requisicion.
     */
     verRequisicion( r ) {
-        this.$dispatch("ver-requisicion", r);
+        this.$dispatch("ver-requisicion", r.id);
     },
 });
