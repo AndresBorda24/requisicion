@@ -59,9 +59,11 @@ class Requisicion
     {
         try {
             $_ = $this->db->get(static::TABLE." (R)", [
-                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]vista_jefes (J)" => "jefe_id"
             ], [
                 "A.area_servicio_nombre (area_nombre)",
+                "J.usuario_nombrec (jefe_nombre)",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
                 "R.state", "R.motivo", "R.sector", "R.horario", "R.cantidad",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
