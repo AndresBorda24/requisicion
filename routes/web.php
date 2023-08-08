@@ -8,4 +8,5 @@ use App\Http\Controllers\ViewController;
 */
 function loadWebRoutes(\Slim\App $app) {
     $app->get("/", [ViewController::class, "jefes"]);
+    $app->get("/th", [ViewController::class, "th"]);
 }

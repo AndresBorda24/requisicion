@@ -64,4 +64,20 @@ class Requisicion
             throw $e;
         }
     }
+
+    /**
+     * Obtiene todas las requisiciones dependiendo de `$state`.
+     *
+     * @param string $state Si es vacio toma TODAS las requisiciones.
+    */
+    public function getAll(string $state = ""): array
+    {
+        try {
+            return $this->db->select(static::TABLE, "*", [
+                "state[~]" => $state
+            ]);
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }
