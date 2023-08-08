@@ -10,6 +10,8 @@ interface UserInterface
 {
     public function getId(): int;
 
+    public function getJefeId(): ?int;
+
     public function isJefe(): bool;
 
     public function getGrupo(): string;

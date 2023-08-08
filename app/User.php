@@ -60,6 +60,11 @@ class User implements UserInterface
         return ! ($this->jefeId === null);
     }
 
+    public function getJefeId(): ?int
+    {
+        return $this->jefeId;
+    }
+
     // Revisa los campos requeridos
     private function checkData(array $data): bool
     {
