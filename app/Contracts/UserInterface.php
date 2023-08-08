@@ -8,9 +8,13 @@ namespace App\Contracts;
 */
 interface UserInterface
 {
-    public function getGrupo(): string;
-
     public function getId(): int;
+
+    public function getJefeId(): ?int;
+
+    public function isJefe(): bool;
+
+    public function getGrupo(): string;
 
     public function getAreaId(): int;
 

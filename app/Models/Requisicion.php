@@ -34,7 +34,7 @@ class Requisicion
                 "sector" => $data["sector"],
                 "horario" => $data["horario"],
                 "jefe_id" => $data["jefe_id"],
-                "area_id" => 20,
+                "area_id" => $data["area_id"],
                 "cantidad" => $data["cantidad"],
                 "funciones" => $data["funciones"],
                 "area_anios" => $data["area_anios"],

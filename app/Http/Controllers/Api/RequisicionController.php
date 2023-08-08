@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\UserInterface;
 use App\Models\Requisicion;
 use App\Http\Requests\RequisicionRequest;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -22,12 +23,15 @@ class RequisicionController
         $this->validator = $validator;
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request, UserInterface $user): Response
     {
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator
-                ->validateInsert($body + ["jefe_id" => 12]);
+                ->validateInsert($body + [
+                    "jefe_id" => $user->getJefeId(),
+                    "area_id" => $user->getAreaId()
+                ]);
 
             return new JsonResponse([
                 "status" => true,
