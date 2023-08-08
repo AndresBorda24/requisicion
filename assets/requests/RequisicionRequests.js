@@ -31,3 +31,17 @@ export async function getAllRequisiciones( state = "" ) {
         throw e;
     }
 }
+
+export async function getRequisicionesJefe( state = "" ) {
+    try {
+        showLoader()
+        const { data } = await axios
+            .get("/requisicion/get-jefe", {
+                params: { state }
+            }).finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}

@@ -8,6 +8,6 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("GrillaJefes", grilla);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    Alpine.start();
-})
+document.addEventListener("DOMContentLoaded", Alpine.start);
+
+window.Alpine = Alpine;
