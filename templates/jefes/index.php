@@ -18,5 +18,6 @@
   <?= $this->fetch("./partials/footer.php") ?>
 
   <?= $this->fetch("./jefes/comp/req-form.php") ?>
+  <?= $this->fetch("./partials/loader.php") ?>
 </body>
 </html>
