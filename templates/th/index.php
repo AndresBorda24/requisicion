@@ -19,6 +19,8 @@
     <?= $this->fetch("./th/comp/grilla.php") ?>
   </main>
   <?= $this->fetch("./partials/footer.php") ?>
+
+  <?= $this->fetch("./th/comp/ver.php") ?>
   <?= $this->fetch("./partials/loader.php") ?>
 </body>
 </html>

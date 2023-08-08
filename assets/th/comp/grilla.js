@@ -23,6 +23,13 @@ export default () => ({
     },
 
     /**
+     * Despacha el evento para ver la informacion de la requisicion.
+    */
+    verRequisicion( r ) {
+        this.$dispatch("ver-requisicion", r);
+    },
+
+    /**
      * Determina si hay datos o no en la grilla
     */
     get noData() {

@@ -33,7 +33,7 @@
         </template>
 
 
-        <template x-for="r in grillaData">
+        <template x-for="r in grillaData" :key="r.id">
           <tr class="small align-middle position-relative">
             <td x-text="r.area_nombre" style="white-space: nowrap;"></td>
             <td x-text="r.cargo"></td>
@@ -42,7 +42,7 @@
             <td class="position-sticky end-0">
               <button
               class="btn btn-sm btn-warning py-0"
-              @click="console.log(r)"
+              @click="verRequisicion( r )"
               type="button">
                 <span class="small">Ver</span>
               </button>
