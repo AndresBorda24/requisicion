@@ -96,9 +96,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           <input
           type="text"
           id="horario"
-          requried
+          required
           x-model="state.horario"
-          placeholder="Lunes - Viernes"
           class="form-control form-select-sm">
         </div>
 
@@ -110,7 +109,6 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           id="horas"
           required
           x-model="state.horas"
-          placeholder="48"
           class="form-control form-select-sm">
         </div>
       </div>

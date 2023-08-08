@@ -23,6 +23,10 @@ export default () => ({
     openForm() {
         this.state = {};
         this.showForm = true;
+        setTimeout(() => {
+            const _ = document.getElementById('cargo');
+            _.focus();
+        }, 1);
     },
 
     /** Cierra el modal */
