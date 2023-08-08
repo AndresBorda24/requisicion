@@ -17,6 +17,7 @@ class RequisicionRequest extends BodyRequest
                 "sector" => "required",
                 "horario" => "required",
                 "jefe_id" => "required",
+                "cantidad" => "required|integer|min:1",
                 "funciones" => "required",
                 "area_anios" => "required|integer",
                 "sector_anios" => "required|integer",

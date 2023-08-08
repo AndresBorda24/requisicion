@@ -24,7 +24,7 @@ class Requisicion
     public function create(array $data): int
     {
         try {
-            $_ = $this->db->insert(static::TABLE, [
+            $this->db->insert(static::TABLE, [
                 "area" => $data["area"],
                 "tipo" => $data["tipo"],
                 "horas" => $data["horas"],
@@ -34,6 +34,8 @@ class Requisicion
                 "sector" => $data["sector"],
                 "horario" => $data["horario"],
                 "jefe_id" => $data["jefe_id"],
+                "area_id" => 20,
+                "cantidad" => $data["cantidad"],
                 "funciones" => $data["funciones"],
                 "area_anios" => $data["area_anios"],
                 "sector_anios" => $data["sector_anios"],
@@ -57,13 +59,13 @@ class Requisicion
     {
         try {
             $_ = $this->db->get(static::TABLE." (R)", [
-                "[<]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.area", "R.tipo", "R.horas", "R.cargo",
-                "R.state", "R.motivo", "R.sector", "R.horario",
+                "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
+                "R.state", "R.motivo", "R.sector", "R.horario", "R.cantidad",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
-                "R.conocimientos", "R.nivel_educativo"
+                "R.conocimientos", "R.nivel_educativo", "R.created_at"
             ], ["id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
@@ -84,13 +86,10 @@ class Requisicion
     {
         try {
             $_ = $this->db->select(static::TABLE."(R)", [
-                "[<]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
-                "R.state", "R.motivo", "R.sector", "R.horario",
-                "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
-                "R.conocimientos", "R.nivel_educativo", "R.created_at"
+                "R.id", "R.cargo", "R.state", "R.created_at"
             ], ["state[~]" => $state]);
 
             if ($_ === null) throw new \Exception("No requisiciones encontradas");
