@@ -3,67 +3,52 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Medoo\Medoo;
+use App\User as Usuario;
 use App\Contracts\UserInterface;
 
-class User implements UserInterface
+class User
 {
     public const TABLE = "usuario";
 
-    private int $id;
-    private int $areaId;
-    private int $cargoId;
-    private string $grupo;
-    private string $nombre;
+    private Medoo $db;
 
-    public function __construct(array $data)
+    public function __construct(Medoo $db)
+    {
+        $this->db = $db;
+    }
+
+    /**
+     * Trae la informacion de un usuario dependiendo de su ID
+     *
+    */
+    public function find(int $id): ?UserInterface
     {
         try {
-            $this->checkData($data);
+            $u = $this->db->get(static::TABLE." (U)", [
+                "[>]jefes (J)" => ["usuario_id" => "id_usuario"]
+            ], [
+                "U.cargo_id",
+                "U.usuario_id (id)",
+                "U.usuario_grupo (grupo)",
+                "J.jefe_area (areaId)",
+                "J.jefe_id",
+                "nombre" => Medoo::raw("CONCAT_WS(
+                        ' ',
+                        `usuario_apellido1`,
+                        `usuario_apellido2`,
+                        `usuario_nombre1`,
+                        `usuario_nombre2`
+                )")
+            ], [
+                "usuario_id" => $id
+            ]);
 
-            $this->id      = (int) $data["id"];
-            $this->grupo   = $data["grupo"];
-            $this->areaId  = (int) $data["areaId"];
-            $this->cargoId = (int) $data["cargo_id"];
-            $this->nombre  = $data["nombre"];
+            if (!$u) return null;
+
+            return new Usuario($u);
         } catch(\Exception $e) {
             throw $e;
         }
-    }
-
-    public function getGrupo(): string
-    {
-        return $this->grupo;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getAreaId(): int
-    {
-        return $this->areaId;
-    }
-
-    public function getCargoId(): int
-    {
-        return $this->cargoId;
-    }
-
-    public function getNombre(): string
-    {
-        return $this->nombre;
-    }
-
-    // Revisa los campos requeridos
-    private function checkData(array $data): bool
-    {
-        foreach(["id", "areaId", "grupo", "cargo_id"]as $key) {
-            if(! array_key_exists($key, $data)) {
-                throw new \RuntimeException("Faltan datos usuario");
-            }
-        }
-
-        return true;
     }
 }
