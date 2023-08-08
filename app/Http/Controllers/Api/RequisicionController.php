@@ -57,4 +57,18 @@ class RequisicionController
             return responseError($e);
         }
     }
+
+    public function getJefe(Request $request, UserInterface $user): Response
+    {
+        try {
+            $_ = $request->getQueryParams()["state"] ?? "";
+
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->getAll($_, $user->getJefeId())
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
 }

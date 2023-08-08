@@ -80,17 +80,22 @@ class Requisicion
      * Obtiene todas las requisiciones dependiendo de `$state`.
      *
      * @param string $state Si es vacio toma TODAS las requisiciones.
+     * @param ?int $jefeId Si no es nulo se buscan solo las de ese jege
+     * en especifico
      * @return array
     */
-    public function getAll(string $state = "")
+    public function getAll(string $state = "", ?int $jefeId = null)
     {
         try {
+            $where = ["state[~]" => $state];
+            if ($jefeId) $where["jefe_id"] = $jefeId;
+
             $_ = $this->db->select(static::TABLE."(R)", [
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
                 "R.id", "R.cargo", "R.state", "R.created_at"
-            ], ["state[~]" => $state]);
+            ], $where);
 
             if ($_ === null) throw new \Exception("No requisiciones encontradas");
 
