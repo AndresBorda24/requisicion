@@ -36,14 +36,25 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       </p>
 
       <h6>Informaci&oacute;n General</h6>
-      <div class="mb-2">
-        <label for="cargo" class="form-label text-muted small">Cargo*:</label>
-        <input
-        type="text"
-        required
-        placeholder="Auxiliar de Sistemas"
-        x-model="state.cargo"
-        class="form-control form-control-sm" id="cargo">
+      <div class="mb-2 row g-0">
+        <div class="p-1 col-md-9">
+          <label for="cargo" class="form-label text-muted small">Cargo*:</label>
+          <input
+          type="text"
+          required
+          placeholder="Auxiliar de Sistemas"
+          x-model="state.cargo"
+          class="form-control form-control-sm" id="cargo">
+        </div>
+        <div class="p-1 col-md-3">
+          <label for="cantidad" class="form-label text-muted small"># Cargos*:</label>
+          <input
+          min="1"
+          required
+          type="number"
+          x-model="state.cantidad"
+          class="form-control form-control-sm" id="cantidad">
+        </div>
       </div>
 
       <div class="mb-2 row row-cols-1 row-cols-md-2 g-0">
