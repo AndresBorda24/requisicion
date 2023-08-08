@@ -7,7 +7,9 @@
     <?= $this->loadAssets("jefes/app") ?>
 </head>
 <body>
-  <?= $this->fetch("./partials/header.php") ?>
+  <?= $this->fetch("./partials/header.php", [
+    "title" => "Panel de requisiciones | Jefes"
+  ]) ?>
   <main class="container my-5">
     <section
     class="mb-3"
@@ -18,6 +20,7 @@
   <?= $this->fetch("./partials/footer.php") ?>
 
   <?= $this->fetch("./jefes/comp/req-form.php") ?>
+  <?= $this->fetch("./partials/ver/ver-req.php") ?>
   <?= $this->fetch("./partials/loader.php") ?>
 </body>
 </html>

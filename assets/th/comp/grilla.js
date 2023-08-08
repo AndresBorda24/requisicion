@@ -1,9 +1,9 @@
+import { grilla } from "@/partials/grilla";
 import { errorAlert } from "@/partials/alerts"
 import { getAllRequisiciones } from "@/requests/RequisicionRequests";
 
 export default () => ({
-    grillaData: [],
-    grillaState: "PENDIENTE",
+    ...grilla,
 
     async init() {
         await this.getData();
@@ -26,13 +26,6 @@ export default () => ({
      * Despacha el evento para ver la informacion de la requisicion.
     */
     verRequisicion( r ) {
-        this.$dispatch("ver-requisicion", r);
+        this.$dispatch("ver-requisicion", r.id);
     },
-
-    /**
-     * Determina si hay datos o no en la grilla
-    */
-    get noData() {
-        return this.grillaData.length === 0;
-    }
 });

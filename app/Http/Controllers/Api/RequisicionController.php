@@ -44,6 +44,18 @@ class RequisicionController
         }
     }
 
+    public function find(int $id): Response
+    {
+        try {
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->find($id)
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
     public function getTh(Request $request): Response
     {
         try {
@@ -52,6 +64,20 @@ class RequisicionController
             return new JsonResponse([
                 "status" => true,
                 "data" => $this->req->getAll($_)
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
+    public function getJefe(Request $request, UserInterface $user): Response
+    {
+        try {
+            $_ = $request->getQueryParams()["state"] ?? "";
+
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->getAll($_, $user->getJefeId())
             ]);
         } catch(\Exception $e) {
             return responseError($e);

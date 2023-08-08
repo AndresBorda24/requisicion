@@ -9,7 +9,9 @@ use App\Http\Controllers\Api\RequisicionController;
 function loadApiRoutes(App $app): void {
     $app->group("/api", function(Group $api) {
         $api->group("/requisicion", function(Group $req) {
+            $req->get("/{id:[0-9]+}/get", [RequisicionController::class, "find"]);
             $req->get("/get-th", [RequisicionController::class, "getTh"]);
+            $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
             $req->post("/create", [RequisicionController::class, "create"]);
         });
     })->add(JsonBodyParserMiddleware::class);

@@ -21,6 +21,12 @@ class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
     <section
     class="p-3 flex-grow-1 overflow-auto bg-body small text-primary-emphasis">
       <h6>Informaci&oacute;n General</h6>
+      <p class="text-center">
+        Solicitado por
+        <span x-text="data.jefe_nombre" class="fw-bold"></span>
+        jefe del &aacute;rea de
+        <span x-text="data.area_nombre" class="fw-bold"></span>.
+      </p>
       <div class="mb-2">
         <span for="cargo" class="d-block mb-2 form-label text-muted small">Cargo:</span>
         <span
