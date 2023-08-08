@@ -2,7 +2,10 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Utilities.php"
+        ]
     },
     "config": {
         "platform": {
@@ -14,7 +17,7 @@
         "php-di/slim-bridge": "3.3",
         "slim/php-view": "3.2",
         "vlucas/phpdotenv": "5.5",
-        "catfan/medoo": "2.1",
+        "catfan/medoo": "2.1.10",
         "laminas/laminas-diactoros": "^2.17",
         "rakit/validation": "^1.4"
     }
