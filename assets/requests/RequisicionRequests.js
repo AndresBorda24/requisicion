@@ -17,3 +17,17 @@ export async function createRequisicion( $data ) {
         throw e;
     }
 }
+
+export async function getAllRequisiciones( state = "" ) {
+    try {
+        showLoader()
+        const { data } = await axios
+            .get("/requisicion/get-th", {
+                params: { state }
+            }).finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
