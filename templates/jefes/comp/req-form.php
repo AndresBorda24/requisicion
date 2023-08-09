@@ -66,10 +66,9 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           required
           class="form-select form-select-sm">
             <option value="" hidden>-- Selecciona --</option>
-            <option value="creacion">Creaci&oacute;n</option>
-            <option value="retiro">Retiro</option>
-            <option value="licvac">Lic. Vac.</option>
-            <option value="traslado">Traslado</option>
+            <?php foreach(\App\Enums\Motivo::all() as $key => $value): ?>
+              <option value="<?= $key ?>"> <?= $value ?> </option>
+            <?php endforeach ?>
           </select>
         </div>
 
@@ -81,11 +80,9 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           required
           class="form-select form-select-sm">
             <option value="" hidden>-- Selecciona --</option>
-            <option value="direct">Directa con Cl&iacute;nica</option>
-            <option value="temp">Temporal</option>
-            <option value="outsourcing">Outsourcing</option>
-            <option value="aprendiz">Contrato de Aprendizaje</option>
-            <option value="mandato">Contrato de Mandato</option>
+            <?php foreach(\App\Enums\Tipo::all() as $key => $value): ?>
+              <option value="<?= $key ?>"> <?= $value ?> </option>
+            <?php endforeach ?>
           </select>
         </div>
       </div>
@@ -124,11 +121,9 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         id="nivel_educativo"
         required>
           <option selected="" hidden="" value="">-- Seleccionar --</option>
-          <option value="BACHILLER">Bachiller</option>
-          <option value="TECNICO">Técnico</option>
-          <option value="TECNOLOGO">Tecnólogo</option>
-          <option value="PROFESIONAL">Profesional</option>
-          <option value="ESPECIALIZACION">Especialización</option>
+          <?php foreach(\App\Enums\NivelEducativo::all() as $key => $value): ?>
+            <option value="<?= $key ?>"> <?= $value ?> </option>
+          <?php endforeach ?>
         </select>
       </div>
 
