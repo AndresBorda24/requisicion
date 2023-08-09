@@ -38,14 +38,14 @@ class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
         <div class="p-1">
           <span for="motivo" class="d-block mb-2 form-label text-muted small">Motivo:</span>
           <span
-          x-text="data._motivo"
+          x-html="data._motivo"
           class="form-control form-control-sm"></span>
         </div>
 
         <div class="p-1">
           <span class="d-block mb-2 form-label text-muted small">Tipo:</span>
           <span
-          x-text="data._tipo"
+          x-html="data._tipo"
           class="form-control form-control-sm"></span>
         </div>
       </div>
@@ -72,7 +72,7 @@ class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
           Educaci&oacute;n en (Nivel Acad&eacute;mico):
         </span>
         <span
-        x-text="data._nivel_educativo"
+        x-html="data._nivel_educativo"
         class="form-control form-control-sm"></span>
       </div>
 
