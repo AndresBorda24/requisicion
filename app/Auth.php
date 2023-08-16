@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use Medoo\Medoo;
 use App\Models\User;
 use App\Contracts\UserInterface;
 
@@ -28,7 +27,7 @@ class Auth
             return $this->user;
         }
 
-        $id = $this->session->get("usu_id", 133); // 133 // 617
+        $id = $this->session->get("usu_id", 675); // 133 // 617 // 675
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);
