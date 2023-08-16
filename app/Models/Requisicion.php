@@ -95,16 +95,18 @@ class Requisicion
             $where = ["state[~]" => $state];
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
-            $_ = $this->db->select(static::TABLE."(R)", [
+            $data = [];
+            $this->db->select(static::TABLE."(R)", [
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
                 "R.id", "R.cargo", "R.state", "R.created_at"
-            ], $where);
+            ], $where, function($item) use(&$data) {
+                $item["state"] = Estados::value($item["state"]);
+                array_push($data, $item);
+            });
 
-            if ($_ === null) throw new \Exception("No requisiciones encontradas");
-
-            return $_;
+            return $data;
         } catch(\Exception $e) {
             throw $e;
         }

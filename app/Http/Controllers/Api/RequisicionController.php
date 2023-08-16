@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\UserInterface;
+use App\Enums\Estados;
 use App\Models\Requisicion;
 use App\Http\Requests\RequisicionRequest;
 use Laminas\Diactoros\Response\JsonResponse;
