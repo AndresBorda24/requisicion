@@ -13,10 +13,12 @@ export default () => ({
     async openModal({ detail: id }) {
         await this.getData( id );
         this.show = true;
+        window.overflow();
     },
 
     closeModal() {
         this.show = false;
+        window.overflow(true);
     },
 
     async getData( id ) {
