@@ -27,17 +27,16 @@ class RequisicionController
     {
         try {
             $body = $request->getParsedBody() ?? [];
-            $data = $this->validator
-                ->validateInsert($body + [
-                    "jefe_id" => $user->getJefeId(),
-                    "area_id" => $user->getAreaId()
-                ]);
+            $data = $this->validator->validateInsert($body);
+
+            $new  = $this->req->create($data + [
+                "jefe_id" => $user->getJefeId(),
+                "area_id" => $user->getAreaId()
+            ]);
 
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->find(
-                    $this->req->create($data)
-                )
+                "data" => $this->req->find($new)
             ]);
         } catch(\Exception $e) {
             return responseError($e);
