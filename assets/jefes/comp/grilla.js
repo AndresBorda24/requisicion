@@ -8,6 +8,7 @@ export default () => ({
     },
 
     async init() {
+        this.grillaState = this.$el.dataset.defEstado || "";
         await this.getData();
     },
 

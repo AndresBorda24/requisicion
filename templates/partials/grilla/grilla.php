@@ -12,8 +12,9 @@ style="max-height: 500px;">
           @change="getData"
           x-model="grillaState"
           class="form-select form-select-sm m-0">
-            <option value="PENDIENTE">Pendientes</option>
-            <option value="RECHAZADA">Rechazadas</option>
+            <?php foreach(\App\Enums\Estados::all() as $key => $value): ?>
+              <option value="<?= $key ?>"> <?= $value ?> </option>
+            <?php endforeach ?>
           </select>
         </th>
         <th></th>
