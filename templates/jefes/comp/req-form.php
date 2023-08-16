@@ -16,7 +16,6 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   <form
   @submit.prevent="save"
   class="small m-auto d-flex flex-column rounded overflow-auto" style="
-    width: 70vw;
     max-height: 80vh;
     max-width: 800px;
   ">
@@ -30,12 +29,14 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       class="btn btn-sm btn-close btn-close-white float-end"></button>
     </section>
 
-    <section class="p-3 flex-grow-1 overflow-auto bg-light-subtle small">
-      <p class="text-muted small">
+    <section class="bg-secondary p-2 text-light">
+      <h6 class="fw-bold text-warning">Información General</h6>
+      <span class="opacity-75 small">
         Todos los campos con (*) son requeridos.
-      </p>
+      </span>
+    </section>
 
-      <h6 class="fw-bold">Informaci&oacute;n General</h6>
+    <section class="p-3 flex-grow-1 overflow-auto bg-light-subtle small">
       <div class="mb-2 row g-0">
         <div class="p-1 col-md-9">
           <label for="cargo" class="form-label small">Cargo*:</label>
@@ -47,7 +48,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           class="form-control form-control-sm" id="cargo">
         </div>
         <div class="p-1 col-md-3">
-          <label for="cantidad" class="form-label small"># Cargos*:</label>
+          <label for="cantidad" class="form-label small">Cantidad*:</label>
           <input
           min="1"
           required
@@ -58,8 +59,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-2 row row-cols-1 row-cols-md-2 g-0">
-        <div class="p-1">
+      <div class="mb-2">
+        <div class="mb-2">
           <label for="motivo" class="form-label small">Motivo*:</label>
           <select
           id="motivo"
@@ -73,7 +74,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           </select>
         </div>
 
-        <div class="p-1">
+        <div>
           <label for="tipo" class="form-label small">Tipo*:</label>
           <select
           id="tipo"
@@ -88,8 +89,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-2 row row-cols-1 row-cols-md-2 g-0">
-        <div class="p-1">
+      <div class="mb-2">
+        <div class="mb-2">
           <label for="horario" class="form-label small">Horario*:</label>
           <input
           type="text"
@@ -99,7 +100,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           class="form-control form-select-sm">
         </div>
 
-        <div class="p-1">
+        <div>
           <label for="horas" class="form-label small">Horas Semanales*:</label>
           <input
           type="number"
@@ -112,7 +113,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-2">
         <label class="form-label small text-muted" for="funciones">
           Funciones
         </label>
@@ -125,9 +126,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         ></textarea>
       </div>
 
-      <hr>
-
-      <div class="mb-4">
+      <div class="mb-2">
         <label class="form-label small text-muted" for="observacion">
           Observaci&oacute;n:
         </label>

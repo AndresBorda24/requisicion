@@ -21,7 +21,7 @@
     --blue-800: #094c72;
     --blue-900: #0c3953;
 }
-body {
+body, .bg-dots {
     background-image: radial-gradient(#025b7d 0.5px, transparent 0.5px);
     background-size: 29px 29px;
     background-color: #f7f7f7;
