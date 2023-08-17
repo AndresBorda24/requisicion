@@ -23,6 +23,7 @@ class RequisicionRequest extends BodyRequest
                 "horas"     => "required|integer",
                 "funciones" => "nullable",
                 "observacion" => "nullable",
+                "conocimientos" => "required"
             ]);
         } catch(\Exception $e) {
             throw $e;

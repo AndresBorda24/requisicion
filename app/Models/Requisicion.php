@@ -38,6 +38,7 @@ class Requisicion
                 "area_id" => $data["area_id"],
                 "cantidad" => $data["cantidad"],
                 "funciones" => $data["funciones"],
+                "conocimientos" => $data["conocimientos"],
             ], 'id');
 
             return (int) $this->db->id();
