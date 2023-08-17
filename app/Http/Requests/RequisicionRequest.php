@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 
 use App\Enums\Tipo;
 use App\Enums\Motivo;
+use App\Enums\NivelEducativo;
 
 class RequisicionRequest extends BodyRequest
 {
@@ -24,6 +25,23 @@ class RequisicionRequest extends BodyRequest
                 "funciones" => "nullable",
                 "observacion" => "nullable",
                 "conocimientos" => "required"
+            ]);
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function validataUpdateTh(array $data): array
+    {
+        try {
+            $nivel = array_keys(NivelEducativo::all());
+
+            return $this->validate($data, [
+                "area"          => "required",
+                "sector"        => "required",
+                "area_anios"    => "required|integer",
+                "sector_anios"  => "required|integer",
+                "nivel_educativo" => "required|in:".implode(",", $nivel)
             ]);
         } catch(\Exception $e) {
             throw $e;

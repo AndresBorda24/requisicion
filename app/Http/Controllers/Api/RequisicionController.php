@@ -83,4 +83,19 @@ class RequisicionController
             return responseError($e);
         }
     }
+
+    public function updateTh(Request $request, int $id): Response
+    {
+        try {
+            $body = $request->getParsedBody() ?? [];
+            $data = $this->validator->validataUpdateTh($body);
+
+            return new JsonResponse([
+                "status" => true,
+                "__ctrl" => $this->req->updateTh($id, $data)
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
 }

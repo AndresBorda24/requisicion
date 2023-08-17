@@ -38,7 +38,7 @@ style="max-height: 500px;">
           <td x-text="r.area_nombre" style="white-space: nowrap;"></td>
           <td x-text="r.cargo" class="text-nowrap"></td>
           <td x-text="r.created_at"></td>
-          <td x-text="r.state"></td>
+          <td x-html="r.state"></td>
           <td class="position-sticky end-0">
             <button
             class="btn btn-sm btn-warning py-0"

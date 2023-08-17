@@ -59,11 +59,11 @@ export async function getRequisicion( id ) {
     }
 }
 
-export async function updateThRequisicion( state ) {
+export async function updateThRequisicion( id, state ) {
     try {
         showLoader()
         const { data } = await axios
-            .put(`/requisicion/${state.id}/update-th`, state)
+            .put(`/requisicion/${id}/update-th`, state)
             .finally(hideLoader);
 
         return data;

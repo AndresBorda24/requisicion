@@ -113,4 +113,25 @@ class Requisicion
             throw $e;
         }
     }
+
+    /**
+     * Actualizacion realizada por TH.
+    */
+    public function updateTh(int $id, array $data): int
+    {
+        try {
+            $_ = $this->db->update(static::TABLE, [
+                "area" => $data["area"],
+                "state" => Estados::PRENDIENTE_APRO,
+                "sector" => $data["sector"],
+                "area_anios" => $data["area_anios"],
+                "sector_anios" => $data["sector_anios"],
+                "nivel_educativo" => $data["nivel_educativo"]
+            ], [ "id" => $id ]);
+
+            return $_->rowCount();
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }

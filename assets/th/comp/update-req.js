@@ -6,11 +6,14 @@ export default () => ({
 
     async save() {
         try {
-            const data = await updateThRequisicion(this.state);
+            const data = await updateThRequisicion(
+                this.getReq('id'),
+                this.state
+            );
 
             console.log(data);
         } catch(e) {
-            errorAlert(e);
+            errorAlert(e.message);
         }
     }
 });

@@ -13,6 +13,8 @@ function loadApiRoutes(App $app): void {
             $req->get("/get-th", [RequisicionController::class, "getTh"]);
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
             $req->post("/create", [RequisicionController::class, "create"]);
+
+            $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
         });
     })->add(JsonBodyParserMiddleware::class);
 }
