@@ -16,7 +16,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   <form
   @submit.prevent="save"
   class="small m-auto d-flex flex-column rounded overflow-auto" style="
-    max-height: 80vh;
+    max-height: 75vh;
     max-width: 800px;
   ">
     <section class="bg-primary p-2">
