@@ -22,7 +22,7 @@ class Enum
     public static function value(string $tipo): string
     {
         if(! array_key_exists($tipo, static::$values)) {
-            throw new \Exception("Tipo not found...");
+            throw new \Exception("$tipo not found...");
         }
 
         return static::$values[ $tipo ];

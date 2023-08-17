@@ -16,8 +16,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   <form
   @submit.prevent="save"
   class="small m-auto d-flex flex-column rounded overflow-auto" style="
-    width: 70vw;
-    height: 80vh;
+    max-height: 80vh;
     max-width: 800px;
   ">
     <section class="bg-primary p-2">
@@ -30,36 +29,39 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       class="btn btn-sm btn-close btn-close-white float-end"></button>
     </section>
 
-    <section class="p-3 flex-grow-1 overflow-auto bg-body small text-primary-emphasis">
-      <p class="text-muted small">
+    <section class="bg-secondary p-2 text-light small">
+      <h6 class="fw-bold text-warning m-0">Información General</h6>
+      <span class="opacity-75 small">
         Todos los campos con (*) son requeridos.
-      </p>
+      </span>
+    </section>
 
-      <h6>Informaci&oacute;n General</h6>
+    <section class="p-3 flex-grow-1 overflow-auto bg-light-subtle small">
       <div class="mb-2 row g-0">
         <div class="p-1 col-md-9">
-          <label for="cargo" class="form-label text-muted small">Cargo*:</label>
+          <label for="cargo" class="form-label small">Cargo*:</label>
           <input
           type="text"
           required
-          placeholder="Auxiliar de Sistemas"
+          placeholder="Ej: Auxiliar de Sistemas"
           x-model="state.cargo"
           class="form-control form-control-sm" id="cargo">
         </div>
         <div class="p-1 col-md-3">
-          <label for="cantidad" class="form-label text-muted small"># Cargos*:</label>
+          <label for="cantidad" class="form-label small">Cantidad*:</label>
           <input
           min="1"
           required
           type="number"
+          placeholder="Ej: 1"
           x-model="state.cantidad"
           class="form-control form-control-sm" id="cantidad">
         </div>
       </div>
 
-      <div class="mb-2 row row-cols-1 row-cols-md-2 g-0">
-        <div class="p-1">
-          <label for="motivo" class="form-label text-muted small">Motivo*:</label>
+      <div class="mb-2">
+        <div class="mb-2">
+          <label for="motivo" class="form-label small">Motivo*:</label>
           <select
           id="motivo"
           x-model="state.motivo"
@@ -72,8 +74,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           </select>
         </div>
 
-        <div class="p-1">
-          <label for="tipo" class="form-label text-muted small">Tipo*:</label>
+        <div>
+          <label for="tipo" class="form-label small">Tipo*:</label>
           <select
           id="tipo"
           x-model="state.tipo"
@@ -87,9 +89,9 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-4 row row-cols-1 row-cols-md-2 g-0">
-        <div class="p-1">
-          <label for="horario" class="form-label text-muted small">Horario*:</label>
+      <div class="mb-2">
+        <div class="mb-2">
+          <label for="horario" class="form-label small">Horario*:</label>
           <input
           type="text"
           id="horario"
@@ -98,106 +100,59 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           class="form-control form-select-sm">
         </div>
 
-        <div class="p-1">
-          <label for="horas" class="form-label text-muted small">Horas Semanales*:</label>
+        <div>
+          <label for="horas" class="form-label small">Horas Semanales*:</label>
           <input
           type="number"
           min="0"
           id="horas"
           required
+          placeholder="Ej: 47"
           x-model="state.horas"
           class="form-control form-select-sm">
         </div>
       </div>
 
-      <h6>Cargo Nuevo</h6>
       <div class="mb-2">
-        <label class="form-label text-muted small" for="nivel_educativo">
-          Educaci&oacute;n en (Nivel Acad&eacute;mico):
+        <label for="conocimientos" class="form-label small">
+          Conocimientos*:
         </label>
-        <select
-        x-model="state.nivel_educativo"
-        class="form-select form-select-sm"
-        id="nivel_educativo"
-        required>
-          <option selected="" hidden="" value="">-- Seleccionar --</option>
-          <?php foreach(\App\Enums\NivelEducativo::all() as $key => $value): ?>
-            <option value="<?= $key ?>"> <?= $value ?> </option>
-          <?php endforeach ?>
-        </select>
-      </div>
-
-      <div class="mb-4">
-        <label for="conv-conocimientos"
-        class="form-label small text-muted">Conocimientos:</label>
         <textarea
+        id="conocimientos"
+        style="height: 100px;"
         x-model="state.conocimientos"
-        id="conv-conocimientos"
-        style="height: 110px;"
-        class="form-control form-control-sm"
-        placeholder="Detalla los conocimientos necesarios..."></textarea>
-      </div>
-
-
-      <h6>Experiencia Laboral</h6>
-      <div class="mb-2 row g-0">
-        <div class="p-1 col-12 col-md-7">
-          <label for="sector" class="form-label text-muted small">Sector*:</label>
-          <input
-          type="text"
-          id="sector"
-          x-model="state.sector"
-          required
-          class="form-control form-control-sm">
-        </div>
-
-        <div class="p-1 col-12 col-md-5">
-          <label for="sector_anios" class="form-label text-muted small">A&ntilde;os*:</label>
-          <input
-          min="0"
-          required
-          type="number"
-          id="sector_anios"
-          x-model="state.sector_anios"
-          class="form-control form-control-sm">
-        </div>
-      </div>
-
-      <div class="mb-2 row g-0">
-        <div class="p-1 col-12 col-md-7">
-          <label for="area" class="form-label text-muted small">Area*:</label>
-          <input
-          id="area"
-          required
-          type="text"
-          x-model="state.area"
-          class="form-control form-control-sm">
-        </div>
-
-        <div class="p-1 col-12 col-md-5">
-          <label for="area_anios" class="form-label text-muted small">A&ntilde;os*:</label>
-          <input
-          min="0"
-          required
-          type="number"
-          id="area_anios"
-          x-model="state.area_anios"
-          class="form-control form-control-sm">
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label class="form-label small text-muted" for="funciones">
-          Funciones principales del cargo
-        </label>
-        <textarea
         required
-        id="funciones"
-        style="height: 110px;"
-        x-model="state.funciones"
+        placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
       </div>
+
+      <div class="mb-2">
+        <label class="form-label small text-muted" for="funciones">
+          Funciones
+        </label>
+        <textarea
+        id="funciones"
+        style="height: 100px;"
+        x-model="state.funciones"
+        placeholder="Si quieres, escribe las principales funciones del cargo..."
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label small text-muted" for="observacion">
+          Observaci&oacute;n:
+        </label>
+        <textarea
+        id="observacion"
+        style="height: 50px;"
+        placeholder="Si es necesario, deja una observaci&oacute;n..."
+        x-model="state.observacion"
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
+
     </section>
 
     <section class="bg-secondary d-flex justify-content-end p-2">

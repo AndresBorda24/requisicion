@@ -4,6 +4,7 @@ import { getRequisicion } from "@/requests/RequisicionRequests";
 export default () => ({
     data: {},
     show: false,
+    tab: 1,
     events: {
         ["@ver-requisicion.document.stop"]: "openModal",
         ["x-transition.opacity"]: "",
@@ -11,12 +12,15 @@ export default () => ({
     },
 
     async openModal({ detail: id }) {
+        this.tab =  1;
         await this.getData( id );
         this.show = true;
+        window.overflow();
     },
 
     closeModal() {
         this.show = false;
+        window.overflow(true);
     },
 
     async getData( id ) {

@@ -21,6 +21,7 @@ export default () => ({
 
     /** Abre el modal y 'Resetea' el estado */
     openForm() {
+        window.overflow();
         this.state = {};
         this.showForm = true;
         setTimeout(() => {
@@ -31,6 +32,7 @@ export default () => ({
 
     /** Cierra el modal */
     closeForm() {
+        window.overflow(true);
         this.showForm = false;
     }
 });

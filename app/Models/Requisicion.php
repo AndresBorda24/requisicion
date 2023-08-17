@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\Estados;
+use App\Enums\NivelEducativo;
+use App\Enums\Tipo;
 use Medoo\Medoo;
 
 class Requisicion
@@ -25,22 +28,17 @@ class Requisicion
     {
         try {
             $this->db->insert(static::TABLE, [
-                "area" => $data["area"],
                 "tipo" => $data["tipo"],
                 "horas" => $data["horas"],
                 "cargo" => $data["cargo"],
-                "state" => "PENDIENTE",
+                "state" => Estados::SOLICITUD,
                 "motivo" => $data["motivo"],
-                "sector" => $data["sector"],
                 "horario" => $data["horario"],
                 "jefe_id" => $data["jefe_id"],
                 "area_id" => $data["area_id"],
                 "cantidad" => $data["cantidad"],
                 "funciones" => $data["funciones"],
-                "area_anios" => $data["area_anios"],
-                "sector_anios" => $data["sector_anios"],
                 "conocimientos" => $data["conocimientos"],
-                "nivel_educativo" => $data["nivel_educativo"],
             ], 'id');
 
             return (int) $this->db->id();
@@ -72,9 +70,12 @@ class Requisicion
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["_tipo"] = \App\Enums\Tipo::value($_["tipo"]);
+            $_["state"] = Estados::value($_["state"]);
+            $_["_tipo"] = Tipo::value($_["tipo"]);
             $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
-            $_["_nivel_educativo"] = \App\Enums\NivelEducativo::value($_["nivel_educativo"]);
+            $_["_nivel_educativo"] = $_["nivel_educativo"]
+                ? NivelEducativo::value($_["nivel_educativo"])
+                : null;
 
             return $_;
         } catch(\Exception $e) {
@@ -96,16 +97,18 @@ class Requisicion
             $where = ["state[~]" => $state];
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
-            $_ = $this->db->select(static::TABLE."(R)", [
+            $data = [];
+            $this->db->select(static::TABLE."(R)", [
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
                 "R.id", "R.cargo", "R.state", "R.created_at"
-            ], $where);
+            ], $where, function($item) use(&$data) {
+                $item["state"] = Estados::value($item["state"]);
+                array_push($data, $item);
+            });
 
-            if ($_ === null) throw new \Exception("No requisiciones encontradas");
-
-            return $_;
+            return $data;
         } catch(\Exception $e) {
             throw $e;
         }

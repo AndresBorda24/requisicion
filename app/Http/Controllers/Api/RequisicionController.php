@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\UserInterface;
+use App\Enums\Estados;
 use App\Models\Requisicion;
 use App\Http\Requests\RequisicionRequest;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -27,17 +28,16 @@ class RequisicionController
     {
         try {
             $body = $request->getParsedBody() ?? [];
-            $data = $this->validator
-                ->validateInsert($body + [
-                    "jefe_id" => $user->getJefeId(),
-                    "area_id" => $user->getAreaId()
-                ]);
+            $data = $this->validator->validateInsert($body);
+
+            $new  = $this->req->create($data + [
+                "jefe_id" => $user->getJefeId(),
+                "area_id" => $user->getAreaId()
+            ]);
 
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->find(
-                    $this->req->create($data)
-                )
+                "data" => $this->req->find($new)
             ]);
         } catch(\Exception $e) {
             return responseError($e);
