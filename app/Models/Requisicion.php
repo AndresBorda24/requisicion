@@ -70,6 +70,7 @@ class Requisicion
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
+            $_["state"] = Estados::value($_["state"]);
             $_["_tipo"] = Tipo::value($_["tipo"]);
             $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
             $_["_nivel_educativo"] = $_["nivel_educativo"]
