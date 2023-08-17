@@ -1,13 +1,13 @@
 <div
 class="table-responsive-md position-relative overflow-auto shadow z-0"
 style="max-height: 500px;">
-  <table class="table table-sm table-striped table-hover m-0">
+  <table class="table table-sm table-striped table-bordered table-hover m-0">
     <thead class="sticky-top">
       <tr class="align-middle">
         <th>&Aacute;rea</th>
         <th style="width: 30%;">Cargo</th>
-        <th>Fecha Solicitud</th>
-        <th>
+        <th class="text-nowrap">Fecha Solicitud</th>
+        <th style="min-width: 100px;">
           <select
           @change="getData"
           x-model="grillaState"
@@ -36,7 +36,7 @@ style="max-height: 500px;">
       <template x-for="r in grillaData" :key="r.id">
         <tr class="small align-middle position-relative">
           <td x-text="r.area_nombre" style="white-space: nowrap;"></td>
-          <td x-text="r.cargo"></td>
+          <td x-text="r.cargo" class="text-nowrap"></td>
           <td x-text="r.created_at"></td>
           <td x-text="r.state"></td>
           <td class="position-sticky end-0">
