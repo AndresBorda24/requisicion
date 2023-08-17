@@ -1,5 +1,13 @@
-<div class="p-3 small" x-show="tab === 2">
-  <form @submit.prevent>
+<div
+class="small"
+x-transition:enter.delay.80ms
+x-show="tab === 2">
+  <article class="p-3 text-center text-bg-danger">
+    Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
+    requisici&oacute;n pasar&aacute; automaticamente a ser "Pendiente por
+    Aprovaci&oacute;n".
+  </article>
+  <form class="p-3" @submit.prevent>
     <div class="mb-2">
       <label for="educacion" class="form-label small">Educaci&oacute;n*:</label>
       <select

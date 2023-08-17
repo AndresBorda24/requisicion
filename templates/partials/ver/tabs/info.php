@@ -1,4 +1,6 @@
-<div class="p-3" x-show="tab === 1">
+<div class="p-3"
+x-transition:enter.delay.80ms
+x-show="tab === 1">
   <p>
     <span x-text="data.jefe_nombre" class="fw-semibold"></span>,
     jefe del &aacute;rea de <span x-text="data.area_nombre" class="fw-semibold"></span>,
