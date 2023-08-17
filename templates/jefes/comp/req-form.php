@@ -114,6 +114,20 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       </div>
 
       <div class="mb-2">
+        <label for="conocimientos" class="form-label small">
+          Conocimientos*:
+        </label>
+        <textarea
+        id="conocimientos"
+        style="height: 100px;"
+        x-model="state.conocimientos"
+        required
+        placeholder="Describe los conocimientos necesarios para el cargo..."
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
+
+      <div class="mb-2">
         <label class="form-label small text-muted" for="funciones">
           Funciones
         </label>
@@ -122,19 +136,6 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         style="height: 100px;"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
-        class="form-control form-control-sm"
-        ></textarea>
-      </div>
-
-      <div class="mb-2">
-        <label class="form-label small text-muted" for="conocimientos">
-          Conocimientos
-        </label>
-        <textarea
-        id="conocimientos"
-        style="height: 100px;"
-        x-model="state.conocimientos"
-        placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
       </div>
