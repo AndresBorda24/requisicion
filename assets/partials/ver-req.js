@@ -8,7 +8,8 @@ export default () => ({
     events: {
         ["@ver-requisicion.document.stop"]: "openModal",
         ["x-transition.opacity"]: "",
-        ["x-show"]: "show"
+        ["x-show"]: "show",
+        ["@updated-th"]: "updateData($event)"
     },
 
     async openModal({ detail: id }) {
@@ -47,5 +48,19 @@ export default () => ({
         }
 
         return null;
+    },
+
+    /**
+     * Una vez talento humano actualiza los datos de educacion y experiendia
+     * se emite un evento ( updated-th ) y se actualizan algunos datos
+    */
+    updateData({ detail: data }){
+        this.data.area = data.area;
+        this.data._state = "_";
+        this.data.sector = data.sector;
+        this.data.area_anios = data.area_anios;
+        this.data.sector_anios = data.sector_anios;
+        this.data.nivel_educativo = data.nivel_educativo;
+        this.data._nivel_educativo = data._nivel_educativo || "";
     }
 });
