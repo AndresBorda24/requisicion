@@ -8,24 +8,26 @@
   </button>
 
   <button
-  title="Talento Humano"
-  @click="tab = 2"
-  :class="{'shadow active': tab === 2}"
-  class="btn btn-sm btn-outline-warning px-3 rounded-5">
-    TH
-  </button>
-
-  <button
   title="Observaciones"
   class="btn btn-sm btn-outline-warning px-3 rounded-5">
     Obs.
   </button>
 
-  <button
-  title="Acciones"
-  @click="tab = 4"
-  :class="{'shadow active': tab === 4}"
-  class="btn btn-sm btn-outline-warning px-3 rounded-5 lh-1">
-    <?= $this->fetch("./icons/wrench.php") ?>
-  </button>
+  <?php if($user->isTh() && $this->isRoute('req.th')): ?>
+    <button
+    title="Talento Humano"
+    @click="tab = 2"
+    :class="{'shadow active': tab === 2}"
+    class="btn btn-sm btn-outline-warning px-3 rounded-5">
+      TH
+    </button>
+
+    <button
+    title="Acciones"
+    @click="tab = 4"
+    :class="{'shadow active': tab === 4}"
+    class="btn btn-sm btn-outline-warning px-3 rounded-5 lh-1">
+      <?= $this->fetch("./icons/wrench.php") ?>
+    </button>
+  <?php endif ?>
 </nav>

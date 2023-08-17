@@ -76,4 +76,10 @@ class User implements UserInterface
 
         return true;
     }
+
+    public function isTh(): bool
+    {
+        // 29 es el id en la tabla area_servicio
+        return ($this->getAreaId() === 29);
+    }
 }

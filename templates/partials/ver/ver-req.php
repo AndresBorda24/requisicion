@@ -14,8 +14,12 @@ class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
     <section
     class="flex-grow-1 overflow-auto bg-body">
       <?= $this->fetch("./partials/ver/tabs/info.php") ?>
-      <?= $this->fetch("./partials/ver/tabs/extra-th.php") ?>
-      <?= $this->fetch("./partials/ver/tabs/actions.php") ?>
+      <?php
+        if($user->isTh() && $this->isRoute('req.th')) {
+          echo $this->fetch("./partials/ver/tabs/extra-th.php");
+          echo $this->fetch("./partials/ver/tabs/actions.php");
+        }
+      ?>
     </section>
 
     <?= $this->fetch("./partials/ver/modal-footer.php") ?>

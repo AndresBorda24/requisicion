@@ -58,3 +58,16 @@ export async function getRequisicion( id ) {
         throw e;
     }
 }
+
+export async function updateThRequisicion( state ) {
+    try {
+        showLoader()
+        const { data } = await axios
+            .put(`/requisicion/${state.id}/update-th`, state)
+            .finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
