@@ -29,8 +29,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       class="btn btn-sm btn-close btn-close-white float-end"></button>
     </section>
 
-    <section class="bg-secondary p-2 text-light">
-      <h6 class="fw-bold text-warning">Información General</h6>
+    <section class="bg-secondary p-2 text-light small">
+      <h6 class="fw-bold text-warning m-0">Información General</h6>
       <span class="opacity-75 small">
         Todos los campos con (*) son requeridos.
       </span>
@@ -122,6 +122,19 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         style="height: 100px;"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label small text-muted" for="conocimientos">
+          Conocimientos
+        </label>
+        <textarea
+        id="conocimientos"
+        style="height: 100px;"
+        x-model="state.conocimientos"
+        placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
       </div>
