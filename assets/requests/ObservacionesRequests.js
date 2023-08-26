@@ -21,13 +21,11 @@ export async function createObservacion( reqId, obs ) {
 
 export async function getObservaciones( reqId ) {
     try {
-        showLoader()
         const { data } = await axios
             .get(`/requisicion/${reqId}/observaciones`, {
                 body: obs
-            }).finally(hideLoader);
+            });
 
-        successAlert();
         return data;
     } catch(e) {
         throw e;
