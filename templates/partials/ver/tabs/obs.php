@@ -2,7 +2,7 @@
 x-transition:enter.delay.80ms
 x-show="tab === 3"
 style="min-height: 300px;">
-  <div class="sticky-top">
+  <div class="sticky-top pt-1">
     <?= $this->fetch("./partials/obs/obs.php") ?>
   </div>
   <ul x-data class="list-group">
