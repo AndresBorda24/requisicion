@@ -15,9 +15,10 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
 
   <form
   @submit.prevent="save"
-  class="small m-auto d-flex flex-column rounded overflow-auto" style="
-    max-height: 75vh;
+  class="small d-flex flex-column rounded overflow-auto" style="
+    max-height: 80vh;
     max-width: 800px;
+    margin: 10% auto;
   ">
     <section class="bg-primary p-2">
       <span class="text-light fw-bold ms-3">
@@ -36,7 +37,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       </span>
     </section>
 
-    <section class="p-3 flex-grow-1 overflow-auto bg-light-subtle small">
+    <section class="p-3 overflow-auto bg-light-subtle small">
       <div class="mb-2 row g-0">
         <div class="p-1 col-md-9">
           <label for="cargo" class="form-label small">Cargo*:</label>
@@ -59,8 +60,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         </div>
       </div>
 
-      <div class="mb-2">
-        <div class="mb-2">
+      <div class="mb-2 d-flex gap-2">
+        <div class="flex-grow-1">
           <label for="motivo" class="form-label small">Motivo*:</label>
           <select
           id="motivo"
@@ -74,7 +75,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
           </select>
         </div>
 
-        <div>
+        <div class="flex-grow-1">
           <label for="tipo" class="form-label small">Tipo*:</label>
           <select
           id="tipo"
@@ -139,20 +140,6 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         class="form-control form-control-sm"
         ></textarea>
       </div>
-
-      <div class="mb-2">
-        <label class="form-label small text-muted" for="observacion">
-          Observaci&oacute;n:
-        </label>
-        <textarea
-        id="observacion"
-        style="height: 50px;"
-        placeholder="Si es necesario, deja una observaci&oacute;n..."
-        x-model="state.observacion"
-        class="form-control form-control-sm"
-        ></textarea>
-      </div>
-
     </section>
 
     <section class="bg-secondary d-flex justify-content-end p-2">
