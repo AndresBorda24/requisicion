@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Slim\App;
+use App\Http\Controllers\Api\ObservacionController;
 use Slim\Routing\RouteCollectorProxy as Group;
 use App\Http\Middleware\JsonBodyParserMiddleware;
 use App\Http\Controllers\Api\RequisicionController;
@@ -15,6 +16,10 @@ function loadApiRoutes(App $app): void {
             $req->post("/create", [RequisicionController::class, "create"]);
 
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
+        });
+
+        $api->group("/observacion", function(Group $obs) {
+            $obs->post("/{reqId:[0-9]+}/create", [ObservacionController::class, "create"]);
         });
     })->add(JsonBodyParserMiddleware::class);
 }
