@@ -10,6 +10,8 @@ export default () => ({
     async saveObs() {
         try {
             await createObservacion(this.data.id, this.obs);
+            this.obs = "";
+            this.$nextTick(() => this.$el?.querySelector("textarea")?.focus());
         } catch(e) {
             console.error("Save Obs:", e);
             errorAlert("No se ha logrado realizar la observaci&oacute;n")
