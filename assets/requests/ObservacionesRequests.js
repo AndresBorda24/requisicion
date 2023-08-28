@@ -21,10 +21,7 @@ export async function createObservacion( reqId, obs ) {
 
 export async function getObservaciones( reqId ) {
     try {
-        const { data } = await axios
-            .get(`/requisicion/${reqId}/observaciones`, {
-                body: obs
-            });
+        const { data } = await axios.get(`/observacion/${reqId}/getall`);
 
         return data;
     } catch(e) {

@@ -41,18 +41,18 @@ class Observacion
      *
      * @param int $reqId El id de la requisicion a buscar.
     */
-    public function getAll(int $reqId): array
+    public function getAll(int $reqId): ?array
     {
         try {
-            $data = [];
-            $this->db->select(static::TABLE."(R)", [
-                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            $data = $this->db->select(static::TABLE."(O)", [
+                "[>]usuario (U)" => ["quien" => "usuario_id"]
             ], [
-                "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.cargo", "R.state", "R.created_at"
-            ], [ "req_id" => $reqId ], function($item) use(&$data) {
-                array_push($data, $item);
-            });
+                "author" => Medoo::raw("CONCAT_WS(' ', usuario_apellido1, usuario_nombre1)"),
+                "O.id", "O.body", "O.created_at"
+            ], [
+                "req_id" => $reqId,
+                "ORDER" => ["O.created_at" => "DESC"]
+            ]);
 
             return $data;
         } catch(\Exception $e) {

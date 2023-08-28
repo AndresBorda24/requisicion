@@ -42,4 +42,13 @@ class ObservacionController
             return responseError($e);
         }
     }
+
+    public function getAll(int $reqId): Response
+    {
+        try {
+            return new JsonResponse($this->obs->getAll($reqId));
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
 }
