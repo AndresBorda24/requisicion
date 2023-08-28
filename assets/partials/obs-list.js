@@ -3,6 +3,9 @@ import { getObservaciones } from "@/requests/ObservacionesRequests";
 
 export default () => ({
     obsList: [],
+    events: {
+        ['@obs-created.document.stop']: "addObs"
+    },
 
     init() {
         this.$watch("data.id", (val) => {
@@ -22,5 +25,13 @@ export default () => ({
             console.error("Get Obs:", e);
             errorAlert();
         }
+    },
+
+    /**
+     * Agrega una observacion al array. Esto se hace con la finalidad de evitar
+     * hacer la consulta y volver a cargar todas las observaciones.
+    */
+    addObs({ detail: data }) {
+        this.obsList.unshift(data);
     }
 });

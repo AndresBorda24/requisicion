@@ -9,9 +9,10 @@ export default () => ({
     */
     async saveObs() {
         try {
-            await createObservacion(this.data.id, this.obs);
+            const data = await createObservacion(this.data.id, this.obs);
             this.obs = "";
-            this.$nextTick(() => this.$el?.querySelector("textarea")?.focus());
+            this.$dispatch("obs-created", data.new);
+            this.closeDetail();
         } catch(e) {
             console.error("Save Obs:", e);
             errorAlert("No se ha logrado realizar la observaci&oacute;n")
@@ -23,6 +24,14 @@ export default () => ({
     */
     showSave() {
         return this.obsLength > 5;
+    },
+
+    closeDetail() {
+        this.$refs.obsCreate?.removeAttribute('open');
+    },
+
+    setFocus() {
+        this.$nextTick(() => this.$refs.obsCreate?.querySelector("textarea")?.focus())
     },
 
     get obsLength() {

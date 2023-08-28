@@ -1,8 +1,9 @@
 <details
 x-data="Obs"
 class="position-relative z-1"
-@click.outside="$el.removeAttribute('open')">
-  <summary class="btn btn-sm btn-primary border-0" role="button">
+x-ref="obsCreate"
+@click.outside="closeDetail">
+  <summary @click="setFocus" class="btn btn-sm btn-primary border-0" role="button">
     Dejar Observaci&oacute;n
   </summary>
 

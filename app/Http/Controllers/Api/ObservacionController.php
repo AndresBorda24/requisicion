@@ -36,7 +36,7 @@ class ObservacionController
 
             return new JsonResponse([
                 "status" => true,
-                "__id"   => $new
+                "new"    => $this->obs->find($new)
             ]);
         } catch(\Exception $e) {
             return responseError($e);

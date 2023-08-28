@@ -59,4 +59,26 @@ class Observacion
             throw $e;
         }
     }
+
+    /**
+     * Encuentra una obsrvacion dependiendo de su ID. Este metodo se emplea
+     * principalmente despues de crear una observacion.
+     *
+     * @param int $id
+    */
+    public function find(int $id): ?array
+    {
+        try {
+            $data = $this->db->get(static::TABLE."(O)", [
+                "[>]usuario (U)" => ["quien" => "usuario_id"]
+            ], [
+                "author" => Medoo::raw("CONCAT_WS(' ', usuario_apellido1, usuario_nombre1)"),
+                "O.id", "O.body", "O.created_at"
+            ], ["O.id" => $id]);
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }
