@@ -3,11 +3,11 @@ class="table-responsive-md position-relative overflow-auto shadow z-0"
 style="max-height: 500px;">
   <table class="table table-sm table-striped table-bordered table-hover m-0">
     <thead class="sticky-top">
-      <tr class="align-middle">
-        <th>&Aacute;rea</th>
-        <th style="width: 30%;">Cargo</th>
-        <th class="text-nowrap">Fecha Solicitud</th>
-        <th style="min-width: 100px;">
+      <tr class="align-middle small">
+        <th class="px-2">&Aacute;rea</th>
+        <th class="px-2" style="width: 30%;">Cargo</th>
+        <th class="text-nowrap px-2">Fecha Solicitud</th>
+        <th class="px-2" style="min-width: 120px;">
           <select
           @change="getData"
           x-model="grillaState"

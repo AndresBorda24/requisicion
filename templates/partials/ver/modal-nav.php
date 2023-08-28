@@ -8,6 +8,8 @@
   </button>
 
   <button
+  @click="tab = 3"
+  :class="{'shadow active': tab === 3}"
   title="Observaciones"
   class="btn btn-sm btn-outline-warning px-3 rounded-5">
     Obs.
