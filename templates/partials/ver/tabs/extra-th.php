@@ -6,8 +6,7 @@ x-transition:enter.delay.80ms
 x-show="tab === 2">
   <article class="p-3 text-center text-bg-danger" x-show="isPendiente">
     Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
-    requisici&oacute;n pasar&aacute; automaticamente a ser "Pendiente por
-    Aprovaci&oacute;n".
+    requisici&oacute;n pasar&aacute; automaticamente a "En revisi&oacute;n".
   </article>
 
   <form class="p-3" @submit.prevent="save">

@@ -123,7 +123,7 @@ class Requisicion
         try {
             $_ = $this->db->update(static::TABLE, [
                 "area" => $data["area"],
-                "state" => Estados::PRENDIENTE_APRO,
+                "state" => Estados::REVISION,
                 "sector" => $data["sector"],
                 "area_anios" => $data["area_anios"],
                 "sector_anios" => $data["sector_anios"],
