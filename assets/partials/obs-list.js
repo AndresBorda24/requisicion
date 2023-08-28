@@ -8,10 +8,7 @@ export default () => ({
     },
 
     init() {
-        this.$watch("data.id", (val) => {
-            console.log("Req: ", val);
-            this.getObs();
-        })
+        this.$watch("data.id", () => this.getObs());
     },
 
     /**
