@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Contracts\UserInterface;
 use App\Enums\Estados;
 use App\Models\Requisicion;
+use App\Models\Observacion;
+use App\Contracts\UserInterface;
 use App\Http\Requests\RequisicionRequest;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -34,6 +35,14 @@ class RequisicionController
                 "jefe_id" => $user->getJefeId(),
                 "area_id" => $user->getAreaId()
             ]);
+
+            if (! empty($data["observacion"])) {
+                (new Observacion($this->req->db))->create([
+                    "body"   => $data["observacion"],
+                    "quien"  => $user->getId(),
+                    "req_id" => $new
+                ]);
+            }
 
             return new JsonResponse([
                 "status" => true,
