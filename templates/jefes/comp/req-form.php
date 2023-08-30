@@ -87,16 +87,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
       </div>
 
       <div class="mb-2">
-        <div class="mb-2">
-          <label for="horario" class="form-label small">Horario*:</label>
-          <input
-          type="text"
-          id="horario"
-          required
-          x-model="state.horario"
-          class="form-control form-select-sm">
-        </div>
-
+        <?= $this->fetch("./jefes/comp/horario.php") ?>
         <div>
           <label for="horas" class="form-label small">Horas Semanales*:</label>
           <input
