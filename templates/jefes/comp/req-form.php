@@ -18,7 +18,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
   class="small d-flex flex-column rounded overflow-auto" style="
     max-height: 80vh;
     max-width: 800px;
-    margin: 10% auto;
+    margin: 5% auto auto auto;
   ">
     <section class="bg-primary p-2">
       <span class="text-light fw-bold ms-3">

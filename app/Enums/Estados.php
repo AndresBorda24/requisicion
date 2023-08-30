@@ -12,6 +12,7 @@ final class Estados extends Enum
     public const REVISION   = "RV";
     public const APROBADO   = "AP";
     public const ANULADO    = "AN";
+    public const CERRADO    = "CR";
     public const PRENDIENTE_APRO = "PA";
 
     protected static array $values = [
@@ -19,6 +20,7 @@ final class Estados extends Enum
         self::REVISION  => "En revisi&oacute;n",
         self::APROBADO  => "Aprobado",
         self::ANULADO   => "Anulado",
+        self::CERRADO   => "Cerrado",
         self::PRENDIENTE_APRO => "Pendiente por aprobaci&oacute;n",
     ];
 }
