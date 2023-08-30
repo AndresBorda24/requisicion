@@ -133,6 +133,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         </label>
         <textarea
         id="observacion"
+        maxlength="490"
         style="height: 100px;"
         x-model="state.observacion"
         placeholder="Deja una observaci&oacute;n"
