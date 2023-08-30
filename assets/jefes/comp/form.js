@@ -22,7 +22,7 @@ export default () => ({
     /** Abre el modal y 'Resetea' el estado */
     openForm() {
         window.overflow();
-        this.state = {};
+        this.state = { cargo: "" };
         this.showForm = true;
         setTimeout(() => {
             const _ = document.getElementById('cargo');
