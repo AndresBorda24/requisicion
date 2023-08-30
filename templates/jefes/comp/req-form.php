@@ -39,16 +39,12 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
 
     <section class="p-3 overflow-auto bg-light-subtle small">
       <div class="mb-2 row g-0">
-        <div class="p-1 col-md-9">
+        <div class="ps-0 p-1 col-md-9 position-relative">
           <label for="cargo" class="form-label small">Cargo*:</label>
-          <input
-          type="text"
-          required
-          placeholder="Ej: Auxiliar de Sistemas"
-          x-model="state.cargo"
-          class="form-control form-control-sm" id="cargo">
+
+          <?= $this->fetch("./jefes/comp/sugerencias.php") ?>
         </div>
-        <div class="p-1 col-md-3">
+        <div class="pe-0 p-1 col-md-3">
           <label for="cantidad" class="form-label small">Cantidad*:</label>
           <input
           min="1"
