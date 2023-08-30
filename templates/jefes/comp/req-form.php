@@ -2,7 +2,8 @@
 x-data="ReqForm"
 x-cloak x-transition.opacity
 x-show="showForm"
-class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
+style="padding-bottom: 50px;"
+class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
   <template x-teleport="#buttons-container">
     <button
     type="button"
@@ -15,10 +16,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
 
   <form
   @submit.prevent="save"
-  class="small d-flex flex-column rounded overflow-auto" style="
-    max-height: 80vh;
+  class="small d-flex flex-column rounded overflow-auto mx-auto mt-4 mb-auto" style="
     max-width: 800px;
-    margin: 5% auto auto auto;
   ">
     <section class="bg-primary p-2">
       <span class="text-light fw-bold ms-3">
@@ -124,6 +123,19 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex">
         style="height: 100px;"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
+        class="form-control form-control-sm"
+        ></textarea>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label small text-muted" for="funciones">
+          Observaci&oacute;n:
+        </label>
+        <textarea
+        id="observacion"
+        style="height: 100px;"
+        x-model="state.observacion"
+        placeholder="Deja una observaci&oacute;n"
         class="form-control form-control-sm"
         ></textarea>
       </div>
