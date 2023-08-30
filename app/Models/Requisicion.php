@@ -12,7 +12,7 @@ class Requisicion
 {
     public const TABLE = "cv_requisiciones";
 
-    private Medoo $db;
+    public Medoo $db;
 
     public function __construct(Medoo $db)
     {
@@ -38,7 +38,7 @@ class Requisicion
                 "area_id" => $data["area_id"],
                 "cantidad" => $data["cantidad"],
                 "funciones" => $data["funciones"],
-                "conocimientos" => $data["conocimientos"],
+                "conocimientos" => $data["conocimientos"]
             ], 'id');
 
             return (int) $this->db->id();
