@@ -2,8 +2,9 @@
 class="table-responsive-md position-relative overflow-auto shadow z-0"
 style="max-height: 500px;">
   <table class="table table-sm table-striped table-bordered table-hover m-0">
-    <thead class="sticky-top">
+    <thead class="sticky-top" style="top: -1px;">
       <tr class="align-middle small">
+        <th class="px-2">#ID</th>
         <th class="px-2">&Aacute;rea</th>
         <th class="px-2" style="width: 30%;">Cargo</th>
         <th class="text-nowrap px-2">Fecha Solicitud</th>
@@ -32,9 +33,9 @@ style="max-height: 500px;">
         </tr>
       </template>
 
-
       <template x-for="r in grillaData" :key="r.id">
         <tr class="small align-middle position-relative">
+          <td x-text="r.id" style="white-space: nowrap;"></td>
           <td x-text="r.area_nombre" style="white-space: nowrap;"></td>
           <td x-text="r.cargo" class="text-nowrap"></td>
           <td x-text="r.created_at"></td>
