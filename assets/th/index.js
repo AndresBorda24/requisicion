@@ -5,6 +5,7 @@ import grilla from "./comp/grilla"
 import ver from "@/partials/ver-req";
 import obsList from "@/partials/obs-list";
 import updateReq from "./comp/update-req";
+import grillaItem from "@/partials/grilla-item";
 import "@/partials/global-helpers.js";
 
 document.addEventListener("alpine:init", () => {
@@ -12,6 +13,7 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("ObsList", obsList);
     Alpine.data("GrillaTh", grilla);
     Alpine.data("VerRequisicion", ver);
+    Alpine.data("GrillaItem", grillaItem);
     Alpine.data("UpdateRequisicion", updateReq);
 });
 

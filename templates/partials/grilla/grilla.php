@@ -1,17 +1,17 @@
 <div
 class="table-responsive-md position-relative overflow-auto shadow z-0"
 style="max-height: 500px;">
-  <table class="table table-sm table-striped table-bordered table-hover m-0">
+  <table class="table table-sm table-bordered table-hover m-0">
     <thead class="sticky-top" style="top: -1px;">
       <tr class="align-middle small">
-        <th class="px-2">#ID</th>
-        <th class="px-2">&Aacute;rea</th>
-        <th class="px-2" style="width: 30%;">Cargo</th>
-        <th class="text-nowrap px-2">Fecha Solicitud</th>
-        <th class="px-2" style="min-width: 120px;">
+        <th class="px-2 text-bg-primary">#ID</th>
+        <th class="px-2 text-bg-primary">&Aacute;rea</th>
+        <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
+        <th class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
+        <th class="px-2 text-bg-primary" style="min-width: 120px;">
           Estado
         </th>
-        <th></th>
+        <th class="text-bg-primary"></th>
       </tr>
     </thead>
 
@@ -27,21 +27,7 @@ style="max-height: 500px;">
       </template>
 
       <template x-for="r in grillaData" :key="r.id">
-        <tr class="small align-middle position-relative">
-          <td x-text="r.id" style="white-space: nowrap;"></td>
-          <td x-text="r.area_nombre" style="white-space: nowrap;"></td>
-          <td x-text="r.cargo" class="text-nowrap"></td>
-          <td x-text="r.created_at"></td>
-          <td x-html="r.state"></td>
-          <td class="position-sticky end-0">
-            <button
-            class="btn btn-sm btn-warning py-0"
-            @click="verRequisicion( r )"
-            type="button">
-              <span class="small">Ver</span>
-            </button>
-          </td>
-        </tr>
+        <?= $this->fetch("./partials/grilla/item.php") ?>
       </template>
     </tbody>
   </table>

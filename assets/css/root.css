@@ -1,5 +1,4 @@
 @import "./bootstrap.css";
-/*@import "tabulator-tables/dist/css/tabulator_simple.min.css";*/
 @import "awesome-notifications/dist/style.css";
 
 :root {
@@ -20,6 +19,19 @@
     --blue-700: #055a8c;
     --blue-800: #094c72;
     --blue-900: #0c3953;
+    /* Estados de requisicion */
+    --req-solicitud: #FEF6FB;
+    --req-solicitud-rgb: 254,246,251;
+    --req-revision: #F8B195;
+    --req-revision-rgb: 248,177,149;
+    --req-aprobado: #17B978;
+    --req-aprobado-rgb: 23,185,120;
+    --req-anulado: #c92626;
+    --req-anulado-rgb: 201,38,38;
+    --req-cerrado: #1597BB;
+    --req-cerrado-rgb: 21,151,187;
+    --req-pendiente: #E8630A;
+    --req-pendiente-rgb: 232,99,10;
 }
 body, .bg-dots {
     background-image: radial-gradient(#025b7d 0.5px, transparent 0.5px);
@@ -44,6 +56,32 @@ main {
 .text-bg-primary {
     color: #fff!important;
     background-color: RGBA(var(--bs-primary-rgb),var(--bs-bg-opacity,1))!important;
+}
+
+/* Text bg estados */
+.text-bg-solicitud {
+    color: #191919!important;
+    background-color: RGBA(var(--req-solicitud-rgb),var(--bs-bg-opacity,1))!important;
+}
+.text-bg-revision {
+    color: #191919!important;
+    background-color: RGBA(var(--req-revision-rgb),var(--bs-bg-opacity,1))!important;
+}
+.text-bg-aprobado {
+    color: #fff!important;
+    background-color: RGBA(var(--req-aprobado-rgb),var(--bs-bg-opacity,1))!important;
+}
+.text-bg-anulado {
+    color: #fff!important;
+    background-color: RGBA(var(--req-anulado-rgb),var(--bs-bg-opacity,1))!important;
+}
+.text-bg-cerrado {
+    color: #fff!important;
+    background-color: RGBA(var(--req-cerrado-rgb),var(--bs-bg-opacity,1))!important;
+}
+.text-bg-pendiente {
+    color: #191919!important;
+    background-color: RGBA(var(--req-pendiente-rgb),var(--bs-bg-opacity,1))!important;
 }
 @media (max-width: 991px) {
     .registro-usuario-image {

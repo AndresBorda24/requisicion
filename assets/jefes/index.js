@@ -8,6 +8,7 @@ import "@/partials/global-helpers.js";
 import horarios from "./comp/horarios";
 import obsList from "@/partials/obs-list";
 import sugerencias from "./comp/sugerencias";
+import grillaItem from "@/partials/grilla-item";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("Obs", obs);
@@ -16,6 +17,7 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("Horarios", horarios);
     Alpine.data("GrillaJefes", grilla);
     Alpine.data("VerRequisicion", ver);
+    Alpine.data("GrillaItem", grillaItem);
     Alpine.data("Sugerencias", sugerencias);
 });
 
