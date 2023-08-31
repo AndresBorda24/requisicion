@@ -9,14 +9,7 @@ style="max-height: 500px;">
         <th class="px-2" style="width: 30%;">Cargo</th>
         <th class="text-nowrap px-2">Fecha Solicitud</th>
         <th class="px-2" style="min-width: 120px;">
-          <select
-          @change="getData"
-          x-model="grillaState"
-          class="form-select form-select-sm m-0">
-            <?php foreach(\App\Enums\Estados::all() as $key => $value): ?>
-              <option value="<?= $key ?>"> <?= $value ?> </option>
-            <?php endforeach ?>
-          </select>
+          Estado
         </th>
         <th></th>
       </tr>

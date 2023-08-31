@@ -18,13 +18,12 @@ export async function createRequisicion( $data ) {
     }
 }
 
-export async function getAllRequisiciones( state = "" ) {
+export async function getAllRequisiciones() {
     try {
         showLoader()
         const { data } = await axios
-            .get("/requisicion/get-th", {
-                params: { state }
-            }).finally(hideLoader);
+            .get("/requisicion/get-th")
+            .finally(hideLoader);
 
         return data;
     } catch(e) {
@@ -32,13 +31,12 @@ export async function getAllRequisiciones( state = "" ) {
     }
 }
 
-export async function getRequisicionesJefe( state = "" ) {
+export async function getRequisicionesJefe() {
     try {
         showLoader()
         const { data } = await axios
-            .get("/requisicion/get-jefe", {
-                params: { state }
-            }).finally(hideLoader);
+            .get("/requisicion/get-jefe")
+            .finally(hideLoader);
 
         return data;
     } catch(e) {

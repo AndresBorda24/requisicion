@@ -17,7 +17,7 @@ export default () => ({
     */
     async getData() {
         try {
-            const data = await getRequisicionesJefe(this.grillaState);
+            const data = await getRequisicionesJefe();
             this.grillaData = data.data;
         } catch(e) {
             errorAlert("Error al cargar las requisiciones.");

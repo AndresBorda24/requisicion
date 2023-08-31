@@ -1,6 +1,5 @@
 <div
 x-data="GrillaJefes"
-x-bind="grillaEvents"
-data-def-estado="<?= \App\Enums\Estados::SOLICITUD ?>">
+x-bind="grillaEvents">
   <?= $this->fetch("./partials/grilla/grilla.php") ?>
 </div>
