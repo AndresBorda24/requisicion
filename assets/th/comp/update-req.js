@@ -19,7 +19,7 @@ export default () => ({
      * Establece unas propiedades dependiendo de val.
     */
     setData( val ){
-        this.isPendiente = (val._state == this.pendiente);
+        this.isPendiente = (val.state == this.pendiente);
         this.state = {
             area: val.area,
             sector: val.sector,

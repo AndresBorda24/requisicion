@@ -18,7 +18,7 @@ x-show="tab === 1">
   <p class="m-0"> Las principales funciones son las siguientes: </p>
   <p x-text="data.funciones || 'No especificadas...'" class="fw-semibold"></p>
 
-  <template x-if="data._state != '<?= \App\Enums\Estados::SOLICITUD?>'">
+  <template x-if="data.state != '<?= \App\Enums\Estados::SOLICITUD?>'">
     <div class="border-top pt-3">
       <p>Siendo el nivel educatico requerido:
         <span x-html="data._nivel_educativo" class="fw-semibold"></span>,  con
