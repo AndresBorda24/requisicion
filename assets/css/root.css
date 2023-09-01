@@ -57,32 +57,6 @@ main {
     color: #fff!important;
     background-color: RGBA(var(--bs-primary-rgb),var(--bs-bg-opacity,1))!important;
 }
-
-/* Text bg estados */
-.text-bg-solicitud {
-    color: #191919!important;
-    background-color: RGBA(var(--req-solicitud-rgb),var(--bs-bg-opacity,1))!important;
-}
-.text-bg-revision {
-    color: #191919!important;
-    background-color: RGBA(var(--req-revision-rgb),var(--bs-bg-opacity,1))!important;
-}
-.text-bg-aprobado {
-    color: #fff!important;
-    background-color: RGBA(var(--req-aprobado-rgb),var(--bs-bg-opacity,1))!important;
-}
-.text-bg-anulado {
-    color: #fff!important;
-    background-color: RGBA(var(--req-anulado-rgb),var(--bs-bg-opacity,1))!important;
-}
-.text-bg-cerrado {
-    color: #fff!important;
-    background-color: RGBA(var(--req-cerrado-rgb),var(--bs-bg-opacity,1))!important;
-}
-.text-bg-pendiente {
-    color: #191919!important;
-    background-color: RGBA(var(--req-pendiente-rgb),var(--bs-bg-opacity,1))!important;
-}
 @media (max-width: 991px) {
     .registro-usuario-image {
         max-height: 300px;
