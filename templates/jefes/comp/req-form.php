@@ -17,7 +17,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
   <form
   @submit.prevent="save"
   class="small d-flex flex-column rounded overflow-auto mx-auto mt-4 mb-auto" style="
-    max-width: 800px;
+    width: 500px;
   ">
     <section class="bg-primary p-2">
       <span class="text-light fw-bold ms-3">
@@ -39,12 +39,11 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
     <section class="p-3 overflow-auto bg-light-subtle small">
       <div class="mb-2 row g-0">
         <div class="ps-0 p-1 col-md-9 position-relative">
-          <label for="cargo" class="form-label small">Cargo*:</label>
-
+          <label for="cargo" class="form-label small mb-0">Cargo*:</label>
           <?= $this->fetch("./jefes/comp/sugerencias.php") ?>
         </div>
         <div class="pe-0 p-1 col-md-3">
-          <label for="cantidad" class="form-label small">Cantidad*:</label>
+          <label for="cantidad" class="form-label small mb-0">Cantidad*:</label>
           <input
           min="1"
           required
@@ -55,40 +54,46 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         </div>
       </div>
 
-      <div class="mb-2 d-flex gap-2">
-        <div class="flex-grow-1">
-          <label for="motivo" class="form-label small">Motivo*:</label>
-          <select
-          id="motivo"
-          x-model="state.motivo"
-          required
-          class="form-select form-select-sm">
-            <option value="" hidden>-- Selecciona --</option>
-            <?php foreach(\App\Enums\Motivo::all() as $key => $value): ?>
-              <option value="<?= $key ?>"> <?= $value ?> </option>
-            <?php endforeach ?>
-          </select>
-        </div>
+      <div class="mb-2">
+        <label for="motivo" class="form-label small mb-0">Motivo*:</label>
+        <select
+        id="motivo"
+        x-model="state.motivo"
+        required
+        class="form-select form-select-sm">
+          <option value="" hidden>-- Selecciona --</option>
+          <?php foreach(\App\Enums\Motivo::all() as $key => $value): ?>
+            <option value="<?= $key ?>"> <?= $value ?> </option>
+          <?php endforeach ?>
+        </select>
+        <label for="motivo_desc"
+        class="form-label small mb-0 mt-2">Motivo Descipci&oacute;n*:</label>
+        <textarea
+        required
+        type="text"
+        maxlength="100"
+        x-model="state.motivo_desc"
+        class="form-control form-control-sm" id="motivo_desc"></textarea>
+      </div>
 
-        <div class="flex-grow-1">
-          <label for="tipo" class="form-label small">Tipo de Vinculadci&oacute;n*:</label>
-          <select
-          id="tipo"
-          x-model="state.tipo"
-          required
-          class="form-select form-select-sm">
-            <option value="" hidden>-- Selecciona --</option>
-            <?php foreach(\App\Enums\Tipo::all() as $key => $value): ?>
-              <option value="<?= $key ?>"> <?= $value ?> </option>
-            <?php endforeach ?>
-          </select>
-        </div>
+      <div class="mb-2">
+        <label for="tipo" class="form-label small mb-0">Tipo de Vinculadci&oacute;n*:</label>
+        <select
+        id="tipo"
+        x-model="state.tipo"
+        required
+        class="form-select form-select-sm">
+          <option value="" hidden>-- Selecciona --</option>
+          <?php foreach(\App\Enums\Tipo::all() as $key => $value): ?>
+            <option value="<?= $key ?>"> <?= $value ?> </option>
+          <?php endforeach ?>
+        </select>
       </div>
 
       <div class="mb-2">
         <?= $this->fetch("./jefes/comp/horario.php") ?>
         <div>
-          <label for="horas" class="form-label small">Horas Semanales*:</label>
+          <label for="horas" class="form-label small mb-0">Horas Semanales*:</label>
           <input
           type="number"
           min="0"
@@ -101,7 +106,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
       </div>
 
       <div class="mb-2">
-        <label for="conocimientos" class="form-label small">
+        <label for="conocimientos" class="form-label small mb-0">
           Conocimientos*:
         </label>
         <textarea
@@ -115,7 +120,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
       </div>
 
       <div class="mb-2">
-        <label class="form-label small text-muted" for="funciones">
+        <label class="form-label mb-0 small text-muted" for="funciones">
           Funciones
         </label>
         <textarea
@@ -128,7 +133,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
       </div>
 
       <div class="mb-2">
-        <label class="form-label small text-muted" for="funciones">
+        <label class="form-label mb-0 small text-muted" for="funciones">
           Observaci&oacute;n:
         </label>
         <textarea

@@ -17,7 +17,7 @@ final class Estados extends Enum
 
     protected static array $values = [
         self::SOLICITUD => "En solicitud",
-        self::REVISION  => "En REVISIONi&oacute;n",
+        self::REVISION  => "En revisi&oacute;n",
         self::APROBADO  => "Aprobado",
         self::ANULADO   => "Anulado",
         self::CUMPLIDO   => "Cumplido",
