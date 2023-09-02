@@ -95,7 +95,10 @@ class Requisicion
     public function getAll(string $state = "", ?int $jefeId = null)
     {
         try {
-            $where = ["state[~]" => $state];
+            $where = [
+                "state[~]" => $state,
+                "ORDER" => ["R.created_at" => "ASC"]
+            ];
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
             $data = [];
@@ -103,7 +106,7 @@ class Requisicion
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.cargo", "R.state", "R.created_at"
+                "R.id", "R.cargo", "R.state", "R.created_at", "R.area_id"
             ], $where, function($item) use(&$data) {
                 $item["_state"] = Estados::value($item["state"]);
                 array_push($data, $item);

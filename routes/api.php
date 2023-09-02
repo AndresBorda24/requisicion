@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\ExtraController;
 use Slim\App;
 use App\Http\Controllers\Api\ObservacionController;
 use Slim\Routing\RouteCollectorProxy as Group;
@@ -21,6 +22,10 @@ function loadApiRoutes(App $app): void {
         $api->group("/observacion", function(Group $obs) {
             $obs->get("/{reqId:[0-9]+}/getall", [ObservacionController::class, "getAll"]);
             $obs->post("/{reqId:[0-9]+}/create", [ObservacionController::class, "create"]);
+        });
+
+        $api->group("/get", function(Group $extra) {
+            $extra->get("/areas", [ExtraController::class, "areas"]);
         });
     })->add(JsonBodyParserMiddleware::class);
 }

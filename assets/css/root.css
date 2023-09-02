@@ -57,6 +57,18 @@ main {
     color: #fff!important;
     background-color: RGBA(var(--bs-primary-rgb),var(--bs-bg-opacity,1))!important;
 }
+th[data-dir="false"]:before {
+    content: '\25BC';
+    color: rgb(255 255 255 / 67%);
+    font-size: 0.6rem;
+    padding-right: 4px;
+}
+th[data-dir="true"]:before {
+    content: '\25B2';
+    color: rgb(255 255 255 / 67%);
+    font-size: 0.6rem;
+    padding-right: 4px;
+}
 @media (max-width: 991px) {
     .registro-usuario-image {
         max-height: 300px;

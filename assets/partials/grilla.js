@@ -1,6 +1,21 @@
+import Alpine from "alpinejs";
+import filters from "@/partials/grilla-filtros"
+import grillaItem from "@/partials/grilla-item";
+
+// Componenetes Hijo
+document.addEventListener("alpine:init", () => {
+    Alpine.data("GrillaItem", grillaItem);
+    Alpine.data("GrillaFiltros", filters);
+});
+
 export const grilla = {
     grillaData: [],
     grillaState: "PENDIENTE",
+    filters: {
+        area: "",
+        cargo: "",
+        state: ""
+    },
     events: {
         ["@updated-th.document"]: "removeItem($event.detail.id)"
     },
@@ -12,6 +27,17 @@ export const grilla = {
         return this.grillaData.length === 0;
     },
 
+    sort(key, $el) {
+        const d = JSON.parse($el.dataset.dir);
+
+        if (d) {
+            this.grillaData.sort((a, b) => b[key].localeCompare(a[key], "es"));
+        } else {
+            this.grillaData.sort((a, b) => a[key].localeCompare(b[key], "es"));
+        }
+
+        $el.dataset.dir = !d;
+    },
 
     removeItem(id) {
         const index = this.grillaData.findIndex(t => t.id == id)

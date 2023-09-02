@@ -1,17 +1,18 @@
 <div
 class="table-responsive-md position-relative overflow-auto shadow z-0"
-style="max-height: 500px;">
+style="height: 500px;">
   <table class="table table-sm table-bordered table-hover m-0">
     <thead class="sticky-top" style="top: -1px;">
-      <tr class="align-middle small">
+      <tr class="align-middle small position-relative">
         <th class="px-2 text-bg-primary">#ID</th>
         <th class="px-2 text-bg-primary">&Aacute;rea</th>
         <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
-        <th class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
-        <th class="px-2 text-bg-primary" style="min-width: 120px;">
-          Estado
+        <th @click="sort('created_at', $el)" data-dir="true" role="button"
+        class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
+        <th class="px-2 text-bg-primary" style="min-width: 120px;"> Estado </th>
+        <th class="text-bg-primary position-sticky end-0">
+          <?= $this->fetch("./partials/grilla/filtros.php") ?>
         </th>
-        <th class="text-bg-primary"></th>
       </tr>
     </thead>
 
@@ -20,7 +21,7 @@ style="max-height: 500px;">
         <tr>
           <td
           class="table-warning p-4 text-center align-middle"
-          colspan="5">
+          colspan="6">
             Parece que no hay requisiciones...
           </td>
         </tr>
