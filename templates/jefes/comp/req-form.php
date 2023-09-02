@@ -71,7 +71,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         </div>
 
         <div class="flex-grow-1">
-          <label for="tipo" class="form-label small">Tipo*:</label>
+          <label for="tipo" class="form-label small">Tipo de Vinculadci&oacute;n*:</label>
           <select
           id="tipo"
           x-model="state.tipo"
