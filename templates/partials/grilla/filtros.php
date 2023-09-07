@@ -1,4 +1,7 @@
-<details x-data="GrillaFiltros" class="position-relative">
+<details
+x-data="GrillaFiltros"
+@click.outside="$el.removeAttribute('open')"
+class="position-relative">
   <summary
   role="button"
   title="Filtros"
@@ -7,8 +10,8 @@
     <span class="small">Filtros</span>
   </summary>
   <div
-  style="width: 250px; outline: 2px solid #bceeff;"
-  class="text-dark position-absolute rounded top-100 end-0 p-2 border shadow bg-body-tertiary mt-1">
+  style="width: 250px;"
+  class="text-bg-secondary position-absolute rounded-1 top-100 end-0 p-2 shadow mt-1 border border-warning-subtle">
     <div class="mb-2 small">
       <label for="filter-state" class="form-label m-0">Estado:</label>
       <select x-model="filters.state" id="filter-state" class="form-select form-select-sm">
@@ -33,7 +36,11 @@
 
     <div class="mb-2 small">
       <label for="filter-cargo" class="form-label m-0">Cargo:</label>
-      <input x-model.lazy="filters.cargo" type="text" id="filter-cargo" class="form-control form-control-sm">
+      <input
+      x-model.debounce.600="filters.cargo"
+      type="text" id="filter-cargo"
+      @keyup="$el.value = $el.value.toUpperCase()"
+      class="text-uppercase form-control form-control-sm">
     </div>
   </div>
 </details>

@@ -60,18 +60,17 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         id="motivo"
         x-model="state.motivo"
         required
-        class="form-select form-select-sm">
+        class="form-select form-select-sm mb-1">
           <option value="" hidden>-- Selecciona --</option>
           <?php foreach(\App\Enums\Motivo::all() as $key => $value): ?>
             <option value="<?= $key ?>"> <?= $value ?> </option>
           <?php endforeach ?>
         </select>
-        <label for="motivo_desc"
-        class="form-label small mb-0 mt-2">Motivo Descipci&oacute;n*:</label>
         <textarea
         required
         type="text"
         maxlength="100"
+        placeholder="Describe un poco el motivo..."
         x-model="state.motivo_desc"
         class="form-control form-control-sm" id="motivo_desc"></textarea>
       </div>

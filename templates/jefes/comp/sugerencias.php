@@ -7,6 +7,7 @@ class="position-relative">
   type="text"
   id="cargo"
   required
+  autocomplete="off"
   placeholder="Ej: Auxiliar de Sistemas"
   x-model="input"
   @input.debounce.300="searchCargo($event.target.value)"

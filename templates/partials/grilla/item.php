@@ -1,7 +1,6 @@
 <tr
 x-data="GrillaItem( r.id )"
-class="small align-middle position-relative"
-x-show="show">
+class="small align-middle position-relative">
   <td x-text="item?.id" class="text-nowrap"></td>
   <td x-text="item?.area_nombre" class="text-nowrap"></td>
   <td x-text="item?.cargo" class="text-nowrap"></td>

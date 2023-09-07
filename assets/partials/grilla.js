@@ -24,7 +24,7 @@ export const grilla = {
      * Determina si hay datos o no en la grilla
     */
     noData() {
-        return this.grillaData.length === 0;
+        return this.filtered().length === 0;
     },
 
     sort(key, $el) {
@@ -45,5 +45,14 @@ export const grilla = {
         if (index > -1) {
             this.grillaData.splice(index, 1);
         }
+    },
+
+    /** @return { array } */
+    filtered() {
+        return this.grillaData.filter($i =>
+            $i.state.includes(this.filters.state)
+            && $i.cargo.includes(this.filters.cargo)
+            && $i.area_id.includes(this.filters.area)
+        );
     }
 }

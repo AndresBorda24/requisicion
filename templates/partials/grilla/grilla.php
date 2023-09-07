@@ -1,5 +1,5 @@
 <div
-class="table-responsive-md position-relative overflow-auto shadow z-0"
+class="table-responsive-md position-relative overflow-auto z-0"
 style="height: 500px;">
   <table class="table table-sm table-bordered table-hover m-0">
     <thead class="sticky-top" style="top: -1px;">
@@ -27,7 +27,7 @@ style="height: 500px;">
         </tr>
       </template>
 
-      <template x-for="r in grillaData" :key="r.id">
+      <template x-for="r in filtered" :key="r.id">
         <?= $this->fetch("./partials/grilla/item.php") ?>
       </template>
     </tbody>

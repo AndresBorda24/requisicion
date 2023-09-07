@@ -16,13 +16,14 @@ class RequisicionRequest extends BodyRequest
             $motivos = array_keys(Motivo::all());
 
             return $this->validate($data, [
-                "cargo"     => "required",
-                "cantidad"  => "required|integer|min:1",
-                "motivo"    => "required|in:".implode(",", $motivos),
-                "tipo"      => "required|in:".implode(",", $tipos),
-                "horario"   => "required",
-                "horas"     => "required|integer",
-                "funciones" => "nullable",
+                "cargo"       => "required",
+                "cantidad"    => "required|integer|min:1",
+                "motivo"      => "required|in:".implode(",", $motivos),
+                "motivo_desc" => "required",
+                "tipo"        => "required|in:".implode(",", $tipos),
+                "horario"     => "required",
+                "horas"       => "required|integer",
+                "funciones"   => "nullable",
                 "observacion" => "nullable",
                 "conocimientos" => "required"
             ]);

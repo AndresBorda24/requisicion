@@ -33,6 +33,7 @@ class Requisicion
                 "cargo" => $data["cargo"],
                 "state" => Estados::SOLICITUD,
                 "motivo" => $data["motivo"],
+                "motivo_desc" => $data["motivo_desc"],
                 "horario" => $data["horario"],
                 "jefe_id" => $data["jefe_id"],
                 "area_id" => $data["area_id"],
@@ -60,7 +61,7 @@ class Requisicion
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
                 "[>]vista_jefes (J)" => "jefe_id"
             ], [
-                "A.area_servicio_nombre (area_nombre)",
+                "A.area_servicio_nombre (area_nombre)", "area_id",
                 "J.usuario_nombrec (jefe_nombre)",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
                 "R.state", "R.motivo", "R.sector", "R.horario", "R.cantidad",
