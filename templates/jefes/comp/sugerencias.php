@@ -11,10 +11,11 @@ class="position-relative">
   placeholder="Ej: Auxiliar de Sistemas"
   x-model="input"
   @input.debounce.300="searchCargo($event.target.value)"
+  @keyup="$el.value = $el.value.toUpperCase()"
   @keydown.up.prevent="goUp"
   @keydown.down.prevent="goDown"
   @keydown.enter.prevent="selectItem"
-  class="form-control form-control-sm" id="cargo">
+  class="form-control form-control-sm text-uppercase" id="cargo">
 
   <ul
   x-show="! isEmpty"

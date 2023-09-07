@@ -30,7 +30,7 @@ class Requisicion
             $this->db->insert(static::TABLE, [
                 "tipo" => $data["tipo"],
                 "horas" => $data["horas"],
-                "cargo" => $data["cargo"],
+                "cargo" => mb_strtoupper($data["cargo"]),
                 "state" => Estados::SOLICITUD,
                 "motivo" => $data["motivo"],
                 "motivo_desc" => $data["motivo_desc"],
