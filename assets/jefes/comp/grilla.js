@@ -34,7 +34,6 @@ export default () => ({
 
     /** Agrega una requisicion a la tabla */
     addRequisicion({ detail: data }) {
-        console.log(data);
         this.grillaData.push(data);
     }
 });
