@@ -56,7 +56,7 @@ export default () => ({
     */
     updateData({ detail: data }){
         this.data.area = data.area;
-        this.data._state = "_";
+        this.data.state = "_"; // Esto es para que los inputs esten disabled
         this.data.sector = data.sector;
         this.data.area_anios = data.area_anios;
         this.data.sector_anios = data.sector_anios;

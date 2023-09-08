@@ -63,7 +63,7 @@ class Requisicion
             ], [
                 "A.area_servicio_nombre (area_nombre)", "area_id",
                 "J.usuario_nombrec (jefe_nombre)",
-                "R.id", "R.area", "R.tipo", "R.horas", "R.cargo",
+                "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
                 "R.state", "R.motivo", "R.sector", "R.horario", "R.cantidad",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
                 "R.conocimientos", "R.nivel_educativo", "R.created_at"

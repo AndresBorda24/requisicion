@@ -5,9 +5,8 @@ x-bind="events"
 class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
   <div class="small d-flex flex-column rounded overflow-auto" style="
     width: 100vw;
-    max-height: 80vh;
     max-width: 500px;
-    margin: 10% auto;
+    margin: 15px auto;
   ">
     <?= $this->fetch("./partials/ver/modal-header.php") ?>
     <?= $this->fetch("./partials/ver/modal-nav.php") ?>
