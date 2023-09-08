@@ -49,7 +49,7 @@ x-show="tab === 1">
       Experiencia:
       <ul>
         <li>En el sector <span x-text="data.sector" class="fw-semibold"></span>
-        de <span x-text="data.sector_anios" class="fw-semibold"></span> a&ntilde;os</li>
+        de <span x-text="data.sector_anios" class="fw-semibold"></span> a&ntilde;os.</li>
         <li>En el area de <span x-text="data.area" class="fw-semibold"></span> de
         <span x-text="data.area_anios" class="fw-semibold"></span> a&ntilde;os.</li>
       </ul>

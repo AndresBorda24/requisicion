@@ -4,7 +4,7 @@ style="height: 500px;">
   <table class="table table-sm table-bordered table-hover m-0">
     <thead class="sticky-top" style="top: -1px;">
       <tr class="align-middle small position-relative">
-        <th class="px-2 text-bg-primary">#ID</th>
+        <th class="px-2 text-bg-primary">#</th>
         <th class="px-2 text-bg-primary">&Aacute;rea</th>
         <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
         <th @click="sort('created_at', $el)" data-dir="true" role="button"
