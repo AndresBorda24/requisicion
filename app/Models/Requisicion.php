@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\Estados;
 use App\Enums\NivelEducativo;
 use App\Enums\Tipo;
+use App\Enums\UserTypes;
 use Medoo\Medoo;
 
 class Requisicion
@@ -25,6 +26,36 @@ class Requisicion
      * @return int id de la nueva requisicion.
     */
     public function create(array $data): int
+    {
+        $error = null;
+        $newId = null;
+        $this->db->action(function($db) use($data, &$newId, &$error) {
+            try {
+                $reqId = $this->new($data);
+                (new Estado($db))->create($reqId, [
+                    "by"     => UserTypes::JEFE,
+                    "state"  => Estados::SOLICITUD,
+                    "detail" => @$data["observacion"]
+                ]);
+
+                $newId = $reqId;
+            } catch(\Exception $e) {
+                $error = $e;
+                return false;
+            }
+        });
+
+        if ($error !== null) throw $error;
+
+        return (int) $newId;
+    }
+
+    /**
+     * Crea una nueva requisicion.
+     *
+     * @return int Id de la nueva requisicion
+    */
+    public function new(array $data): int
     {
         try {
             $this->db->insert(static::TABLE, [
@@ -71,7 +102,6 @@ class Requisicion
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["state"] = $_["state"];
             $_["_state"]  = Estados::value($_["state"]);
             $_["_tipo"]  = Tipo::value($_["tipo"]);
             $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
@@ -84,6 +114,30 @@ class Requisicion
             throw $e;
         }
     }
+
+    /**
+     * Obtiene informacion basica sobre la requisicion. Principalmnete se usa
+     * para adjuntar nuevos items a la grilla luego de creados.
+    */
+    public function findBasic(int $id): ?array
+    {
+        try {
+            $_ = $this->db->get(static::TABLE."(R)", [
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            ], [
+                "A.area_servicio_nombre (area_nombre)",
+                "R.id", "R.cargo", "R.state", "R.created_at", "R.area_id"
+            ], [ "id" => $id ]);
+
+            if (!$_) throw new \Exception("Requisicion no encontrada.");
+
+            $_["_state"] = Estados::value($_["state"]);
+            return $_;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
 
     /**
      * Obtiene todas las requisiciones dependiendo de `$state`.

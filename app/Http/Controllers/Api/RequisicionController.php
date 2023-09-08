@@ -36,17 +36,9 @@ class RequisicionController
                 "area_id" => $user->getAreaId()
             ]);
 
-            if (! empty($data["observacion"])) {
-                (new Observacion($this->req->db))->create([
-                    "body"   => $data["observacion"],
-                    "quien"  => $user->getId(),
-                    "req_id" => $new
-                ]);
-            }
-
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->find($new)
+                "data" => $this->req->findBasic($new)
             ]);
         } catch(\Exception $e) {
             return responseError($e);
