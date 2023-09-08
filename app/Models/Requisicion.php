@@ -193,4 +193,23 @@ class Requisicion
             throw $e;
         }
     }
+
+    /**
+     * Obtiene las obsercaciones **de los estados** de una requisicion.
+    */
+    public function getObservaciones(int $id): array
+    {
+        try {
+            $data = $this->db->select(static::TABLE."(R)", [
+                "[<]".Estado::TABLE." (E)" => [ "id" => "req_id" ]
+            ], [
+                "author" => Medoo::raw("CONCAT_WS(' ', E.state, 'por', E.by)"),
+                "E.id", "E.detail (body)", "E.at"
+            ], [ "E.req_id" => $id ]);
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }

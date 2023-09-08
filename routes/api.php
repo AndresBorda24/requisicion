@@ -20,7 +20,8 @@ function loadApiRoutes(App $app): void {
         });
 
         $api->group("/observacion", function(Group $obs) {
-            $obs->get("/{reqId:[0-9]+}/getall", [ObservacionController::class, "getAll"]);
+            // $obs->get("/{reqId:[0-9]+}/getall", [ObservacionController::class, "getAll"]);
+            $obs->get("/{id:[0-9]+}/getall", [RequisicionController::class, "observaciones"]);
             $obs->post("/{reqId:[0-9]+}/create", [ObservacionController::class, "create"]);
         });
 
