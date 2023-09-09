@@ -90,10 +90,11 @@ class RequisicionController
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validataUpdateTh($body);
+            $this->req->updateTh($id, $data);
 
             return new JsonResponse([
                 "status" => true,
-                "__ctrl" => $this->req->updateTh($id, $data)
+                "__ctrl" => $this->req->findBasic($id)
             ]);
         } catch(\Exception $e) {
             return responseError($e);

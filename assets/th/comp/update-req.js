@@ -41,13 +41,13 @@ export default () => ({
     */
     async save() {
         try {
-            await updateThRequisicion(
+            const data = await updateThRequisicion(
                 this.getReq('id'),
                 this.state
             );
 
             this.$dispatch('updated-th', {
-                ... this.state,
+                ... { ... this.state, ... data.__ctrl }, // Gracias JavaScript
                 id: this.getReq('id')
             });
         } catch(e) {
