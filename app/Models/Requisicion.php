@@ -79,6 +79,28 @@ class Requisicion
         }
     }
 
+    public function updateTh(int $id, array $data): int
+    {
+        $error = null;
+        $this->db->action(function($db) use($id, $data, &$error) {
+            try {
+                $this->setChangesTh($id, $data);
+                (new Estado($db))->create($id, [
+                    "by"     => UserTypes::TH,
+                    "state"  => Estados::APROBADO,
+                    "detail" => @$data["observacion"]
+                ]);
+            } catch(\Exception $e) {
+                $error = $e;
+                return false;
+            }
+        });
+
+        if ($error !== null) throw $error;
+
+        return 1;
+    }
+
     /**
      * Busca y retorna la informacion de una requisicion.
      *
@@ -138,7 +160,6 @@ class Requisicion
         }
     }
 
-
     /**
      * Obtiene todas las requisiciones dependiendo de `$state`.
      *
@@ -176,7 +197,7 @@ class Requisicion
     /**
      * Actualizacion realizada por TH.
     */
-    public function updateTh(int $id, array $data): int
+    public function setChangesTh(int $id, array $data): int
     {
         try {
             $_ = $this->db->update(static::TABLE, [
@@ -200,12 +221,20 @@ class Requisicion
     public function getObservaciones(int $id): array
     {
         try {
-            $data = $this->db->select(static::TABLE."(R)", [
+            $data = [];
+            $this->db->select(static::TABLE."(R)", [
                 "[<]".Estado::TABLE." (E)" => [ "id" => "req_id" ]
             ], [
-                "author" => Medoo::raw("CONCAT_WS(' ', E.state, 'por', E.by)"),
+                "E.state", "E.by",
                 "E.id", "E.detail (body)", "E.at"
-            ], [ "E.req_id" => $id ]);
+            ], [ "E.req_id" => $id ], function($item) use(&$data) {
+                $item["author"] = sprintf("%s por %s",...[
+                    Estados::value($item["state"]),
+                    UserTypes::value($item["by"])
+                ]);
+
+                array_push($data, $item);
+            });
 
             return $data;
         } catch(\Exception $e) {

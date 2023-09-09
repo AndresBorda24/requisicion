@@ -41,6 +41,7 @@ class RequisicionRequest extends BodyRequest
                 "area"          => "required",
                 "sector"        => "required",
                 "area_anios"    => "required|integer",
+                "observacion"   => "nullable",
                 "sector_anios"  => "required|integer",
                 "nivel_educativo" => "required|in:".implode(",", $nivel)
             ]);
