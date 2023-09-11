@@ -232,7 +232,10 @@ class Requisicion
             ], [
                 "E.state", "E.by",
                 "E.id", "E.detail (body)", "E.at"
-            ], [ "E.req_id" => $id ], function($item) use(&$data) {
+            ], [
+                "E.req_id" => $id,
+                "ORDER" => [ "E.at" => "DESC"]
+            ], function($item) use(&$data) {
                 $item["author"] = sprintf("%s por %s",...[
                     Estados::value($item["state"]),
                     UserTypes::value($item["by"])
