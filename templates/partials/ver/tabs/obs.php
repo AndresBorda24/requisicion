@@ -2,7 +2,7 @@
 x-transition:enter.delay.80ms
 x-show="tab === 3">
   <div class="sticky-top pt-1">
-    <?= "" // $this->fetch("./partials/obs/obs.php") ?>
+    <?= $this->fetch("./partials/obs/obs.php") ?>
   </div>
   <ul x-data="ObsList" class="list-group list-group-flush" x-bind="events">
     <template x-for="ob in obsList" :key="ob.id">

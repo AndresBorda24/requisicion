@@ -105,7 +105,8 @@ class RequisicionController
     public function observaciones(int $id): Response
     {
         try {
-            return new JsonResponse($this->req->getObservaciones($id));
+            // return new JsonResponse($this->req->getObservaciones($id));
+            return new JsonResponse($this->req->getAllObs($id));
         } catch(\Exception $e) {
             return responseError($e);
         }

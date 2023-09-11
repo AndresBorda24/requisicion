@@ -145,15 +145,19 @@ class Requisicion
     {
         try {
             $_ = $this->db->get(static::TABLE."(R)", [
-                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.cargo", "R.state", "R.created_at", "R.area_id"
-            ], [ "id" => $id ]);
+                "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
+            ], [ "R.id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["_state"] = Estados::value($_["state"]);
+            $_["_state"] = sprintf("%s por %s",...[
+                Estados::value($_["state"]),
+                UserTypes::value($_["by"])
+            ]);
             return $_;
         } catch(\Exception $e) {
             throw $e;
@@ -243,6 +247,56 @@ class Requisicion
 
                 array_push($data, $item);
             });
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Obtiene las observaciones de una requisicion tanto de los estados como
+     * de la tabla cv_req_observaciones
+    */
+    public function getAllObs(int $id): array
+    {
+        try {
+            $query = $this->db->query("(
+                    SELECT
+                         `E`.`id`, `E`.`state`, `E`.`by`, `E`.`detail` AS `body`,  `E`.`at`
+                    FROM cv_requisiciones AS `R`
+                    LEFT JOIN cv_requisicion_estados AS `E`
+                        ON `R`.`id` = `E`.`req_id`
+                    WHERE <E.req_id> = :req_id
+                ) UNION (
+                    SELECT
+                        CONCAT('O-',`O`.`id`) AS `id`,
+                        NULL AS `state`,
+                        CONCAT_WS(' ', usuario_apellido1, usuario_nombre1) AS `by`,
+                        `O`.`body`,
+                        `O`.`created_at` AS `at`
+                    FROM `cv_req_observaciones` AS `O`
+                    LEFT JOIN `usuario` AS `U`
+                        ON `O`.`quien` = `U`.`usuario_id`
+                    WHERE <req_id> = :req_id
+                )
+                ORDER BY `at` DESC
+            ", [ ":req_id" => $id ]);
+
+            $data = [];
+            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+                if ($row["state"] !== null) {
+                    $row["author"] = sprintf("%s por %s",...[
+                        Estados::value($row["state"]),
+                        UserTypes::value($row["by"])
+                    ]);
+                } else {
+                    $row["author"] = $row["by"];
+                }
+
+                unset($row["by"], $row["state"]);
+                array_push($data, $row);
+            }
 
             return $data;
         } catch(\Exception $e) {

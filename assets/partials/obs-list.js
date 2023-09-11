@@ -4,7 +4,8 @@ import { getObservaciones } from "@/requests/ObservacionesRequests";
 export default () => ({
     obsList: [],
     events: {
-        ['@obs-created.document.stop']: "addObs"
+        ['@obs-created.document.stop']: "getObs(false)",
+        ['@updated-th.document.stop']: "getObs(false)"
     },
 
     init() {
@@ -14,9 +15,9 @@ export default () => ({
     /**
      * Obtiene las observaciones de una requisicion especifica.
     */
-    async getObs() {
+    async getObs(reset = true) {
         try {
-            this.obsList = [];
+            if (reset) this.obsList = [];
             this.obsList = await getObservaciones(this.data.id);
         } catch(e) {
             console.error("Get Obs:", e);
