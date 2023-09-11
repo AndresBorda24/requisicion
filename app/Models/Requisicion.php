@@ -169,22 +169,27 @@ class Requisicion
      * @return array
     */
     public function getAll(string $state = "", ?int $jefeId = null)
-    {
+   {
         try {
             $where = [
-                "state[~]" => $state,
+                "E.state[~]" => $state,
                 "ORDER" => ["R.created_at" => "ASC"]
             ];
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
             $data = [];
-            $this->db->select(static::TABLE."(R)", [
-                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            $this->db->select(static::TABLE." (R)", [
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.cargo", "R.state", "R.created_at", "R.area_id"
+                "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], $where, function($item) use(&$data) {
-                $item["_state"] = Estados::value($item["state"]);
+                $item["_state"] = sprintf("%s por %s",...[
+                    Estados::value($item["state"]),
+                    UserTypes::value($item["by"])
+                ]);
+
                 array_push($data, $item);
             });
 
