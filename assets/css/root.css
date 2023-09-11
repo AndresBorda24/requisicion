@@ -90,10 +90,11 @@ th[data-dir="true"]:before {
     content: "";
     position: absolute;
     height: 100%;
-    width: 6px;
+    width: 8px;
     border-right: 2px solid var(--bs-primary);
     top: 0;
-    left: -3px;
+    font-size: 16px;
+    left: -4px;
     line-height: 17px;
 }
 .obs-list-item:last-child::before {
