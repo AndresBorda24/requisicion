@@ -69,6 +69,45 @@ th[data-dir="true"]:before {
     font-size: 0.6rem;
     padding-right: 4px;
 }
+/* Esto es para el listado de observaciones */
+.obs-list-item {
+    position: relative;
+}
+.obs-list-item::after {
+    content: "";
+    position: absolute;
+    aspect-ratio: 1;
+    width: 12px;
+    background-color: var(--bs-warning);
+    border: 1px solid var(--bs-primary);
+    top: 0;
+    bottom: 0;
+    left: -4px;
+    border-radius: 100%;
+    margin: auto 0;
+}
+.obs-list-item::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 6px;
+    border-right: 2px solid var(--bs-primary);
+    top: 0;
+    left: -3px;
+    line-height: 17px;
+}
+.obs-list-item:last-child::before {
+    height: 50%;
+}
+.obs-list-item:first-of-type::before {
+    height: 50%;
+    content: '\25b2';
+    color: var(--bs-primary);
+    top: unset;
+    bottom: 0;
+}
+/* Esto es para el listado de observaciones (fin) */
+
 @media (max-width: 991px) {
     .registro-usuario-image {
         max-height: 300px;
