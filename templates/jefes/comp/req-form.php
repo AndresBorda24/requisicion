@@ -113,6 +113,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         style="height: 100px;"
         x-model="state.conocimientos"
         required
+        maxlength="380"
         placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
@@ -124,6 +125,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         </label>
         <textarea
         id="funciones"
+        maxlength="450"
         style="height: 100px;"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
@@ -137,7 +139,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         </label>
         <textarea
         id="observacion"
-        maxlength="490"
+        maxlength="280"
         style="height: 100px;"
         x-model="state.observacion"
         placeholder="Deja una observaci&oacute;n"

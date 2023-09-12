@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Enums\Estados;
 use App\Enums\NivelEducativo;
 use App\Enums\Tipo;
+use App\Enums\UserTypes;
 use Medoo\Medoo;
 
 class Requisicion
@@ -25,6 +26,36 @@ class Requisicion
      * @return int id de la nueva requisicion.
     */
     public function create(array $data): int
+    {
+        $error = null;
+        $newId = null;
+        $this->db->action(function($db) use($data, &$newId, &$error) {
+            try {
+                $reqId = $this->new($data);
+                (new Estado($db))->create($reqId, [
+                    "by"     => UserTypes::JEFE,
+                    "state"  => Estados::SOLICITUD,
+                    "detail" => @$data["observacion"]
+                ]);
+
+                $newId = $reqId;
+            } catch(\Exception $e) {
+                $error = $e;
+                return false;
+            }
+        });
+
+        if ($error !== null) throw $error;
+
+        return (int) $newId;
+    }
+
+    /**
+     * Crea una nueva requisicion.
+     *
+     * @return int Id de la nueva requisicion
+    */
+    public function new(array $data): int
     {
         try {
             $this->db->insert(static::TABLE, [
@@ -46,6 +77,28 @@ class Requisicion
         } catch(\Exception $e) {
             throw $e;
         }
+    }
+
+    public function updateTh(int $id, array $data): int
+    {
+        $error = null;
+        $this->db->action(function($db) use($id, $data, &$error) {
+            try {
+                $this->setChangesTh($id, $data);
+                (new Estado($db))->create($id, [
+                    "by"     => UserTypes::TH,
+                    "state"  => Estados::APROBADO,
+                    "detail" => @$data["observacion"]
+                ]);
+            } catch(\Exception $e) {
+                $error = $e;
+                return false;
+            }
+        });
+
+        if ($error !== null) throw $error;
+
+        return 1;
     }
 
     /**
@@ -71,7 +124,6 @@ class Requisicion
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["state"] = $_["state"];
             $_["_state"]  = Estados::value($_["state"]);
             $_["_tipo"]  = Tipo::value($_["tipo"]);
             $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
@@ -79,6 +131,33 @@ class Requisicion
                 ? NivelEducativo::value($_["nivel_educativo"])
                 : null;
 
+            return $_;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Obtiene informacion basica sobre la requisicion. Principalmnete se usa
+     * para adjuntar nuevos items a la grilla luego de creados.
+    */
+    public function findBasic(int $id): ?array
+    {
+        try {
+            $_ = $this->db->get(static::TABLE."(R)", [
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
+            ], [
+                "A.area_servicio_nombre (area_nombre)",
+                "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
+            ], [ "R.id" => $id ]);
+
+            if (!$_) throw new \Exception("Requisicion no encontrada.");
+
+            $_["_state"] = sprintf("%s por %s",...[
+                Estados::value($_["state"]),
+                UserTypes::value($_["by"])
+            ]);
             return $_;
         } catch(\Exception $e) {
             throw $e;
@@ -94,22 +173,27 @@ class Requisicion
      * @return array
     */
     public function getAll(string $state = "", ?int $jefeId = null)
-    {
+   {
         try {
             $where = [
-                "state[~]" => $state,
+                "E.state[~]" => $state,
                 "ORDER" => ["R.created_at" => "ASC"]
             ];
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
             $data = [];
-            $this->db->select(static::TABLE."(R)", [
-                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            $this->db->select(static::TABLE." (R)", [
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
-                "R.id", "R.cargo", "R.state", "R.created_at", "R.area_id"
+                "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], $where, function($item) use(&$data) {
-                $item["_state"] = Estados::value($item["state"]);
+                $item["_state"] = sprintf("%s por %s",...[
+                    Estados::value($item["state"]),
+                    UserTypes::value($item["by"])
+                ]);
+
                 array_push($data, $item);
             });
 
@@ -122,7 +206,7 @@ class Requisicion
     /**
      * Actualizacion realizada por TH.
     */
-    public function updateTh(int $id, array $data): int
+    public function setChangesTh(int $id, array $data): int
     {
         try {
             $_ = $this->db->update(static::TABLE, [
@@ -135,6 +219,86 @@ class Requisicion
             ], [ "id" => $id ]);
 
             return $_->rowCount();
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Obtiene las obsercaciones **de los estados** de una requisicion.
+    */
+    public function getObservaciones(int $id): array
+    {
+        try {
+            $data = [];
+            $this->db->select(static::TABLE."(R)", [
+                "[<]".Estado::TABLE." (E)" => [ "id" => "req_id" ]
+            ], [
+                "E.state", "E.by",
+                "E.id", "E.detail (body)", "E.at"
+            ], [
+                "E.req_id" => $id,
+                "ORDER" => [ "E.at" => "DESC"]
+            ], function($item) use(&$data) {
+                $item["author"] = sprintf("%s por %s",...[
+                    Estados::value($item["state"]),
+                    UserTypes::value($item["by"])
+                ]);
+
+                array_push($data, $item);
+            });
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Obtiene las observaciones de una requisicion tanto de los estados como
+     * de la tabla cv_req_observaciones
+    */
+    public function getAllObs(int $id): array
+    {
+        try {
+            $query = $this->db->query("(
+                    SELECT
+                         `E`.`id`, `E`.`state`, `E`.`by`, `E`.`detail` AS `body`,  `E`.`at`
+                    FROM cv_requisiciones AS `R`
+                    LEFT JOIN cv_requisicion_estados AS `E`
+                        ON `R`.`id` = `E`.`req_id`
+                    WHERE <E.req_id> = :req_id
+                ) UNION (
+                    SELECT
+                        CONCAT('O-',`O`.`id`) AS `id`,
+                        NULL AS `state`,
+                        CONCAT_WS(' ', usuario_apellido1, usuario_nombre1) AS `by`,
+                        `O`.`body`,
+                        `O`.`created_at` AS `at`
+                    FROM `cv_req_observaciones` AS `O`
+                    LEFT JOIN `usuario` AS `U`
+                        ON `O`.`quien` = `U`.`usuario_id`
+                    WHERE <req_id> = :req_id
+                )
+                ORDER BY `at` DESC
+            ", [ ":req_id" => $id ]);
+
+            $data = [];
+            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+                if ($row["state"] !== null) {
+                    $row["author"] = sprintf("%s por %s",...[
+                        Estados::value($row["state"]),
+                        UserTypes::value($row["by"])
+                    ]);
+                } else {
+                    $row["author"] = $row["by"];
+                }
+
+                unset($row["by"], $row["state"]);
+                array_push($data, $row);
+            }
+
+            return $data;
         } catch(\Exception $e) {
             throw $e;
         }

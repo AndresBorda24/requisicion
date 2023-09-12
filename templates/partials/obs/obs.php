@@ -8,8 +8,8 @@ x-ref="obsCreate"
   </summary>
 
   <section
-  class="bg-blue-50 small border p-2 position-absolute rounded shadow-lg top-100 border-primary-subtle start-0 m-1"
-  style="width: 300px;">
+  style="box-shadow: 0px 1rem 3rem 0px rgb(0 0 0 / .5);"
+  class="bg-body small border p-2 position-absolute rounded top-100 start-0 mt-1 w-100">
     <form @submit.prevent="saveObs">
       <div class="d-flex align-items-center">
         <label class="flex-grow-1 m-0 form-label small text-muted py-1" for="observacion">

@@ -17,7 +17,7 @@ export const grilla = {
         state: ""
     },
     events: {
-        ["@updated-th.document"]: "removeItem($event.detail.id)"
+        ["@updated-th.document"]: "updateItemTh($event.detail)"
     },
 
     /**
@@ -44,6 +44,19 @@ export const grilla = {
 
         if (index > -1) {
             this.grillaData.splice(index, 1);
+        }
+    },
+
+
+    /**
+     * Una vez TH actualiza los campos necesarios se despacha un evento y se
+     * actualiza el estado de la requisicion en la grilla.
+    */
+    updateItemTh( data ) {
+        const index = this.grillaData.findIndex(t => t.id == data.id)
+
+        if (index > -1) {
+            this.grillaData[ index ]._state = data._state;
         }
     },
 

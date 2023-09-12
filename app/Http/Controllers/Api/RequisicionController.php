@@ -36,17 +36,9 @@ class RequisicionController
                 "area_id" => $user->getAreaId()
             ]);
 
-            if (! empty($data["observacion"])) {
-                (new Observacion($this->req->db))->create([
-                    "body"   => $data["observacion"],
-                    "quien"  => $user->getId(),
-                    "req_id" => $new
-                ]);
-            }
-
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->find($new)
+                "data" => $this->req->findBasic($new)
             ]);
         } catch(\Exception $e) {
             return responseError($e);
@@ -98,11 +90,23 @@ class RequisicionController
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validataUpdateTh($body);
+            $this->req->updateTh($id, $data);
 
             return new JsonResponse([
                 "status" => true,
-                "__ctrl" => $this->req->updateTh($id, $data)
+                "__ctrl" => $this->req->findBasic($id)
             ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
+
+    public function observaciones(int $id): Response
+    {
+        try {
+            // return new JsonResponse($this->req->getObservaciones($id));
+            return new JsonResponse($this->req->getAllObs($id));
         } catch(\Exception $e) {
             return responseError($e);
         }
