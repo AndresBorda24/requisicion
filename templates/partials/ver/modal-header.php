@@ -1,4 +1,4 @@
-<section class="bg-primary p-2">
+<section class="bg-primary p-2 rounded-top">
   <span class="text-light fw-bold ms-3">
     Requisici&oacute;n
   </span>

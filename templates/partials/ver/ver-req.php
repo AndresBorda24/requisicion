@@ -2,11 +2,10 @@
 x-data="VerRequisicion"
 x-cloak
 x-bind="events"
-class="vh-100 vw-100 flex fixed-top bg-black bg-opacity-75 flex flex-column">
-  <div class="small d-flex flex-column rounded overflow-auto" style="
+class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex flex-column">
+  <div class="small d-flex flex-column rounded mx-auto mt-3 mb-5 mb-md-3" style="
     width: 100vw;
     max-width: 500px;
-    margin: 15px auto;
   ">
     <?= $this->fetch("./partials/ver/modal-header.php") ?>
     <?= $this->fetch("./partials/ver/modal-nav.php") ?>
