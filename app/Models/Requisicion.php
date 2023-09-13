@@ -112,24 +112,28 @@ class Requisicion
         try {
             $_ = $this->db->get(static::TABLE." (R)", [
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
-                "[>]vista_jefes (J)" => "jefe_id"
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"],
+                "[>]vista_jefes (J)" => "jefe_id",
             ], [
                 "A.area_servicio_nombre (area_nombre)", "area_id",
-                "J.usuario_nombrec (jefe_nombre)",
+                "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
-                "R.state", "R.motivo", "R.sector", "R.horario", "R.cantidad",
+                "R.motivo", "R.sector", "R.horario", "R.cantidad",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
                 "R.conocimientos", "R.nivel_educativo", "R.created_at"
-            ], ["id" => $id ]);
+            ], ["R.id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["_state"]  = Estados::value($_["state"]);
             $_["_tipo"]  = Tipo::value($_["tipo"]);
             $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
             $_["_nivel_educativo"] = $_["nivel_educativo"]
                 ? NivelEducativo::value($_["nivel_educativo"])
                 : null;
+            $_["_state"] = sprintf("%s por %s",...[
+                Estados::value($_["state"]),
+                UserTypes::value($_["by"])
+            ]);
 
             return $_;
         } catch(\Exception $e) {
