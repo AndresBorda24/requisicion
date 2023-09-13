@@ -9,7 +9,8 @@ export default () => ({
         ["@ver-requisicion.document.stop"]: "openModal",
         ["x-transition.opacity"]: "",
         ["x-show"]: "show",
-        ["@updated-th"]: "updateData($event)"
+        ["@updated-th"]: "updateData($event)",
+        ["@updated-state"]: "updateState($event)"
     },
 
     async openModal({ detail: id }) {
@@ -62,5 +63,13 @@ export default () => ({
         this.data.sector_anios = data.sector_anios;
         this.data.nivel_educativo = data.nivel_educativo;
         this.data._nivel_educativo = data._nivel_educativo || "";
+    },
+
+    /**
+     * Aqui se actualiza unicamente el estado.
+    */
+    updateState({ detail: data } ) {
+        this.data.state = data.state;
+        this.data._state = data._state;
     }
 });
