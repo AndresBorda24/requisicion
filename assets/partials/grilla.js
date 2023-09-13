@@ -17,7 +17,8 @@ export const grilla = {
         state: ""
     },
     events: {
-        ["@updated-th.document"]: "updateItemTh($event.detail)"
+        ["@updated-th.document"]: "updateItemTh($event.detail)",
+        ["@updated-state.document"]: "updateItemTh($event.detail)"
     },
 
     /**

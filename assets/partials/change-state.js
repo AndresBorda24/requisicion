@@ -32,8 +32,12 @@ export default () => ({
 
     async changeState() {
         const [data, error] = await updateState(this.data.id, this.state);
+        if (error) return errorAlert("Ha ocurrido un error.");
 
-        if (error) errorAlert("Ha ocurrido un error.");
-        console.log(data);
+        this.$dispatch("updated-state", {
+            id: this.data.id,
+            ... data
+        });
+        this.state = {};
     }
 });

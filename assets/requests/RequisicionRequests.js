@@ -85,6 +85,8 @@ export async function updateState(id, body) {
                 ... body
             })
             .finally(hideLoader);
+
+        successAlert("Estado modificado!");
         _ = data;
     } catch(e) {
         error = e;

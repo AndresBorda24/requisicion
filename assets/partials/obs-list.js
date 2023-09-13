@@ -5,7 +5,8 @@ export default () => ({
     obsList: [],
     events: {
         ['@obs-created.document.stop']: "getObs(false)",
-        ['@updated-th.document.stop']: "getObs(false)"
+        ['@updated-th.document.stop']: "getObs(false)",
+        ['@updated-state.document.stop']: "getObs(false)"
     },
 
     init() {
