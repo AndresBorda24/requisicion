@@ -27,14 +27,14 @@ x-show="tab === 4">
     <div class="p-3">
       <label for="new-state-obs" class="text-muted">Deja una observaci&oacute;n:</label>
       <span class="text-muted small d-block">
-        <span x-text="state.obs?.length || '0'"></span> / 280
+        <span x-text="state.detail?.length || '0'"></span> / 280
       </span>
       <textarea
         required
         maxlength="280"
         id="new-state-obs"
-        x-model="state.obs"
-        :readonly="! Boolean(state.new_state)"
+        x-model="state.detail"
+        :readonly="! Boolean(state.state)"
         class="form-control form-control-sm"
         style="height: 200px; max-height: 300px;"
       ></textarea>
@@ -42,7 +42,7 @@ x-show="tab === 4">
 
     <button
     x-html="submitButtonHtml"
-    x-show="Boolean(state.new_state)"
+    x-show="Boolean(state.state)"
     class="block btn btn-sm m-auto mb-3 w-50"
     :class="`btn-${submitButtonColor}`">
       Hecho!

@@ -1,9 +1,10 @@
+import { errorAlert } from "@/partials/alerts"
 import { updateState } from "@/requests/RequisicionRequests";
 
 export default () => ({
     state: {},
     radio: {
-        ['x-model']: "state.new_state",
+        ['x-model']: "state.state",
         ['type']: "radio",
         ['required']: true,
         ['class']: "visually-hidden"
@@ -14,7 +15,7 @@ export default () => ({
     init() {
         this.$watch("data.id", () => this.state = {});
 
-        this.$watch("state.new_state", (v) => {
+        this.$watch("state.state", (v) => {
             const x = document
                 .querySelector(`input[value="${v}"] + label`);
 
@@ -31,5 +32,8 @@ export default () => ({
 
     async changeState() {
         const [data, error] = await updateState(this.data.id, this.state);
+
+        if (error) errorAlert("Ha ocurrido un error.");
+        console.log(data);
     }
 });

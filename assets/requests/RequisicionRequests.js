@@ -78,8 +78,12 @@ export async function updateState(id, body) {
     let [_, error] = [null, null];
 
     try {
+        showLoader();
         const { data } = await axios
-            .put(`/requisicion/${id}/update-state`, body)
+            .put(`/requisicion/${id}/update-state`, {
+                by: "TH", // Cambiar esto.
+                ... body
+            })
             .finally(hideLoader);
         _ = data;
     } catch(e) {
