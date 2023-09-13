@@ -53,6 +53,7 @@ main {
 .bg-blue-900{ background-color: #0c3953 !important}
 [x-cloak]{display: none !important}
 .flex{display: flex;}
+.block{display: block;}
 .text-bg-primary {
     color: #fff!important;
     background-color: RGBA(var(--bs-primary-rgb),var(--bs-bg-opacity,1))!important;
@@ -108,6 +109,19 @@ th[data-dir="true"]:before {
     bottom: 0;
 }
 /* Esto es para el listado de observaciones (fin) */
+
+input[type="radio"]:checked + .label-activable {
+    opacity: 1 !important;
+    color: var(--bs-btn-active-color);
+    background-color: var(--bs-btn-active-bg);
+    border-color: var(--bs-btn-active-border-color);
+}
+.opacity-hover {
+    opacity: .4;
+}
+.opacity-hover:hover {
+    opacity: 1;
+}
 
 @media (max-width: 991px) {
     .registro-usuario-image {
