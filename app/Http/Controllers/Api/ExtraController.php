@@ -27,4 +27,20 @@ class ExtraController
             return responseError($e);
         }
     }
+
+    /**  @param \App\Contracts\UserInterface $user */
+    public function getAuthInfo($user): Response
+    {
+        try {
+            return new JsonResponse([
+                "id"    => $user->getId(),
+                "cargo" => $user->getCargoId(),
+                "area"  => $user->getAreaId(),
+                "jefe"  => $user->getJefeId(),
+                "nombre" => $user->getNombre()
+            ]);
+        } catch (\Exception $e) {
+            return responseError($e);
+        }
+    }
 }

@@ -69,3 +69,28 @@ export async function updateThRequisicion( id, state ) {
         throw e;
     }
 }
+
+/**
+ * Se encarga de actualizar el estado de la requisicion y adjuntar una
+ * observacion.
+*/
+export async function updateState(id, body) {
+    let [_, error] = [null, null];
+
+    try {
+        showLoader();
+        const { data } = await axios
+            .put(`/requisicion/${id}/update-state`, {
+                by: "TH", // Cambiar esto.
+                ... body
+            })
+            .finally(hideLoader);
+
+        successAlert("Estado modificado!");
+        _ = data;
+    } catch(e) {
+        error = e;
+    } finally {
+        return [_, error];
+    }
+}

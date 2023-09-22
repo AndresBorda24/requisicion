@@ -17,6 +17,7 @@ function loadApiRoutes(App $app): void {
             $req->post("/create", [RequisicionController::class, "create"]);
 
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
+            $req->put("/{id:[0-9]+}/update-state", [RequisicionController::class, "updateState"]);
         });
 
         $api->group("/observacion", function(Group $obs) {
@@ -28,6 +29,8 @@ function loadApiRoutes(App $app): void {
         $api->group("/get", function(Group $extra) {
             $extra->get("/areas", [ExtraController::class, "areas"]);
         });
+
+        $api->get("/auth/info", [ExtraController::class, "getAuthInfo"]);
     })->add(JsonBodyParserMiddleware::class);
 }
 

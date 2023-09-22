@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\Estados;
 use App\Models\Requisicion;
-use App\Models\Observacion;
 use App\Contracts\UserInterface;
 use App\Http\Requests\RequisicionRequest;
+use App\Models\Estado;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -16,12 +15,17 @@ use function App\responseError;
 
 class RequisicionController
 {
+    private Estado $estado;
     private Requisicion $req;
     private RequisicionRequest $validator;
 
-    public function __construct(Requisicion $req, RequisicionRequest $validator)
-    {
+    public function __construct(
+        Estado $estado,
+        Requisicion $req,
+        RequisicionRequest $validator
+    ) {
         $this->req = $req;
+        $this->estado = $estado;
         $this->validator = $validator;
     }
 
@@ -101,6 +105,25 @@ class RequisicionController
         }
     }
 
+    public function updateState(Request $request, int $id): Response
+    {
+        try {
+            $body = $request->getParsedBody() ?? [];
+            $data = $this->validator->validataUpdateState($body);
+            $this->estado->create($id, $data);
+
+            return new JsonResponse([
+                "by"    => $data["by"],
+                "state" => $data["state"],
+                "_state" => sprintf("%s por %s",
+                    \App\Enums\Estados::value($data["state"]),
+                    \App\Enums\UserTypes::value($data["by"])
+                )
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
 
     public function observaciones(int $id): Response
     {

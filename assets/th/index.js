@@ -6,11 +6,15 @@ import ver from "@/partials/ver-req";
 import obsList from "@/partials/obs-list";
 import updateReq from "./comp/update-req";
 import "@/partials/global-helpers.js";
+import changeState from "@/partials/change-state";
+
+import "@/stores/auth-store";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("Obs", obs);
     Alpine.data("ObsList", obsList);
     Alpine.data("GrillaTh", grilla);
+    Alpine.data("ChangeState", changeState);
     Alpine.data("VerRequisicion", ver);
     Alpine.data("UpdateRequisicion", updateReq);
 });

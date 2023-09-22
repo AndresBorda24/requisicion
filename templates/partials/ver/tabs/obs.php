@@ -1,6 +1,7 @@
 <div class="p-3"
 x-transition:enter.delay.80ms
-x-show="tab === 3">
+x-show="tab === 3"
+style="min-height: 350px;">
   <div class="sticky-top pt-1">
     <?= $this->fetch("./partials/obs/obs.php") ?>
   </div>
