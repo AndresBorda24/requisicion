@@ -113,6 +113,7 @@ class RequisicionController
             $this->estado->create($id, $data);
 
             return new JsonResponse([
+                "by"    => $data["by"],
                 "state" => $data["state"],
                 "_state" => sprintf("%s por %s",
                     \App\Enums\Estados::value($data["state"]),

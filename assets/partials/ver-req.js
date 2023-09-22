@@ -69,6 +69,7 @@ export default () => ({
      * Aqui se actualiza unicamente el estado.
     */
     updateState({ detail: data } ) {
+        this.data.by = data.by;
         this.data.state = data.state;
         this.data._state = data._state;
     }
