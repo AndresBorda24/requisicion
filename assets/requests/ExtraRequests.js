@@ -12,3 +12,12 @@ export async function getAreas() {
         throw e;
     }
 }
+
+export async function getAuthInfo() {
+    try {
+        const { data } = await axios.get(`/auth/info`);
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}

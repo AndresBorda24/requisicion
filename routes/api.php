@@ -29,6 +29,8 @@ function loadApiRoutes(App $app): void {
         $api->group("/get", function(Group $extra) {
             $extra->get("/areas", [ExtraController::class, "areas"]);
         });
+
+        $api->get("/auth/info", [ExtraController::class, "getAuthInfo"]);
     })->add(JsonBodyParserMiddleware::class);
 }
 
