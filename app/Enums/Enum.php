@@ -36,4 +36,14 @@ class Enum
     {
         return static::$values;
     }
+
+    /**
+     * @return Retorna los casos posibles en un array llave valor
+    */
+    public static function cases(): array
+    {
+        $_Class = new \ReflectionClass(static::class);
+
+        return $_Class->getConstants();
+    }
 }
