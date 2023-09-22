@@ -1,4 +1,4 @@
-<nav class="p-2 d-flex bg-secondary justify-content-center gap-3 border-bottom border-warning-subtle">
+<nav class="p-2 d-flex bg-secondary justify-content-center gap-3 border-bottom border-top border-warning-subtle">
   <button
   title="Informaci&oacute;n"
   @click="tab = 1"

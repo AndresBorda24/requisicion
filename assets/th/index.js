@@ -8,6 +8,8 @@ import updateReq from "./comp/update-req";
 import "@/partials/global-helpers.js";
 import changeState from "@/partials/change-state";
 
+import "@/stores/auth-store";
+
 document.addEventListener("alpine:init", () => {
     Alpine.data("Obs", obs);
     Alpine.data("ObsList", obsList);

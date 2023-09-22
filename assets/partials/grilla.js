@@ -66,7 +66,7 @@ export const grilla = {
         return this.grillaData.filter($i =>
             $i.state.includes(this.filters.state)
             && $i.cargo.includes(this.filters.cargo)
-            && $i.area_id.includes(this.filters.area)
+            && $i.area_id.toString().includes(this.filters.area)
         );
     }
 }

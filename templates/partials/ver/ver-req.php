@@ -10,7 +10,7 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
     <?= $this->fetch("./partials/ver/modal-header.php") ?>
     <?= $this->fetch("./partials/ver/modal-nav.php") ?>
 
-    <section class="p-1 text-bg-secondary text-center">
+    <section class="p-1 text-bg-primary text-center">
         <span x-html="data?._state"></span>
     </section>
 
