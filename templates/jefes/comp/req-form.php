@@ -1,13 +1,13 @@
 <div
 x-data="ReqForm"
 x-cloak x-transition.opacity
-x-show="showForm"
+x-show="showForm" x-bind="events"
 style="padding-bottom: 50px;"
 class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
   <template x-teleport="#buttons-container">
     <button
     type="button"
-    @click="openForm"
+    @click="openForm(null)"
     class="btn btn-sm btn-warning">
       Formulario Requisici&oacute;n
     </button>
@@ -66,10 +66,12 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
             <option value="<?= $key ?>"> <?= $value ?> </option>
           <?php endforeach ?>
         </select>
+        <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#motivo_desc"]) ?>
         <textarea
         required
         type="text"
-        maxlength="100"
+        style="height: 85px;"
+        maxlength="200"
         placeholder="Describe un poco el motivo..."
         x-model="state.motivo_desc"
         class="form-control form-control-sm" id="motivo_desc"></textarea>
@@ -108,12 +110,13 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <label for="conocimientos" class="form-label small mb-0">
           Conocimientos*:
         </label>
+        <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#conocimientos"]) ?>
         <textarea
         id="conocimientos"
-        style="height: 100px;"
+        style="height: 250px;"
         x-model="state.conocimientos"
         required
-        maxlength="380"
+        maxlength="600"
         placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
@@ -123,10 +126,11 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <label class="form-label mb-0 small text-muted" for="funciones">
           Funciones
         </label>
+        <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#funciones"]) ?>
         <textarea
         id="funciones"
-        maxlength="450"
-        style="height: 100px;"
+        maxlength="600"
+        style="height: 250px;"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
         class="form-control form-control-sm"

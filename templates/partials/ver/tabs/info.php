@@ -2,9 +2,15 @@
 x-transition:enter.delay.80ms
 x-show="tab === 1">
   <p class="lh-sm border-bottom p-3 shadow-sm">
-    <span class="d-flex justify-content-between mb-2 fs-5">
-      <span x-text="data.cargo" class="fw-semibold"></span>
+    <span class="d-flex mb-2 fs-5 gap-2">
+      <span x-text="data.cargo" class="fw-semibold flex-grow-1"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
+      <button
+      @click="openEdit"
+      title="Modificar requisici&oacute;n"
+      class="btn btn-success btn-sm lh-1 px-1">
+        <?= $this->fetch("./icons/wrench.php") ?>
+      </button>
     </span>
     <span class="small">
       <span x-text="data.jefe_nombre" class="small fw-semibold"></span><br>
