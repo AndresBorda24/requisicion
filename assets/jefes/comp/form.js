@@ -37,5 +37,12 @@ export default () => ({
     closeForm() {
         window.overflow(true);
         this.showForm = false;
+    },
+
+    /**
+     * Determina si una requisicion se esta creando o editando
+    */
+    get isEdit() {
+        return Boolean(this.state.id);
     }
 });

@@ -29,11 +29,21 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
       class="btn btn-sm btn-close btn-close-white float-end"></button>
     </section>
 
-    <section class="bg-secondary p-2 text-light small">
-      <h6 class="fw-bold text-warning m-0">Información General</h6>
-      <span class="opacity-75 small">
-        Todos los campos con (*) son requeridos.
-      </span>
+    <section class="d-flex bg-secondary p-2 text-light small">
+      <div class="flex-grow-1">
+        <h6 class="fw-bold text-warning m-0">Información General</h6>
+        <span class="opacity-75 small">
+          Todos los campos con (*) son requeridos.
+        </span>
+      </div>
+      <template x-if="isEdit">
+        <button
+        @click="$dispatch('ver-requisicion', state.id)"
+        type="button"
+        class="btn btn-sm btn-warning">
+          Ver requisici&oacute;n
+        </button>
+      </template>
     </section>
 
     <section class="p-3 overflow-auto bg-light-subtle small">
@@ -141,6 +151,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <label class="form-label mb-0 small text-muted" for="funciones">
           Observaci&oacute;n:
         </label>
+        <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#observacion"]) ?>
         <textarea
         id="observacion"
         maxlength="280"
