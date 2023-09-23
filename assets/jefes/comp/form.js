@@ -1,5 +1,6 @@
 import { errorAlert } from "@/partials/alerts"
 import { createRequisicion } from "@/requests/RequisicionRequests";
+import { updateRequisicion } from "@/requests/RequisicionRequests";
 
 export default () => ({
     state: {},
@@ -13,8 +14,13 @@ export default () => ({
     */
     async save() {
         try {
-            const data = await createRequisicion(this.state);
-            this.$dispatch("new-requisicion", data.data);
+            if ( this.isEdit ) {
+                const data = await updateRequisicion(this.state.id, this.state);
+                this.$dispatch("updated-state", data.data);
+            } else {
+                const data = await createRequisicion(this.state);
+                this.$dispatch("new-requisicion", data.data);
+            }
             this.closeForm();
         } catch(e) {
             errorAlert("No se pudo realizar la solicitud");

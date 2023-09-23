@@ -4,6 +4,7 @@ import { getRequisicionesJefe } from "@/requests/RequisicionRequests";
 export default () => ({
     ...grilla,
     grillaEvents: {
+        ...grilla.events,
         ["@new-requisicion.document"]: "addRequisicion"
     },
 

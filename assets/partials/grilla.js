@@ -55,7 +55,7 @@ export const grilla = {
     */
     updateItemTh( data ) {
         const index = this.grillaData.findIndex(t => t.id == data.id)
-
+        console.log(index, data);
         if (index > -1) {
             this.grillaData[ index ]._state = data._state;
         }

@@ -18,6 +18,20 @@ export async function createRequisicion( $data ) {
     }
 }
 
+export async function updateRequisicion( $id, $data ) {
+    try {
+        showLoader()
+        const { data } = await axios
+            .put(`/requisicion/${$id}/update`, $data)
+            .finally(hideLoader);
+
+        successAlert("Requisici&oacute;n Actualizada");
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
+
 export async function getAllRequisiciones() {
     try {
         showLoader()
