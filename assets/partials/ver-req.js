@@ -52,6 +52,15 @@ export default () => ({
     },
 
     /**
+     * Si la requisicion puede modificarse se mostrara un boton para abrir el
+     * modal de edicion
+    */
+    openEdit() {
+        this.$dispatch('update-requisicion-info', this.data);
+        this.show = false;
+    },
+
+    /**
      * Una vez talento humano actualiza los datos de educacion y experiendia
      * se emite un evento ( updated-th ) y se actualizan algunos datos
     */

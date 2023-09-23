@@ -4,6 +4,9 @@ import { createRequisicion } from "@/requests/RequisicionRequests";
 export default () => ({
     state: {},
     showForm: false,
+    events: {
+        ["@update-requisicion-info.document"]: "openForm($event.detail)"
+    },
 
     /**
      * Guarda la requisicion en la base de datos.
@@ -20,14 +23,14 @@ export default () => ({
     },
 
     /** Abre el modal y 'Resetea' el estado */
-    openForm() {
+    openForm( _data = null ) {
         window.overflow();
-        this.state = { cargo: "" };
+        this.state = _data ?? { cargo: "" };
         this.showForm = true;
         setTimeout(() => {
             const _ = document.getElementById('cargo');
             _.focus();
-        }, 1);
+        }, 20);
     },
 
     /** Cierra el modal */
