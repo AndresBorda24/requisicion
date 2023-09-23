@@ -35,7 +35,7 @@ class RequisicionController
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validateInsert($body);
 
-            $new  = $this->req->create($data + [
+            $new  = $this->req->save($data + [
                 "jefe_id" => $user->getJefeId(),
                 "area_id" => $user->getAreaId()
             ]);
@@ -48,6 +48,23 @@ class RequisicionController
             return responseError($e);
         }
     }
+
+    public function update(Request $request, int $id): Response
+    {
+        try {
+            $body = $request->getParsedBody() ?? [];
+            $data = $this->validator->validateInsert($body);
+            $this->req->save($data, $id);
+
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->findBasic($id)
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
 
     public function find(int $id): Response
     {

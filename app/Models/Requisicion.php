@@ -23,15 +23,25 @@ class Requisicion
     /**
      * Realiza la insercion de una requisicion en la base de datos.
      *
-     * @return int id de la nueva requisicion.
+     * @param int $updateId Sirve para identificar si se hace un insert o un
+     * update, si se pasa y es un entero mayor a 0 se intenta realizar la
+     * actualizacion de otro modo se hace el insert
+     *
+     * @return int INSERT: insert id | UPDATE: rowCount.
     */
-    public function create(array $data): int
+    public function save(array $data, int $updateId = 0): int
     {
         $error = null;
         $newId = null;
-        $this->db->action(function($db) use($data, &$newId, &$error) {
+        $this->db->action(function($db) use($data, $updateId, &$newId, &$error) {
             try {
-                $reqId = $this->new($data);
+                if ($updateId > 0) {
+                    $reqId = $updateId;
+                    $this->update($updateId, $data);
+                } else {
+                    $reqId = $this->new($data);
+                }
+
                 (new Estado($db))->create($reqId, [
                     "by"     => UserTypes::JEFE,
                     "state"  => Estados::SOLICITUD,
@@ -48,6 +58,33 @@ class Requisicion
         if ($error !== null) throw $error;
 
         return (int) $newId;
+    }
+
+    /**
+     * Realiza la actualizadcion de una requisicion en la base de datos.
+     *
+     * @return int id de la requisicion.
+    */
+    public function update(int $id, array $data): int
+    {
+        try {
+            $_ = $this->db->update(static::TABLE, [
+                "tipo" => $data["tipo"],
+                "horas" => $data["horas"],
+                "cargo" => mb_strtoupper($data["cargo"]),
+                "state" => Estados::SOLICITUD,
+                "motivo" => $data["motivo"],
+                "motivo_desc" => $data["motivo_desc"],
+                "horario" => $data["horario"],
+                "cantidad" => $data["cantidad"],
+                "funciones" => $data["funciones"],
+                "conocimientos" => $data["conocimientos"]
+            ], [ "id" => $id ]);
+
+            return $_->rowCount();
+        } catch(\Exception $e) {
+            throw $e;
+        }
     }
 
     /**

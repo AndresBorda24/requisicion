@@ -16,6 +16,7 @@ function loadApiRoutes(App $app): void {
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
             $req->post("/create", [RequisicionController::class, "create"]);
 
+            $req->put("/{id:[0-9]+}/update", [RequisicionController::class, "update"]);
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
             $req->put("/{id:[0-9]+}/update-state", [RequisicionController::class, "updateState"]);
         });
