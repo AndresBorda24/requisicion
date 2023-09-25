@@ -108,7 +108,6 @@ export async function updateState(id, body) {
         showLoader();
         const { data } = await axios
             .put(`/requisicion/${id}/update-state`, {
-                by: "TH", // Cambiar esto.
                 ... body
             })
             .finally(hideLoader);

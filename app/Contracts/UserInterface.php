@@ -21,4 +21,6 @@ interface UserInterface
     public function getCargoId(): int;
 
     public function getNombre(): string;
+
+    public function getUserType(): string;
 }

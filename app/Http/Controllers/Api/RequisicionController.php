@@ -141,11 +141,13 @@ class RequisicionController
         }
     }
 
-    public function updateState(Request $request, int $id): Response
+    public function updateState(Request $request, int $id, UserInterface $user): Response
     {
         try {
             $body = $request->getParsedBody() ?? [];
-            $data = $this->validator->validataUpdateState($body);
+            $data = $this->validator->validataUpdateState($body + [
+                "by" => $user->getUserType()
+            ]);
             $this->estado->create($id, $data);
 
             return new JsonResponse([

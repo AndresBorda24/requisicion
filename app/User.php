@@ -82,4 +82,31 @@ class User implements UserInterface
         // 29 es el id en la tabla area_servicio
         return ($this->getAreaId() === 29);
     }
+
+    /**
+     * Se encarga de retornar el "Tipo de usuario". Esto se usa en los
+     * cambios de estado (especificamente en el campo `by`)
+     *
+     * @return Por defecto retornara JEFE
+    */
+    public function getUserType(): string
+    {
+        /*
+            Estos valores son tomados de la tabla cargos de la base de datos de
+            asotraum_calidad a los dias 25 del mes de septiembre del anio dos
+            mil y veinte y tres.
+
+            46 ---> Coordinado de Talento Humano
+            47 ---> Director Administrativo
+            49 ---> Director Médico Científico
+            59 ---> Gerente
+        */
+        switch ($this->getCargoId()) {
+            case 46: return \App\Enums\UserTypes::TH;
+            case 47: return \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO;
+            case 49: return \App\Enums\UserTypes::DIRECTOR_CIENTIFICO;
+            case 59: return \App\Enums\UserTypes::GERENTE;
+            default: return \App\Enums\UserTypes::JEFE;
+        }
+    }
 }
