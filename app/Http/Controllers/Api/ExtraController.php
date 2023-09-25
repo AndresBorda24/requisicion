@@ -37,7 +37,21 @@ class ExtraController
                 "cargo" => $user->getCargoId(),
                 "area"  => $user->getAreaId(),
                 "jefe"  => $user->getJefeId(),
-                "nombre" => $user->getNombre()
+                "tipo"  => $user->getUserType(),
+                "nombre" => $user->getNombre(),
+            ]);
+        } catch (\Exception $e) {
+            return responseError($e);
+        }
+    }
+
+    /**  @param \App\Contracts\UserInterface $user */
+    public function getMetaInfo(): Response
+    {
+        try {
+            return new JsonResponse([
+                "estados" => \App\Enums\Estados::cases(),
+                "u_tipos" => \App\Enums\UserTypes::cases()
             ]);
         } catch (\Exception $e) {
             return responseError($e);

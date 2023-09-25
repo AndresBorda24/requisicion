@@ -21,3 +21,16 @@ export async function getAuthInfo() {
         throw e;
     }
 }
+
+export async function getMetaInfo() {
+    let [_, error] = [null, null];
+
+    try {
+        const { data } = await axios .get(`/get/meta`);
+        _ = data;
+    } catch(e) {
+        error = e;
+    } finally {
+        return [_, error];
+    }
+}

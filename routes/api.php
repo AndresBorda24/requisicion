@@ -30,6 +30,7 @@ function loadApiRoutes(App $app): void {
 
         $api->group("/get", function(Group $extra) {
             $extra->get("/areas", [ExtraController::class, "areas"]);
+            $extra->get("/meta", [ExtraController::class, "getMetaInfo"]);
         });
 
         $api->get("/auth/info", [ExtraController::class, "getAuthInfo"]);
