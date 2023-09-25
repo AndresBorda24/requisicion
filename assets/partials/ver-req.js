@@ -65,8 +65,10 @@ export default () => ({
      * se emite un evento ( updated-th ) y se actualizan algunos datos
     */
     updateData({ detail: data }){
+        this.data.by = data.by;
         this.data.area = data.area;
-        this.data.state = "_"; // Esto es para que los inputs esten disabled
+        this.data.state = data.state;
+        this.data._state = data._state;
         this.data.sector = data.sector;
         this.data.area_anios = data.area_anios;
         this.data.sector_anios = data.sector_anios;
