@@ -10,11 +10,13 @@ x-show="tab === 4">
         <p class="m-0 text-muted p-3 pb-0">Selecciona el estado:</p>
         <div class="p-3 border-bottom shadow-sm flex justify-content-center flex-wrap gap-1 mb-2 pt-2">
           <!-- rs-# radio-state -->
-          <input x-bind="radio" id="rs-1" value="<?= \App\Enums\Estados::APROBADO ?>">
-          <label
-            for="rs-1"
-            class="flex-grow-1 btn opacity-hover btn-outline-success btn-sm border-0 label-activable"
-          > Aprobar <?= $this->fetch("./icons/approved.php") ?> </label>
+          <?php if(! $this->isRoute("req.th")): ?>
+            <input x-bind="radio" id="rs-1" value="<?= \App\Enums\Estados::APROBADO ?>">
+            <label
+              for="rs-1"
+              class="flex-grow-1 btn opacity-hover btn-outline-success btn-sm border-0 label-activable"
+            > Aprobar <?= $this->fetch("./icons/approved.php") ?> </label>
+          <?php endif ?>
 
           <input x-bind="radio" id="rs-2" value="<?= \App\Enums\Estados::ANULADO ?>">
           <label

@@ -16,7 +16,7 @@ x-show="tab === 2">
     <section>
       <article class="p-3 text-center text-bg-danger">
         Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
-        requisici&oacute;n pasar&aacute; automaticamente a "En revisi&oacute;n".
+        requisici&oacute;n pasar&aacute; automaticamente a "Aprobado por TH".
       </article>
 
       <form class="p-3" @submit.prevent="save">

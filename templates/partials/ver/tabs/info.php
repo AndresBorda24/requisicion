@@ -5,12 +5,19 @@ x-show="tab === 1">
     <span class="d-flex mb-2 fs-5 gap-2">
       <span x-text="data.cargo" class="fw-semibold flex-grow-1"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
-      <button
-      @click="openEdit"
-      title="Modificar requisici&oacute;n"
-      class="btn btn-success btn-sm lh-1 px-1">
-        <?= $this->fetch("./icons/wrench.php") ?>
-      </button>
+      <?php if(! $this->isRoute("req.th")): ?>
+        <template x-if="(
+          data.state === '<?= \App\Enums\Estados::DEVUELTO ?>'
+          && data.by === '<?= \App\Enums\UserTypes::TH ?>'
+        )">
+          <button
+          @click="openEdit"
+          title="Modificar requisici&oacute;n"
+          class="btn btn-success btn-sm lh-1 px-1">
+            <?= $this->fetch("./icons/wrench.php") ?>
+          </button>
+        </template>
+      <?php endif ?>
     </span>
     <span class="small">
       <span x-text="data.jefe_nombre" class="small fw-semibold"></span><br>
@@ -34,7 +41,7 @@ x-show="tab === 1">
     <li class="list-group-item">
       Horas semanales: <span x-text="data.horas"class="fw-semibold"></span>.
     </li>
-    <template x-if="data.state != '<?= \App\Enums\Estados::SOLICITUD ?>'">
+    <template x-if="Boolean(data._nivel_educativo)">
     <li class="list-group-item">
       Nivel educatico:
       <span x-html="data._nivel_educativo" class="fw-semibold"></span>.
@@ -50,7 +57,7 @@ x-show="tab === 1">
       <span x-text="data.funciones || 'No especificadas...'"
       class="d-block p-1"></span>
     </li>
-    <template x-if="data.state != '<?= \App\Enums\Estados::SOLICITUD ?>'">
+    <template x-if="Boolean(data.sector) && Boolean(data.area)">
     <li class="list-group-item">
       Experiencia:
       <ul>
@@ -62,8 +69,4 @@ x-show="tab === 1">
     </li>
     </template>
   </ul>
-
-  <template x-if="data.state != '<?= \App\Enums\Estados::SOLICITUD ?>'">
-    <div class="pt-3"></div>
-  </template>
 </div>
