@@ -3,11 +3,6 @@ import { updateState } from "@/requests/RequisicionRequests";
 
 export default () => ({
     state: {},
-    /**
-     * Un objeto que contiene los posibles estados en los
-     * que puede hallarse una requisicion.
-    */
-    __states: {},
     submitButtonColor: "",
     submitButtonHtml: "Hecho!",
     radio: {
@@ -18,7 +13,6 @@ export default () => ({
     },
 
     init() {
-        this.getReqStates();
         this.setButtonWatcher();
         // Cuando se selecciona una requisicion diferente se limpia el state
         // que es en si el motivo del cambio de estado
@@ -38,18 +32,6 @@ export default () => ({
             ... data
         });
         this.state = {};
-    },
-
-    /**
-     * Obtiene los posibles estados que tiene la requisicion. Esto para realizar
-     * validaciones a futuro.
-    */
-    getReqStates() {
-        this.__states = JSON.parse(
-            this.$el.getAttribute("req-estados")
-            ?? "{}"
-        );
-        this.$el.removeAttribute("req-estados");
     },
 
     /**
@@ -77,19 +59,19 @@ export default () => ({
      * @return {Boolean}
     */
     canChangeState() {
-        if (this.data.state === this.__states.ANULADO || this.__states === {}) {
+        if (this.data.state === this.$store.META.get("estados")?.ANULADO) {
             return false;
         }
 
-        if (
-            this.data.state === this.__states.DEVUELTO
+       if (
+            this.data.state === this.$store.META.get("estados")?.DEVUELTO
             && this.data.by === this.$store.AUTH.get('tipo')
         ) {
             return false;
         }
 
         if (
-            this.data.state === this.__states.APROBADO
+            this.data.state === this.$store.META.get("estados")?.APROBADO
             && this.data.by === this.$store.AUTH.get('tipo')
         ) {
             return false;

@@ -3,7 +3,6 @@ x-transition:enter.delay.80ms
 x-show="tab === 4">
   <form
   @submit.prevent="changeState"
-  req-estados="<?= htmlspecialchars(json_encode(\App\Enums\Estados::cases())) ?>"
   x-data="ChangeState">
     <template x-if="canChangeState">
       <div>
@@ -59,7 +58,8 @@ x-show="tab === 4">
 
     <template x-if="! canChangeState()">
       <div class="p-3">
-        <span class="badge text-bg-danger d-block fs-6">
+        <span class="border border-danger p-2 rounded bg-danger-subtle shadow
+        text-center d-block fs-6">
           No puedes modificar el estado.
         </span> <br>
 

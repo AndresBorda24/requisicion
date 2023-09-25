@@ -13,7 +13,7 @@ x-show="tab === 2">
 
   <template x-if="canUpdate">
     <section>
-      <article class="p-3 text-center text-bg-danger fs-6">
+      <article class="bg-danger-subtle border border-danger fs-6 m-2 p-3 rounded shadow text-center">
         Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
         requisici&oacute;n pasar&aacute; automaticamente a "Aprobado por TH".
       </article>
