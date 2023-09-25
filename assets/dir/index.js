@@ -8,6 +8,7 @@ import changeState from "@/partials/change-state";
 import "@/partials/global-helpers.js";
 
 import "@/stores/auth-store";
+import "@/stores/meta-store";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("Obs", obs);

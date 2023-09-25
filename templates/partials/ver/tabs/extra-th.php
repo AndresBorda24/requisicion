@@ -1,10 +1,9 @@
 <div
 class="small"
 x-data="UpdateRequisicion"
-data-estado-pendiente="<?= \App\Enums\Estados::SOLICITUD ?>"
 x-transition:enter.delay.80ms
 x-show="tab === 2">
-  <template x-if="! isPendiente">
+  <template x-if="! canUpdate()">
     <article class="p-3 text-center text-bg-success fs-6">
       Ya se han establecido los parametros referentes a TH. Para revisarlos mira
       la pesta&ntilde;a <span class="badge text-bg-warning rounded-5">Info</span>.
@@ -12,9 +11,9 @@ x-show="tab === 2">
     </article>
   </template>
 
-  <template x-if="isPendiente">
+  <template x-if="canUpdate">
     <section>
-      <article class="p-3 text-center text-bg-danger">
+      <article class="p-3 text-center text-bg-danger fs-6">
         Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
         requisici&oacute;n pasar&aacute; automaticamente a "Aprobado por TH".
       </article>
@@ -25,7 +24,7 @@ x-show="tab === 2">
           <select
           id="educacion"
           required
-          :disabled="! isPendiente"
+          :disabled="! canUpdate"
           @change="updateEduText"
           x-model="state.nivel_educativo"
           class="form-select form-select-sm">
@@ -41,7 +40,7 @@ x-show="tab === 2">
               <label for="sector" class="form-label small">Sector*:</label>
               <input
               type="text"
-              :readonly="! isPendiente"
+              :readonly="! canUpdate"
               x-model="state.sector"
               placeholder="Ej: TI"
               id="sector"
@@ -53,7 +52,7 @@ x-show="tab === 2">
               <label for="sector_anios" class="form-label small">A&ntilde;os*:</label>
               <input
               type="number"
-              :readonly="! isPendiente"
+              :readonly="! canUpdate"
               x-model="state.sector_anios"
               min="0"
               id="sector_anios"
@@ -67,7 +66,7 @@ x-show="tab === 2">
               <label for="area" class="form-label small">&Aacute;rea*:</label>
               <input
               type="text"
-              :readonly="! isPendiente"
+              :readonly="! canUpdate"
               id="area"
               required
               placeholder="Ej: Desarrollo web"
@@ -79,7 +78,7 @@ x-show="tab === 2">
               <label for="area_anios" class="form-label small">A&ntilde;os*:</label>
               <input
               type="number"
-              :readonly="! isPendiente"
+              :readonly="! canUpdate"
               min="0"
               x-model="state.area_anios"
               id="area_anios"

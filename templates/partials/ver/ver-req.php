@@ -21,6 +21,15 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
       <?php
         if($user->isTh() && $this->isRoute('req.th')) {
           echo $this->fetch("./partials/ver/tabs/extra-th.php");
+        }
+
+
+        if( in_array($user->getUserType(), [
+          \App\Enums\UserTypes::TH,
+          \App\Enums\UserTypes::GERENTE,
+          \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
+          \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO
+        ]) && ($this->isRoute('req.th') || $this->isRoute('req.dir'))) {
           echo $this->fetch("./partials/ver/tabs/actions.php");
         }
       ?>

@@ -23,7 +23,14 @@
     class="btn btn-sm btn-outline-warning px-3 rounded-5">
       TH
     </button>
+  <?php endif ?>
 
+  <?php if(in_array($user->getUserType(), [
+    \App\Enums\UserTypes::TH,
+    \App\Enums\UserTypes::GERENTE,
+    \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
+    \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO
+  ]) && ($this->isRoute('req.th') || $this->isRoute('req.dir'))): ?>
     <button
     title="Acciones"
     @click="tab = 4"

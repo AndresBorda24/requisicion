@@ -77,27 +77,20 @@ export default () => ({
      * @return {Boolean}
     */
     canChangeState() {
-        const uTypes = {
-            39: "DR",
-            42: "DR",
-            29: "TH",
-            32: "GT"
-        }
-
         if (this.data.state === this.__states.ANULADO || this.__states === {}) {
             return false;
         }
 
         if (
             this.data.state === this.__states.DEVUELTO
-            && this.data.by === uTypes[ this.$store.AUTH.get("area") ]
+            && this.data.by === this.$store.AUTH.get('tipo')
         ) {
             return false;
         }
 
         if (
             this.data.state === this.__states.APROBADO
-            && this.data.by === uTypes[ this.$store.AUTH.get("area") ]
+            && this.data.by === this.$store.AUTH.get('tipo')
         ) {
             return false;
         }

@@ -3,12 +3,8 @@ import { errorAlert } from "@/partials/alerts"
 
 export default () => ({
     state: {},
-    isPendiente: true,
-    pendiente: undefined,
 
     init() {
-        this.pendiente = this.$el.dataset.estadoPendiente || "";
-
         // data viene del componente padre, que es /partials/ver-req
         this.$watch('data', val => {
             if (val) this.setData( val );
@@ -19,7 +15,6 @@ export default () => ({
      * Establece unas propiedades dependiendo de val.
     */
     setData( val ){
-        this.isPendiente = (val.state == this.pendiente);
         this.state = {
             area: val.area,
             sector: val.sector,
@@ -47,11 +42,33 @@ export default () => ({
             );
 
             this.$dispatch('updated-th', {
-                ... { ... this.state, ... data.__ctrl }, // Gracias JavaScript
+                ... { ... this.state, ... data.__ctrl }, // Gracias JavaScript <3
                 id: this.getReq('id')
             });
         } catch(e) {
             errorAlert(e.message);
         }
+    },
+
+    /**
+     * Determina si se muestra o no el formulario para que TH realice las
+     * modificaciones.
+    */
+    canUpdate() {
+        if (! this.data?.id) return false;
+
+        if (this.data.state === this.$store.META.get('estados')?.SOLICITUD) {
+            return true;
+        }
+
+        if (
+            this.data.state === this.$store.META.get('estados')?.DEVUELTO && (
+            this.data.by    === this.$store.META.get('u_tipos')?.DIRECTOR_CIENTIFICO
+            || this.data.by === this.$store.META.get('u_tipos')?.DIRECTOR_ADMINISTRATIVO
+        )) {
+            return true;
+        }
+
+        return false;
     }
 });
