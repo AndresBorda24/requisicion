@@ -14,6 +14,7 @@ Encore
     .setManifestKeyPrefix('build/')
     .addEntry('jefes/app', './assets/jefes/index.js')
     .addEntry('th/app', './assets/th/index.js')
+    .addEntry('dir/app', './assets/dir/index.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()

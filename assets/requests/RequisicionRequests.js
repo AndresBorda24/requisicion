@@ -45,6 +45,19 @@ export async function getAllRequisiciones() {
     }
 }
 
+export async function getDirRequisiciones() {
+    try {
+        showLoader()
+        const { data } = await axios
+            .get("/requisicion/get-dir")
+            .finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
+
 export async function getRequisicionesJefe() {
     try {
         showLoader()

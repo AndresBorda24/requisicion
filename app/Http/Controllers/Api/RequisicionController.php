@@ -92,6 +92,25 @@ class RequisicionController
         }
     }
 
+    public function getDir(Request $request, UserInterface $user): Response
+    {
+        try {
+            return new JsonResponse([
+                "status" => true,
+                "data" => $this->req->getAll(
+                    \App\Enums\Estados::APROBADO,
+                    \App\Enums\UserTypes::TH
+                ) + $this->req->getAll(
+                    "",
+                    \App\Enums\UserTypes::DIRECTOR
+                )
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
+
     public function getJefe(Request $request, UserInterface $user): Response
     {
         try {
@@ -99,7 +118,7 @@ class RequisicionController
 
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->getAll($_, $user->getJefeId())
+                "data" => $this->req->getAll($_, "", $user->getJefeId())
             ]);
         } catch(\Exception $e) {
             return responseError($e);

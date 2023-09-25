@@ -12,11 +12,15 @@ final class UserTypes extends Enum
     public const TH       = "TH";
     public const DIRECTOR = "DR";
     public const GERENTE  = "GT";
+    public const DIRECTOR_CIENTIFICO = "DC";
+    public const DIRECTOR_ADMINISTRATIVO = "DA";
 
     protected static array $values = [
-        self::JEFE      => "Jefe",
         self::TH        => "Talento Humano",
+        self::JEFE      => "Jefe",
+        self::GERENTE   => "Gerente",
         self::DIRECTOR  => "Director",
-        self::GERENTE   => "Gerente"
+        self::DIRECTOR_CIENTIFICO => "Director Científico",
+        self::DIRECTOR_ADMINISTRATIVO => "Director Administrativo"
     ];
 }

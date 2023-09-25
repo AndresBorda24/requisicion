@@ -13,5 +13,7 @@ function loadWebRoutes(\Slim\App $app) {
             ->setName("req.jefes");
         $app->get("/th", [ViewController::class, "th"])
             ->setName("req.th");
+        $app->get("/direccion", [ViewController::class, "dir"])
+            ->setName("req.dir");
     })->add(\App\Http\Middleware\SetRouteContextMiddleware::class);
 }

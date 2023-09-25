@@ -26,6 +26,16 @@ class ViewController
     }
 
     /**
+     * Grilla para las jefes de direccion, cientifica y financiera.
+    */
+    public function dir(Response $response, UserInterface $user): Response
+    {
+        $this->views->addAttribute("user", $user);
+        return $this->views->render($response, "direccion/index.php");
+    }
+
+
+    /**
      * Carga la vista para las solicitudes de TH
     */
     public function jefes(Response $response, UserInterface $user): Response

@@ -213,10 +213,11 @@ class Requisicion
      * en especifico
      * @return array
     */
-    public function getAll(string $state = "", ?int $jefeId = null)
+    public function getAll(string $state = "", string $by = "", ?int $jefeId = null)
    {
         try {
             $where = [
+                "E.by[~]" => $by,
                 "E.state[~]" => $state,
                 "ORDER" => ["R.created_at" => "ASC"]
             ];

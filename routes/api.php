@@ -13,6 +13,7 @@ function loadApiRoutes(App $app): void {
         $api->group("/requisicion", function(Group $req) {
             $req->get("/{id:[0-9]+}/get", [RequisicionController::class, "find"]);
             $req->get("/get-th", [RequisicionController::class, "getTh"]);
+            $req->get("/get-dir", [RequisicionController::class, "getDir"]);
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
             $req->post("/create", [RequisicionController::class, "create"]);
 
