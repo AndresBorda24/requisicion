@@ -157,7 +157,7 @@ class Requisicion
                 "A.area_servicio_nombre (area_nombre)", "area_id",
                 "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
-                "R.motivo", "R.sector", "R.horario", "R.cantidad",
+                "R.motivo", "R.sector", "R.horario", "R.cantidad", "R.director",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
                 "R.conocimientos", "R.nivel_educativo", "R.created_at"
             ], ["R.id" => $id ]);
@@ -255,8 +255,8 @@ class Requisicion
         try {
             $_ = $this->db->update(static::TABLE, [
                 "area" => $data["area"],
-                "state" => Estados::REVISION,
                 "sector" => $data["sector"],
+                "director" => $data["director"],
                 "area_anios" => $data["area_anios"],
                 "sector_anios" => $data["sector_anios"],
                 "nivel_educativo" => $data["nivel_educativo"]

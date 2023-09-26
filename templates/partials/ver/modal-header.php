@@ -1,7 +1,5 @@
 <section class="bg-primary p-2 rounded-top">
-  <span class="text-light fw-bold ms-3">
-    Requisici&oacute;n
-  </span>
+  <span x-text="data?.cargo" class="text-light flex-grow-1 small"></span>
   <button
   @click="closeModal"
   type="button"

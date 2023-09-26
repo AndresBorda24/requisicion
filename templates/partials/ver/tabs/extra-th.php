@@ -20,6 +20,27 @@ x-show="tab === 2">
 
       <form class="p-3" @submit.prevent="save">
         <div class="mb-2">
+          <label for="director" class="form-label small">Director Delegado:</label>
+          <select
+          id="director"
+          required
+          :disabled="! canUpdate"
+          x-model="state.director"
+          class="form-select form-select-sm">
+            <option value="" hidden>-- Selecciona --</option>
+            <option value="<?= \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO ?>">
+              <?= \App\Enums\UserTypes::value( \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO ) ?>
+            </option>
+            <option value="<?= \App\Enums\UserTypes::DIRECTOR_CIENTIFICO ?>">
+              <?= \App\Enums\UserTypes::value( \App\Enums\UserTypes::DIRECTOR_CIENTIFICO ) ?>
+            </option>
+            <option value="<?= \App\Enums\UserTypes::GERENTE ?>">
+              <?= \App\Enums\UserTypes::value( \App\Enums\UserTypes::GERENTE ) ?>
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-2">
           <label for="educacion" class="form-label small">Educaci&oacute;n*:</label>
           <select
           id="educacion"
@@ -103,7 +124,7 @@ x-show="tab === 2">
         </div>
         <button
         type="submit"
-        class="btn btn-warning btn-sm">
+        class="btn btn-warning btn-sm d-block ms-auto">
           Guardar!
         </button>
       </form>
