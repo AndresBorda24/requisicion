@@ -84,7 +84,6 @@ class RequisicionController
             $_ = $request->getQueryParams()["state"] ?? "";
 
             return new JsonResponse([
-                "status" => true,
                 "data" => $this->req->getAll($_)
             ]);
         } catch(\Exception $e) {
@@ -92,18 +91,17 @@ class RequisicionController
         }
     }
 
-    public function getDir(Request $request, UserInterface $user): Response
+    public function getDir(UserInterface $user): Response
     {
         try {
             return new JsonResponse([
-                "status" => true,
-                "data" => $this->req->getAll(
+                "data" => array_merge($this->req->getAll(
                     \App\Enums\Estados::APROBADO,
                     \App\Enums\UserTypes::TH
-                ) + $this->req->getAll(
+                ), $this->req->getAll(
                     "",
-                    \App\Enums\UserTypes::DIRECTOR
-                )
+                    $user->getUserType()
+                ))
             ]);
         } catch(\Exception $e) {
             return responseError($e);
