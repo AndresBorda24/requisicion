@@ -27,7 +27,7 @@ class Auth
             return $this->user;
         }
 
-        $id = $this->session->get("usu_id", 476); // 133 // 617 // 675 // 476
+        $id = $this->session->get("usu_id", 675); // 133 // 617 // 675 // 476
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);

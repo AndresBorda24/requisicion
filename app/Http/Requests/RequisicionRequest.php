@@ -25,6 +25,7 @@ class RequisicionRequest extends BodyRequest
                 "tipo"        => "required|in:".implode(",", $tipos),
                 "horario"     => "required",
                 "horas"       => "required|integer",
+                "director"    => "nullable|default:null",
                 "funciones"   => "nullable",
                 "observacion" => "nullable",
                 "conocimientos" => "required"
