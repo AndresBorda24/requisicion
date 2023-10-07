@@ -13,9 +13,16 @@ x-show="tab === 2">
 
   <template x-if="canUpdate">
     <section>
-      <article class="bg-danger-subtle border border-danger fs-6 m-2 p-3 rounded shadow text-center">
-        Aviso: Una vez guardado, no se podr&aacute; modificar y el estado de la
-        requisici&oacute;n pasar&aacute; automaticamente a "Aprobado por TH".
+      <article class="bg-danger-subtle d-flex border border-danger m-2 p-3
+      align-items-center rounded shadow text-center">
+        <span class="lh-1 p-3 ratio-1x1 rounded-circle text-bg-danger">
+          <?= $this->fetch("./icons/warning.php") ?>
+        </span>
+        <p class="m-0">
+          <strong>Aviso:</strong> Una vez guardado, no se podr&aacute; modificar
+          y el estado de la requisici&oacute;n pasar&aacute; automaticamente a
+          "Aprobado por TH".
+        </p>
       </article>
 
       <form class="p-3" @submit.prevent="save">
