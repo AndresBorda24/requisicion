@@ -97,7 +97,7 @@ class User implements UserInterface
             mil y veinte y tres.
 
             46 ---> Coordinado de Talento Humano
-            47 ---> Director Administrativo
+            476 ---> Director Administrativo
             49 ---> Director Médico Científico
             59 ---> Gerente
         */
@@ -105,7 +105,7 @@ class User implements UserInterface
             case 46: return \App\Enums\UserTypes::TH;
             case 47: return \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO;
             case 49: return \App\Enums\UserTypes::DIRECTOR_CIENTIFICO;
-            case 59: return \App\Enums\UserTypes::GERENTE;
+            case 56: return \App\Enums\UserTypes::GERENTE;
             default: return \App\Enums\UserTypes::JEFE;
         }
     }

@@ -27,7 +27,13 @@ class Auth
             return $this->user;
         }
 
-        $id = $this->session->get("usu_id", 675); // 133 // 617 // 675 // 476
+        /**
+         * 38  -> Gerente Botero
+         * 476 -> Director Administrativo Financiero
+         * 51  -> Director cientifico.
+         * 675 -> Jefe Talento Humano
+        */
+        $id = $this->session->get("usu_id", 675); // 617 // 675 // 476
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);

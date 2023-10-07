@@ -15,6 +15,7 @@ Encore
     .addEntry('jefes/app', './assets/jefes/index.js')
     .addEntry('th/app', './assets/th/index.js')
     .addEntry('dir/app', './assets/dir/index.js')
+    .addEntry('gerencia/app', './assets/gerencia/index.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()

@@ -211,18 +211,27 @@ class Requisicion
      * Obtiene todas las requisiciones dependiendo de `$state`.
      *
      * @param string $state Si es vacio toma TODAS las requisiciones.
+     * @param string $by Representa el Usuario que realizo los cambios de estado.
+     * @param string $dir Director, usualmente empleado para las grillas de
+     * gerencia y gerencia.
      * @param ?int $jefeId Si no es nulo se buscan solo las de ese jege
      * en especifico
      * @return array
     */
-    public function getAll(string $state = "", string $by = "", ?int $jefeId = null)
-   {
+    public function getAll(
+        string $state = "",
+        string $by = "",
+        string $dir = "",
+        ?int $jefeId = null
+    ) {
         try {
             $where = [
                 "E.by[~]" => $by,
                 "E.state[~]" => $state,
                 "ORDER" => ["R.created_at" => "ASC"]
             ];
+
+            if ($dir !== "") $where["R.director[~]"] = $dir;
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
             $data = [];
