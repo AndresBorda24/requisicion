@@ -4,10 +4,15 @@ import form from "./comp/form";
 import obs from "@/partials/obs";
 import grilla from "./comp/grilla";
 import ver from "@/partials/ver-req";
-import "@/partials/global-helpers.js";
 import horarios from "./comp/horarios";
+import updateReq from "@/th/comp/update-req";
 import obsList from "@/partials/obs-list";
 import sugerencias from "./comp/sugerencias";
+import changeState from "@/partials/change-state";
+
+import "@/stores/auth-store";
+import "@/stores/meta-store";
+import "@/partials/global-helpers.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("Obs", obs);
@@ -17,6 +22,8 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("GrillaJefes", grilla);
     Alpine.data("VerRequisicion", ver);
     Alpine.data("Sugerencias", sugerencias);
+    Alpine.data("ChangeState", changeState);
+    Alpine.data("UpdateRequisicion", updateReq);
 });
 
 document.addEventListener("DOMContentLoaded", Alpine.start);

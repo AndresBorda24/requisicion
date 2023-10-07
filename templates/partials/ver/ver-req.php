@@ -19,7 +19,7 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
       <?= $this->fetch("./partials/ver/tabs/info.php") ?>
       <?= $this->fetch("./partials/ver/tabs/obs.php") ?>
       <?php
-        if($user->isTh() && $this->isRoute('req.th')) {
+        if($user->isTh()) {
           echo $this->fetch("./partials/ver/tabs/extra-th.php");
         }
 
@@ -29,7 +29,9 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
           \App\Enums\UserTypes::GERENTE,
           \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
           \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO
-        ]) && ($this->isRoute('req.th') || $this->isRoute('req.dir'))) {
+        ])
+          // && ($this->isRoute('req.th') || $this->isRoute('req.dir'))
+        ) {
           echo $this->fetch("./partials/ver/tabs/actions.php");
         }
       ?>
