@@ -58,6 +58,19 @@ export async function getDirRequisiciones() {
     }
 }
 
+export async function getGerenciaRequisiciones() {
+    try {
+        showLoader()
+        const { data } = await axios
+            .get("/requisicion/get-gerencia")
+            .finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
+
 export async function getRequisicionesJefe() {
     try {
         showLoader()

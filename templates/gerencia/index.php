@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Requisici&oacute;n de Personal | Direcci&oacute;n</title>
-  <?= $this->loadAssets("dir/app") ?>
+  <?= $this->loadAssets("gerencia/app") ?>
 </head>
 <body>
   <?= $this->fetch("./partials/header.php", [
@@ -16,7 +16,7 @@
       realizadas por los JEFES de &aacute;rea  que ya han sido aprobadas por
       TH.
     </p>
-    <?= $this->fetch("./gerencia/comp/grilla.php") ?>
+    <?= $this->fetch("./direccion/comp/grilla.php") ?>
   </main>
   <?= $this->fetch("./partials/footer.php") ?>
 

@@ -72,6 +72,7 @@ class Requisicion
                 "tipo" => $data["tipo"],
                 "horas" => $data["horas"],
                 "cargo" => mb_strtoupper($data["cargo"]),
+                "director" => $data["director"],
                 "state" => Estados::SOLICITUD,
                 "motivo" => $data["motivo"],
                 "motivo_desc" => $data["motivo_desc"],
@@ -99,6 +100,7 @@ class Requisicion
                 "tipo" => $data["tipo"],
                 "horas" => $data["horas"],
                 "cargo" => mb_strtoupper($data["cargo"]),
+                "director" => $data["director"],
                 "state" => Estados::SOLICITUD,
                 "motivo" => $data["motivo"],
                 "motivo_desc" => $data["motivo_desc"],
@@ -155,7 +157,7 @@ class Requisicion
                 "A.area_servicio_nombre (area_nombre)", "area_id",
                 "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
-                "R.motivo", "R.sector", "R.horario", "R.cantidad",
+                "R.motivo", "R.sector", "R.horario", "R.cantidad", "R.director",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
                 "R.conocimientos", "R.nivel_educativo", "R.created_at"
             ], ["R.id" => $id ]);
@@ -209,18 +211,27 @@ class Requisicion
      * Obtiene todas las requisiciones dependiendo de `$state`.
      *
      * @param string $state Si es vacio toma TODAS las requisiciones.
+     * @param string $by Representa el Usuario que realizo los cambios de estado.
+     * @param string $dir Director, usualmente empleado para las grillas de
+     * gerencia y gerencia.
      * @param ?int $jefeId Si no es nulo se buscan solo las de ese jege
      * en especifico
      * @return array
     */
-    public function getAll(string $state = "", string $by = "", ?int $jefeId = null)
-   {
+    public function getAll(
+        string $state = "",
+        string $by = "",
+        string $dir = "",
+        ?int $jefeId = null
+    ) {
         try {
             $where = [
                 "E.by[~]" => $by,
                 "E.state[~]" => $state,
                 "ORDER" => ["R.created_at" => "ASC"]
             ];
+
+            if ($dir !== "") $where["R.director[~]"] = $dir;
             if ($jefeId) $where["jefe_id"] = $jefeId;
 
             $data = [];
@@ -253,8 +264,8 @@ class Requisicion
         try {
             $_ = $this->db->update(static::TABLE, [
                 "area" => $data["area"],
-                "state" => Estados::REVISION,
                 "sector" => $data["sector"],
+                "director" => $data["director"],
                 "area_anios" => $data["area_anios"],
                 "sector_anios" => $data["sector_anios"],
                 "nivel_educativo" => $data["nivel_educativo"]

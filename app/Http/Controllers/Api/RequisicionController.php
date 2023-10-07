@@ -97,7 +97,8 @@ class RequisicionController
             return new JsonResponse([
                 "data" => array_merge($this->req->getAll(
                     \App\Enums\Estados::APROBADO,
-                    \App\Enums\UserTypes::TH
+                    \App\Enums\UserTypes::TH,
+                    $user->getUserType()
                 ), $this->req->getAll(
                     "",
                     $user->getUserType()
@@ -108,6 +109,31 @@ class RequisicionController
         }
     }
 
+    public function getGerencia(UserInterface $user): Response
+    {
+        try {
+            return new JsonResponse([
+                "data" => array_merge($this->req->getAll(
+                    \App\Enums\Estados::APROBADO,
+                    \App\Enums\UserTypes::TH,
+                    $user->getUserType()
+                ), $this->req->getAll(
+                    \App\Enums\Estados::APROBADO,
+                    \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
+                    ""
+                ), $this->req->getAll(
+                    \App\Enums\Estados::APROBADO,
+                    \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO,
+                    ""
+                ), $this->req->getAll(
+                    "",
+                    $user->getUserType()
+                ))
+            ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
 
     public function getJefe(Request $request, UserInterface $user): Response
     {
@@ -116,7 +142,7 @@ class RequisicionController
 
             return new JsonResponse([
                 "status" => true,
-                "data" => $this->req->getAll($_, "", $user->getJefeId())
+                "data" => $this->req->getAll($_, "", "", $user->getJefeId())
             ]);
         } catch(\Exception $e) {
             return responseError($e);

@@ -26,11 +26,12 @@ export default () => ({
             .map(x => x.item);
     },
 
-    /** @return {void} */
+    /** @return {void|Boolean} */
     selectItem() {
         if (this.isEmpty) return false;
 
         this.input = this.sugerencias[ this.selectedItem ].cargo;
+        this.state.director = this.sugerencias[ this.selectedItem ].direccion;
         this.sugerencias = [];
         setTimeout(() => document.getElementById('cargo')?.focus(), 1);
     },
@@ -46,6 +47,7 @@ export default () => ({
         if (this.selectedItem > 0)
             this.selectedItem--;
     },
+
     get isEmpty() {
         return this.sugerencias.length === 0;
     }

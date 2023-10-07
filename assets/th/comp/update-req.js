@@ -20,7 +20,8 @@ export default () => ({
             sector: val.sector,
             area_anios: val.area_anios,
             sector_anios: val.sector_anios,
-            nivel_educativo: val.nivel_educativo
+            nivel_educativo: val.nivel_educativo,
+            director: val.director
         };
     },
 

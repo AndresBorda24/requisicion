@@ -34,6 +34,11 @@ class ViewController
         return $this->views->render($response, "direccion/index.php");
     }
 
+    public function gerencia(Response $response, UserInterface $user): Response
+    {
+        $this->views->addAttribute("user", $user);
+        return $this->views->render($response, "gerencia/index.php");
+    }
 
     /**
      * Carga la vista para las solicitudes de TH

@@ -25,6 +25,7 @@ class RequisicionRequest extends BodyRequest
                 "tipo"        => "required|in:".implode(",", $tipos),
                 "horario"     => "required",
                 "horas"       => "required|integer",
+                "director"    => "nullable|default:null",
                 "funciones"   => "nullable",
                 "observacion" => "nullable",
                 "conocimientos" => "required"
@@ -42,6 +43,7 @@ class RequisicionRequest extends BodyRequest
             return $this->validate($data, [
                 "area"          => "required",
                 "sector"        => "required",
+                "director"      => "required",
                 "area_anios"    => "required|integer",
                 "observacion"   => "nullable",
                 "sector_anios"  => "required|integer",
