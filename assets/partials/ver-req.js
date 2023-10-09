@@ -80,6 +80,7 @@ export default () => ({
         this.data.state = data.state;
         this.data._state = data._state;
         this.data.sector = data.sector;
+        this.data._director = data._director;
         this.data.area_anios = data.area_anios;
         this.data.sector_anios = data.sector_anios;
         this.data.nivel_educativo = data.nivel_educativo;

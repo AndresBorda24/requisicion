@@ -170,6 +170,9 @@ class Requisicion
             $_["_nivel_educativo"] = $_["nivel_educativo"]
                 ? NivelEducativo::value($_["nivel_educativo"])
                 : null;
+            $_["_director"] = $_["director"]
+                ? UserTypes::value($_["director"])
+                : null;
             $_["_state"] = sprintf("%s por %s",...[
                 Estados::value($_["state"]),
                 UserTypes::value($_["by"])
@@ -192,12 +195,15 @@ class Requisicion
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
                 "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
-                "A.area_servicio_nombre (area_nombre)",
+                "A.area_servicio_nombre (area_nombre)", "R.director",
                 "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], [ "R.id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
+            $_["_director"] = $_["director"]
+                ? UserTypes::value($_["director"])
+                : null;
             $_["_state"] = sprintf("%s por %s",...[
                 Estados::value($_["state"]),
                 UserTypes::value($_["by"])

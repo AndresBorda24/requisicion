@@ -36,6 +36,9 @@ x-show="tab === 1">
     <li class="list-group-item">
       Horas semanales: <span x-text="data.horas"class="fw-semibold"></span>.
     </li>
+    <li class="list-group-item">
+      Director: <span x-text="data._director"class="fw-semibold"></span>.
+    </li>
     <template x-if="Boolean(data._nivel_educativo)">
     <li class="list-group-item">
       Nivel educatico:
