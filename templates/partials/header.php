@@ -12,7 +12,8 @@
   <div
   class="container nav-scroller p-1 d-flex container justify-content-between align-items-center">
     <span class="fs-5"><?=  $title ?? "Cl&iacute;nica Asotrauma" ?></span>
-    <nav class="nav small gap-1">
-    </nav>
+    <span class="fs-6">
+      <?= \App\Enums\UserTypes::value(  $user->getUserType() ) ?>
+    </span>
   </div>
 </div>

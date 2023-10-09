@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Contracts\UserInterface;
 use App\Enums\Estados;
 use App\Enums\NivelEducativo;
 use App\Enums\Tipo;
@@ -352,6 +353,74 @@ class Requisicion
             }
 
             return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+
+    /*
+    | "Helpers" para la seleccion de las requisiciones dependiendo del tipo de
+    | usuario
+    */
+
+    /** Obtinene las requisiciones para TH */
+    public function getTh(): array
+    {
+        try {
+            return  $this->getAll();
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /** Obtinene las requisiciones para un Jefe de Area*/
+    public function getJefe(UserInterface $user): array
+    {
+        try {
+            return  $this->getAll("", "", "", $user->getJefeId());
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /** Obtinene las requisiciones para el Director */
+    public function getDirector(UserInterface $user): array
+    {
+        try {
+            return  array_merge($this->getAll(
+                \App\Enums\Estados::APROBADO,
+                \App\Enums\UserTypes::TH,
+                $user->getUserType()
+            ), $this->getAll(
+                "",
+                $user->getUserType()
+            ));
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /** Obtinene las requisiciones para el Gerencia */
+    public function getGerencia(UserInterface $user): array
+    {
+        try {
+            return array_merge($this->getAll(
+                \App\Enums\Estados::APROBADO,
+                \App\Enums\UserTypes::TH,
+                $user->getUserType()
+            ), $this->getAll(
+                \App\Enums\Estados::APROBADO,
+                \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
+                ""
+            ), $this->getAll(
+                \App\Enums\Estados::APROBADO,
+                \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO,
+                ""
+            ), $this->getAll(
+                "",
+                $user->getUserType()
+            ));
         } catch(\Exception $e) {
             throw $e;
         }

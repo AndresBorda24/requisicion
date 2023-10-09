@@ -32,6 +32,19 @@ export async function updateRequisicion( $id, $data ) {
     }
 }
 
+export async function getRequisiciones() {
+    try {
+        showLoader()
+        const { data } = await axios
+            .get("/requisicion/get")
+            .finally(hideLoader);
+
+        return data;
+    } catch(e) {
+        throw e;
+    }
+}
+
 export async function getAllRequisiciones() {
     try {
         showLoader()
