@@ -5,11 +5,7 @@ x-show="tab === 1">
     <span class="d-flex mb-2 fs-5 gap-2">
       <span x-text="data.cargo" class="fw-semibold flex-grow-1"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
-      <?php if(! $this->isRoute("req.th")): ?>
-        <template x-if="(
-          data.state === '<?= \App\Enums\Estados::DEVUELTO ?>'
-          && data.by === '<?= \App\Enums\UserTypes::TH ?>'
-        )">
+        <template x-if="canOpenEdit">
           <button
           @click="openEdit"
           title="Modificar requisici&oacute;n"
@@ -17,7 +13,6 @@ x-show="tab === 1">
             <?= $this->fetch("./icons/wrench.php") ?>
           </button>
         </template>
-      <?php endif ?>
     </span>
     <span class="small">
       <span x-text="data.jefe_nombre" class="small fw-semibold"></span><br>

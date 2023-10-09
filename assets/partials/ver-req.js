@@ -1,3 +1,4 @@
+import Alpine from "alpinejs";
 import { errorAlert } from "@/partials/alerts"
 import { getRequisicion } from "@/requests/RequisicionRequests";
 
@@ -58,6 +59,15 @@ export default () => ({
     openEdit() {
         this.$dispatch('update-requisicion-info', this.data);
         this.show = false;
+    },
+
+    /**
+     * Determina si mostrar o no el boton para modificar la requisicion
+     */
+    canOpenEdit() {
+        return this.data.state === Alpine.store("META").get("estados")?.DEVUELTO
+          && this.data.by === Alpine.store("META").get("u_tipos")?.TH
+          && this.data.jefe_id == Alpine.store("AUTH").get("jefe");
     },
 
     /**
