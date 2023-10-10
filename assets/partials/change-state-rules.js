@@ -11,7 +11,8 @@ export function CHANGE_STATE_RULES({ state, by, jefe_id, director }) {
         return false;
 
     if ( by === Alpine.store("META").get("u_tipos").JEFE )
-        return Alpine.store("AUTH").get("jefe") != jefe_id;
+        return Alpine.store("AUTH").get("jefe") != jefe_id
+        || Alpine.store("META").get("u_tipos").TH;
 
     if (
         state === Alpine.store("META").get("estados")?.APROBADO
