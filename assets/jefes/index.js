@@ -10,8 +10,8 @@ import obsList from "@/partials/obs-list";
 import sugerencias from "./comp/sugerencias";
 import changeState from "@/partials/change-state";
 
-import "@/stores/auth-store";
 import "@/stores/meta-store";
+import "@/stores/auth-store";
 import "@/partials/global-helpers.js";
 
 document.addEventListener("alpine:init", () => {

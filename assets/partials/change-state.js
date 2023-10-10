@@ -1,5 +1,6 @@
 import { errorAlert } from "@/partials/alerts"
 import { updateState } from "@/requests/RequisicionRequests";
+import { CHANGE_STATE_BTN_RULES, CHANGE_STATE_RULES } from "@/partials/change-state-rules";
 
 export default () => ({
     state: {},
@@ -59,24 +60,10 @@ export default () => ({
      * @return {Boolean}
     */
     canChangeState() {
-        if (this.data.state === this.$store.META.get("estados")?.ANULADO) {
-            return false;
-        }
+        return CHANGE_STATE_RULES( this.data );
+    },
 
-       if (
-            this.data.state === this.$store.META.get("estados")?.DEVUELTO
-            && this.data.by === this.$store.AUTH.get('tipo')
-        ) {
-            return false;
-        }
-
-        if (
-            this.data.state === this.$store.META.get("estados")?.APROBADO
-            && this.data.by === this.$store.AUTH.get('tipo')
-        ) {
-            return false;
-        }
-
-        return true;
+    showChangeButton( state ) {
+        return CHANGE_STATE_BTN_RULES( state, this.data );
     }
 });

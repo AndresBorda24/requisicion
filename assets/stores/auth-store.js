@@ -22,6 +22,6 @@ document.addEventListener("alpine:init", () => {
     });
 });
 
-document.addEventListener('alpine:initialized', async () => {
-    Alpine.store("AUTH").fetchInfo();
+document.addEventListener('alpine:init', async () => {
+    await Alpine.store("AUTH").fetchInfo();
 });

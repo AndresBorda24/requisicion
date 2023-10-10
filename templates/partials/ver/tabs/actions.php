@@ -12,21 +12,38 @@ x-show="tab === 4">
           <?php if(! $this->isRoute("req.th")): ?>
             <input x-bind="radio" id="rs-1" value="<?= \App\Enums\Estados::APROBADO ?>">
             <label
-              for="rs-1"
-              class="flex-grow-1 btn opacity-hover btn-outline-success btn-sm border-0 label-activable"
+            for="rs-1"
+            x-show="showChangeButton('<?= \App\Enums\Estados::APROBADO ?>')"
+            class="flex-grow-1 btn opacity-hover btn-outline-success btn-sm border-0 label-activable"
             > Aprobar <?= $this->fetch("./icons/approved.php") ?> </label>
           <?php endif ?>
 
-          <input x-bind="radio" id="rs-2" value="<?= \App\Enums\Estados::ANULADO ?>">
+          <input x-bind="radio" id="rs-3" value="<?= \App\Enums\Estados::CUMPLIDO ?>">
           <label
-            for="rs-2"
-            class="flex-grow-1 btn opacity-hover btn-outline-danger btn-sm border-0 label-activable"
+          for="rs-3"
+          x-show="showChangeButton('<?= \App\Enums\Estados::CUMPLIDO ?>')"
+          class="flex-grow-1 btn opacity-hover btn-outline-info btn-sm border-0 label-activable"
+          > Cumplida <?= $this->fetch("./icons/hand-peace.php") ?> </label>
+
+          <input x-bind="radio" id="rs-4" value="<?= \App\Enums\Estados::RECHAZADO ?>">
+          <label
+          for="rs-4"
+          x-show="showChangeButton('<?= \App\Enums\Estados::RECHAZADO ?>')"
+          class="flex-grow-1 btn opacity-hover btn-outline-danger btn-sm border-0 label-activable"
+          > Rechazar <?= $this->fetch("./icons/cancel.php") ?> </label>
+
+          <input x-bind="radio" id="rs-5" value="<?= \App\Enums\Estados::ANULADO ?>">
+          <label
+          for="rs-5"
+          x-show="showChangeButton('<?= \App\Enums\Estados::ANULADO ?>')"
+          class="flex-grow-1 btn opacity-hover btn-outline-danger btn-sm border-0 label-activable"
           > Anular <?= $this->fetch("./icons/cancel.php") ?> </label>
 
-          <input x-bind="radio" id="rs-3" value="<?= \App\Enums\Estados::DEVUELTO ?>">
+          <input x-bind="radio" id="rs-6" value="<?= \App\Enums\Estados::DEVUELTO ?>">
           <label
-            for="rs-3"
-            class="flex-grow-1 btn opacity-hover btn-outline-primary btn-sm border-0 label-activable"
+          for="rs-6"
+          x-show="showChangeButton('<?= \App\Enums\Estados::DEVUELTO ?>')"
+          class="flex-grow-1 btn opacity-hover btn-outline-primary btn-sm border-0 label-activable"
           > Devolver <?= $this->fetch("./icons/back.php") ?> </label>
         </div>
 
