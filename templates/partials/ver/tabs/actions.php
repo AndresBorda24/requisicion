@@ -74,16 +74,18 @@ x-show="tab === 4">
     </template>
 
     <template x-if="! canChangeState()">
-      <div class="p-3">
-        <span class="border border-danger p-2 rounded bg-danger-subtle shadow
-        text-center d-block fs-6">
-          No puedes modificar el estado.
-        </span> <br>
-
-        La requisici&oacute;n se encuentra en espera de la respuesta
-        de <span class="fw-bold">OTRO USUARIO</span> o est&aacute;
-        <span class="fw-bold">ANULADA</span>.
-      </div>
+      <article class="bg-danger-subtle d-flex gap-2 border border-danger m-2 p-3
+      align-items-center rounded shadow">
+        <span class="lh-1 p-3 ratio-1x1 rounded-circle text-bg-danger">
+          <?= $this->fetch("./icons/warning.php") ?>
+        </span>
+        <p class="m-0">
+          <strong> No puedes modificar el estado:</strong> <br>
+          La requisici&oacute;n se encuentra en espera de la respuesta
+          de <span class="fw-bold">OTRO USUARIO</span> o est&aacute;
+          <span class="fw-bold">ANULADA</span>.
+        </p>
+      </article>
     </template>
   </form>
 </div>
