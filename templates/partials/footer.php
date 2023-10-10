@@ -4,8 +4,8 @@
     height="25"
     src="https://asotrauma.com.co/wp-content/uploads/2021/08/logo-asotrauma-w.svg"
     alt="logo-blanco">
-    <span class="small fw-light">#
-      <!-- Aqui se puede poner un texto -->
+    <span class="small fw-light">
+      &#10070; <!-- Aqui se puede poner un texto -->
     </span>
   </div>
 </footer>
