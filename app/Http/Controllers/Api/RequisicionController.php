@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Estado;
+use App\Enums\UserTypes;
 use App\Models\Requisicion;
 use App\Contracts\UserInterface;
 use App\Http\Requests\RequisicionRequest;
-use App\Models\Estado;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -86,6 +87,37 @@ class RequisicionController
             return new JsonResponse([
                 "data" => $this->req->getAll($_)
             ]);
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
+    public function getAll(UserInterface $user): Response
+    {
+        try {
+            if ($user->getUserType() === UserTypes::TH)
+                return new JsonResponse($this->req->getTh());
+
+            $jefe = $this->req->getJefe($user);
+
+            if (in_array($user->getUserType(), [
+                UserTypes::DIRECTOR,
+                UserTypes::DIRECTOR_CIENTIFICO,
+                UserTypes::DIRECTOR_ADMINISTRATIVO,
+            ])) return new JsonResponse(array_unique(array_merge(
+                    $this->req->getDirector($user),
+                    $jefe),
+                \SORT_REGULAR)
+            );
+
+            if ($user->getUserType() === UserTypes::GERENTE)
+                return new JsonResponse(array_unique(array_merge(
+                    $this->req->getGerencia($user),
+                    $jefe),
+                    \SORT_REGULAR)
+                );
+
+            return new JsonResponse($jefe);
         } catch(\Exception $e) {
             return responseError($e);
         }

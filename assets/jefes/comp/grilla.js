@@ -1,5 +1,5 @@
 import { grilla } from "@/partials/grilla";
-import { getRequisicionesJefe } from "@/requests/RequisicionRequests";
+import { getRequisiciones } from "@/requests/RequisicionRequests";
 
 export default () => ({
     ...grilla,
@@ -18,8 +18,8 @@ export default () => ({
     */
     async getData() {
         try {
-            const data = await getRequisicionesJefe();
-            this.grillaData = data.data;
+            const data = await getRequisiciones();
+            this.grillaData = data;
         } catch(e) {
             errorAlert("Error al cargar las requisiciones.");
             console.error(e);

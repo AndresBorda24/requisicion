@@ -15,7 +15,7 @@
     Obs.
   </button>
 
-  <?php if($user->isTh() && $this->isRoute('req.th')): ?>
+  <?php if($user->isTh()): ?>
     <button
     title="Talento Humano"
     @click="tab = 2"
@@ -30,7 +30,9 @@
     \App\Enums\UserTypes::GERENTE,
     \App\Enums\UserTypes::DIRECTOR_CIENTIFICO,
     \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO
-  ]) && ($this->isRoute('req.th') || $this->isRoute('req.dir'))): ?>
+  ])
+   // && ($this->isRoute('req.th') || $this->isRoute('req.dir'))
+ ): ?>
     <button
     title="Acciones"
     @click="tab = 4"

@@ -11,18 +11,20 @@ final class Estados extends Enum
     public const SOLICITUD = "SO";
     public const REVISION  = "RV";
     public const APROBADO  = "AP";
+    public const RECHAZADO = "RZ";
     public const ANULADO   = "AN";
     public const CUMPLIDO  = "CR";
-    public const PRENDIENTE_APRO = "PA";
     public const DEVUELTO  = "DV";
+    // public const PRENDIENTE_APRO = "PA";
 
     protected static array $values = [
         self::SOLICITUD => "En solicitud",
         self::REVISION  => "En revisi&oacute;n",
         self::APROBADO  => "Aprobado",
+        self::RECHAZADO => "Rechazado",
         self::DEVUELTO  => "Devuelto",
         self::ANULADO   => "Anulado",
         self::CUMPLIDO  => "Cumplido",
-        self::PRENDIENTE_APRO => "Pendiente por aprobaci&oacute;n",
+        // self::PRENDIENTE_APRO => "Pendiente por aprobaci&oacute;n",
     ];
 }

@@ -1,3 +1,4 @@
+import Alpine from "alpinejs";
 import { errorAlert } from "@/partials/alerts"
 import { getRequisicion } from "@/requests/RequisicionRequests";
 
@@ -61,6 +62,15 @@ export default () => ({
     },
 
     /**
+     * Determina si mostrar o no el boton para modificar la requisicion
+     */
+    canOpenEdit() {
+        return this.data.state === Alpine.store("META").get("estados")?.DEVUELTO
+          && this.data.by === Alpine.store("META").get("u_tipos")?.TH
+          && this.data.jefe_id == Alpine.store("AUTH").get("jefe");
+    },
+
+    /**
      * Una vez talento humano actualiza los datos de educacion y experiendia
      * se emite un evento ( updated-th ) y se actualizan algunos datos
     */
@@ -70,6 +80,7 @@ export default () => ({
         this.data.state = data.state;
         this.data._state = data._state;
         this.data.sector = data.sector;
+        this.data._director = data._director;
         this.data.area_anios = data.area_anios;
         this.data.sector_anios = data.sector_anios;
         this.data.nivel_educativo = data.nivel_educativo;
