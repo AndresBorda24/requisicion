@@ -10,7 +10,7 @@
   <?= $this->fetch("./partials/header.php", [
     "title" => "Panel de requisiciones | Jefes"
   ]) ?>
-  <main class="container my-5">
+  <main class="container container-height py-4">
     <section
     class="mb-3"
     id="buttons-container"></section>
