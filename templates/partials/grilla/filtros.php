@@ -23,7 +23,18 @@ class="position-relative">
       </select>
     </div>
 
-    <?php if($this->isRoute("req.th")): // Solo si es la vista de TH  ?>
+    <div class="mb-2 small">
+      <label for="filter-by" class="form-label m-0">Por:</label>
+      <select x-model="filters.by" id="filter-by"
+      class="bg-opacity-10 bg-white border-opacity-25 border-white form-select form-select-sm text-light text-uppercase">
+        <option value="" class="text-dark">Todos</option>
+        <?php foreach (\App\Enums\UserTypes::all() as $key => $value): ?>
+          <option value="<?= $key ?>" class="text-dark"><?= $value ?></option>
+        <?php endforeach ?>
+      </select>
+    </div>
+
+    <?php if($user->getUserType() !== \App\Enums\UserTypes::JEFE): // Solo si es la vista de TH  ?>
     <div class="mb-2 small">
       <label for="filter-area" class="form-label m-0">&Aacute;rea:</label>
       <select x-model="filters.area" id="filter-area"
@@ -44,5 +55,11 @@ class="position-relative">
       @keyup="$el.value = $el.value.toUpperCase()"
       class="bg-opacity-10 bg-white border-opacity-25 border-white form-control form-control-sm text-light text-uppercase">
     </div>
+
+    <button
+    @click="resetFilters"
+    class="btn btn-sm small text-decoration-underline text-light fw-light">
+      Limpiar filtros
+    </button>
   </div>
 </details>

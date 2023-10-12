@@ -14,7 +14,8 @@ export const grilla = {
     filters: {
         area: "",
         cargo: "",
-        state: ""
+        state: "",
+        by: ""
     },
     events: {
         ["@updated-th.document"]: "updateItemTh($event.detail)",
@@ -67,6 +68,7 @@ export const grilla = {
     filtered() {
         return this.grillaData.filter($i =>
             $i.state.includes(this.filters.state)
+            && $i.by.includes(this.filters.by)
             && $i.cargo.includes(this.filters.cargo)
             && $i.area_id.toString().includes(this.filters.area)
         );
