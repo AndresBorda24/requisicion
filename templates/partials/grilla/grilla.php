@@ -2,7 +2,7 @@
 class="bg-body border overflow-auto position-relative rounded shadow-sm table-responsive-md z-0"
 style="height: 500px;">
   <table class="table table-sm table-striped-columns table-hover m-0">
-    <thead class="sticky-top" style="top: -1px;">
+    <thead class="sticky-top">
       <tr class="align-middle small position-relative">
         <th class="px-2 text-bg-primary">#</th>
         <th class="px-2 text-bg-primary">&Aacute;rea</th>
