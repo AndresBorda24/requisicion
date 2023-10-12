@@ -19,7 +19,7 @@ export default () => ({
     async getData() {
         try {
             const data = await getRequisiciones();
-            this.grillaData = data;
+            this.grillaData = Object.values(data);
         } catch(e) {
             errorAlert("Error al cargar las requisiciones.");
             console.error(e);
