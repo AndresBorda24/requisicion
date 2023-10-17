@@ -27,4 +27,15 @@ final class Estados extends Enum
         self::CUMPLIDO  => "Cumplido",
         // self::PRENDIENTE_APRO => "Pendiente por aprobaci&oacute;n",
     ];
+
+    /**
+     * Obtiene el Estado con el tipo de usuario que lo realizo.
+    */
+    public static function publicBy($state, $by): string
+    {
+        return sprintf("%s por %s",...[
+            self::value($state),
+            UserTypes::value($by)
+        ]);
+    }
 }

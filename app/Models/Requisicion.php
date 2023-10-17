@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\UserInterface;
-use App\Enums\Estados;
-use App\Enums\NivelEducativo;
-use App\Enums\Tipo;
-use App\Enums\UserTypes;
 use Medoo\Medoo;
+use App\Enums\Tipo;
+use App\Enums\Motivo;
+use App\Enums\Estados;
+use App\Enums\UserTypes;
+use App\Enums\NivelEducativo;
+use App\Contracts\UserInterface;
 
 class Requisicion
 {
@@ -157,6 +158,7 @@ class Requisicion
             ], [
                 "A.area_servicio_nombre (area_nombre)", "area_id",
                 "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by",
+                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
                 "R.motivo", "R.sector", "R.horario", "R.cantidad", "R.director",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
@@ -166,17 +168,10 @@ class Requisicion
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
             $_["_tipo"]  = Tipo::value($_["tipo"]);
-            $_["_motivo"] = \App\Enums\Motivo::value($_["motivo"]);
-            $_["_nivel_educativo"] = $_["nivel_educativo"]
-                ? NivelEducativo::value($_["nivel_educativo"])
-                : null;
-            $_["_director"] = $_["director"]
-                ? UserTypes::value($_["director"])
-                : null;
-            $_["_state"] = sprintf("%s por %s",...[
-                Estados::value($_["state"]),
-                UserTypes::value($_["by"])
-            ]);
+            $_["_motivo"] = Motivo::value($_["motivo"]);
+            $_["_director"] = UserTypes::tryValue($_["director"]);
+            $_["_state"] = Estados::publicBy($_["state"], $_["by"]);
+            $_["_nivel_educativo"] = NivelEducativo::tryValue($_["nivel_educativo"]);
 
             return $_;
         } catch(\Exception $e) {
@@ -196,18 +191,14 @@ class Requisicion
                 "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)", "R.director",
+                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
                 "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], [ "R.id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");
 
-            $_["_director"] = $_["director"]
-                ? UserTypes::value($_["director"])
-                : null;
-            $_["_state"] = sprintf("%s por %s",...[
-                Estados::value($_["state"]),
-                UserTypes::value($_["by"])
-            ]);
+            $_["_state"] = Estados::publicBy($_["state"], $_["by"]);
+            $_["_director"] = UserTypes::tryValue($_["director"]);
             return $_;
         } catch(\Exception $e) {
             throw $e;
@@ -247,13 +238,10 @@ class Requisicion
                 "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
                 "A.area_servicio_nombre (area_nombre)",
+                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
                 "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], $where, function($item) use(&$data) {
-                $item["_state"] = sprintf("%s por %s",...[
-                    Estados::value($item["state"]),
-                    UserTypes::value($item["by"])
-                ]);
-
+                $item["_state"] = Estados::publicBy($item["state"], $item["by"]);
                 array_push($data, $item);
             });
 
@@ -300,11 +288,7 @@ class Requisicion
                 "E.req_id" => $id,
                 "ORDER" => [ "E.at" => "DESC"]
             ], function($item) use(&$data) {
-                $item["author"] = sprintf("%s por %s",...[
-                    Estados::value($item["state"]),
-                    UserTypes::value($item["by"])
-                ]);
-
+                $item["author"] = Estados::publicBy($item["state"], $item["by"]);
                 array_push($data, $item);
             });
 
@@ -345,14 +329,9 @@ class Requisicion
 
             $data = [];
             while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
-                if ($row["state"] !== null) {
-                    $row["author"] = sprintf("%s por %s",...[
-                        Estados::value($row["state"]),
-                        UserTypes::value($row["by"])
-                    ]);
-                } else {
-                    $row["author"] = $row["by"];
-                }
+                $row["author"] = ($row["state"] !== null)
+                    ? Estados::publicBy($row["state"], $row["by"])
+                    : $row["by"];
 
                 unset($row["by"], $row["state"]);
                 array_push($data, $row);
