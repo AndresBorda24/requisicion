@@ -4,7 +4,7 @@ style="height: 500px;">
   <table class="table table-sm table-striped-columns table-hover m-0">
     <thead class="sticky-top">
       <tr class="align-middle small position-relative">
-        <th class="px-2 text-bg-primary">#</th>
+        <th class="px-2 text-bg-primary">Cod.</th>
         <th class="px-2 text-bg-primary">&Aacute;rea</th>
         <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
         <th id="sort-created-at" @click="sort('created_at', $el)" data-dir="true"
