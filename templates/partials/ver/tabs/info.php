@@ -67,4 +67,8 @@ x-show="tab === 1">
     </li>
     </template>
   </ul>
+
+  <div class="border-top">
+    <?= $this->fetch("./partials/ver/tabs/actions.php") ?>
+  </div>
 </div>

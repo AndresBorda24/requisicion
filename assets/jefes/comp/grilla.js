@@ -41,6 +41,6 @@ export default () => ({
 
     /** Agrega una requisicion a la tabla */
     addRequisicion({ detail: data }) {
-        this.grillaData.push(data);
+        this.grillaData.unshift(data);
     }
 });

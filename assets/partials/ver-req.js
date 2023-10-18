@@ -19,6 +19,7 @@ export default () => ({
         await this.getData( id );
         this.show = true;
         window.overflow();
+        this.$nextTick(() => this.$el.scroll(0, 0));
     },
 
     closeModal() {
