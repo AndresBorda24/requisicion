@@ -9,7 +9,8 @@ style="height: 500px;">
         <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
         <th id="sort-created-at" @click="sort('created_at', $el)" data-dir="true"
         role="button" class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
-        <th class="px-2 text-bg-primary" style="min-width: 120px;"> Estado </th>
+        <th class="px-2 text-bg-primary" @click="sort('state_at', $el)" data-dir="true"
+        role="button" style="min-width: 120px;"> Estado </th>
         <th class="text-bg-primary position-sticky end-0">
           <?= $this->fetch("./partials/grilla/filtros.php") ?>
         </th>
