@@ -7,8 +7,8 @@ style="height: 500px;">
         <th class="px-2 text-bg-primary">#</th>
         <th class="px-2 text-bg-primary">&Aacute;rea</th>
         <th class="px-2 text-bg-primary" style="width: 30%;">Cargo</th>
-        <th @click="sort('created_at', $el)" data-dir="true" role="button"
-        class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
+        <th id="sort-created-at" @click="sort('created_at', $el)" data-dir="true"
+        role="button" class="text-nowrap px-2 text-bg-primary">Fecha Solicitud</th>
         <th class="px-2 text-bg-primary" style="min-width: 120px;"> Estado </th>
         <th class="text-bg-primary position-sticky end-0">
           <?= $this->fetch("./partials/grilla/filtros.php") ?>

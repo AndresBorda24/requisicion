@@ -157,8 +157,7 @@ class Requisicion
                 "[>]vista_jefes (J)" => "jefe_id",
             ], [
                 "A.area_servicio_nombre (area_nombre)", "area_id",
-                "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by",
-                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
+                "J.usuario_nombrec (jefe_nombre)", "E.state", "E.by", "E.at (state_at)",
                 "R.id", "R.area", "R.tipo", "R.horas", "R.cargo", "R.motivo_desc",
                 "R.motivo", "R.sector", "R.horario", "R.cantidad", "R.director",
                 "R.jefe_id", "R.funciones", "R.area_anios", "R.sector_anios",
@@ -190,8 +189,7 @@ class Requisicion
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
                 "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
-                "A.area_servicio_nombre (area_nombre)", "R.director",
-                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
+                "A.area_servicio_nombre (area_nombre)", "R.director", "E.at (state_at)",
                 "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], [ "R.id" => $id ]);
 
@@ -237,8 +235,7 @@ class Requisicion
                 "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
                 "[>]cv_req_estado_view (E)" => ["id" => "req_id"]
             ], [
-                "A.area_servicio_nombre (area_nombre)",
-                "state_days" => Medoo::raw("DATEDIFF(<E.at>, NOW())"),
+                "A.area_servicio_nombre (area_nombre)", "E.at (state_at)",
                 "R.id", "R.cargo", "E.state", "E.by", "R.created_at", "R.area_id"
             ], $where, function($item) use(&$data) {
                 $item["_state"] = Estados::publicBy($item["state"], $item["by"]);

@@ -20,6 +20,12 @@ export default () => ({
         try {
             const data = await getRequisiciones();
             this.grillaData = Object.values(data);
+            this.$nextTick(() => {
+                this.sort(
+                    "created_at",
+                    document.getElementById("sort-created-at")
+                );
+            });
         } catch(e) {
             errorAlert("Error al cargar las requisiciones.");
             console.error(e);
