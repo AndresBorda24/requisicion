@@ -80,7 +80,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <textarea
         required
         type="text"
-        style="height: 85px;"
+        @input="resizeTextarea"
         maxlength="200"
         placeholder="Describe un poco el motivo..."
         x-model="state.motivo_desc"
@@ -123,10 +123,10 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#conocimientos"]) ?>
         <textarea
         id="conocimientos"
-        style="height: 250px;"
+        @input="resizeTextarea"
         x-model="state.conocimientos"
         required
-        maxlength="600"
+        maxlength="850"
         placeholder="Describe los conocimientos necesarios para el cargo..."
         class="form-control form-control-sm"
         ></textarea>
@@ -139,8 +139,8 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <?= $this->fetch("./partials/textarea-counter.php", [ "id" => "#funciones"]) ?>
         <textarea
         id="funciones"
-        maxlength="600"
-        style="height: 250px;"
+        maxlength="850"
+        @input="resizeTextarea"
         x-model="state.funciones"
         placeholder="Si quieres, escribe las principales funciones del cargo..."
         class="form-control form-control-sm"
@@ -155,7 +155,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
         <textarea
         id="observacion"
         maxlength="280"
-        style="height: 100px;"
+        @input="resizeTextarea"
         x-model="state.observacion"
         placeholder="Deja una observaci&oacute;n"
         class="form-control form-control-sm"

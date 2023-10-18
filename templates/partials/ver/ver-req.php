@@ -15,7 +15,7 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
     </section>
 
     <section
-    class="flex-grow-1 overflow-auto bg-body">
+    class="flex-grow-1 bg-body">
       <?= $this->fetch("./partials/ver/tabs/info.php") ?>
       <?= $this->fetch("./partials/ver/tabs/obs.php") ?>
       <?php

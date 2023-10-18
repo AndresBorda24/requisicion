@@ -1,7 +1,7 @@
 <div
 x-transition:enter.delay.80ms
 x-show="tab === 1">
-  <p class="lh-sm border-bottom p-3 shadow-sm">
+  <p class="bg-body border-bottom lh-sm p-3 shadow-sm sticky-top">
     <span class="d-flex mb-2 fs-5 gap-2">
       <span x-text="data.cargo" class="fw-semibold flex-grow-1"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
