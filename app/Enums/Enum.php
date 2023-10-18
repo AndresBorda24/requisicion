@@ -33,7 +33,7 @@ class Enum
      *
      * @return null en caso de NO hallar un match con el ENUM
     */
-    public static function tryValue(string $tipo): ?string
+    public static function tryValue(?string $tipo): ?string
     {
         return array_key_exists($tipo, static::$values)
             ? static::$values[ $tipo ]
