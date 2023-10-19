@@ -304,16 +304,30 @@ class Requisicion
         try {
             $query = $this->db->query("(
                     SELECT
-                         `E`.`id`, `E`.`state`, `E`.`by`, `E`.`detail` AS `body`,  `E`.`at`
+                        `E`.`id`,
+                        `E`.`state`,
+                        `E`.`by`,
+                        CONCAT_WS(' ',
+                            usuario_apellido1,
+                            usuario_nombre1
+                       ) AS `usuario`,
+                        `E`.`detail` AS `body`,
+                        `E`.`at`
                     FROM cv_requisiciones AS `R`
                     LEFT JOIN cv_requisicion_estados AS `E`
                         ON `R`.`id` = `E`.`req_id`
+                    LEFT JOIN `usuario` AS `U`
+                        ON `E`.`usuario_id` = `U`.`usuario_id`
                     WHERE <E.req_id> = :req_id
                 ) UNION (
                     SELECT
                         CONCAT('O-',`O`.`id`) AS `id`,
                         NULL AS `state`,
-                        CONCAT_WS(' ', usuario_apellido1, usuario_nombre1) AS `by`,
+                        NULL AS `by`,
+                        CONCAT_WS(' ',
+                            usuario_apellido1,
+                            usuario_nombre1
+                        ) AS `usuario`,
                         `O`.`body`,
                         `O`.`created_at` AS `at`
                     FROM `cv_req_observaciones` AS `O`
@@ -327,8 +341,8 @@ class Requisicion
             $data = [];
             while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                 $row["author"] = ($row["state"] !== null)
-                    ? Estados::publicBy($row["state"], $row["by"])
-                    : $row["by"];
+                    ? Estados::publicBy($row["state"], $row["by"])." - ".$row["usuario"]
+                    : $row["usuario"];
 
                 unset($row["by"], $row["state"]);
                 array_push($data, $row);

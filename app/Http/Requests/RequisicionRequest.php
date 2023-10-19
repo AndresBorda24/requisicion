@@ -63,7 +63,8 @@ class RequisicionRequest extends BodyRequest
             return $this->validate($data, [
                 "by"     => "required|in:".implode(",", $userTypes),
                 "detail" => "required|max:280",
-                "state"  => "required|in:".implode(",", $estados)
+                "state"  => "required|in:".implode(",", $estados),
+                "usuario_id" => "required|integer"
             ]);
         } catch(\Exception $e) {
             throw $e;

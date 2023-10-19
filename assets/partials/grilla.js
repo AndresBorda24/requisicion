@@ -58,9 +58,10 @@ export const grilla = {
         const index = this.grillaData.findIndex(t => t.id == data.id)
         console.log(index, data);
         if (index > -1) {
+            this.grillaData[ index ].by     = data.by;
             this.grillaData[ index ]._state = data._state;
             this.grillaData[ index ].state  = data.state;
-            this.grillaData[ index ].by     = data.by;
+            this.grillaData[ index ].state_at  = data.state_at;
         }
     },
 

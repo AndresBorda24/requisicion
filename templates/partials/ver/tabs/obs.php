@@ -10,7 +10,8 @@ style="min-height: 350px;">
     <li class="list-group-item obs-list-item">
       <span
       x-text="ob.author"
-      class="badge text-bg-success small"></span>
+      style="white-space: break-spaces; line-height: 14px;"
+      class="badge text-start text-bg-success small"></span>
       <p class="small m-0" x-text="ob.body"></p>
       <span
       x-text="ob.at"
