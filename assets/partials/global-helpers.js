@@ -12,3 +12,14 @@ window.overflow = function(o = false, el = 'body') {
         document.querySelector(el)?.classList.add("overflow-hidden");
     }
 };
+
+/**
+ * Setea un alto al textarea dependiendo de su contenido.
+ *
+ * @param {Event} $e El evento, preferiblemente oninput
+ * @return {void}
+*/
+window.resizeTextarea = function($e) {
+    $e.target.style.height = "auto";
+    $e.target.style.height = ($e.target.scrollHeight + 4) + "px";
+}

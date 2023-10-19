@@ -26,7 +26,8 @@ class Estado
                 "by"     => $data["by"],
                 "state"  => $data["state"],
                 "req_id" => $req_id,
-                "detail" => $data["detail"]
+                "detail" => $data["detail"],
+                "usuario_id" => $data["usuario_id"]
             ], "id");
 
             return (int) $this->db->id();

@@ -3,9 +3,9 @@ x-data="VerRequisicion"
 x-cloak
 x-bind="events"
 class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex flex-column">
-  <div class="small d-flex flex-column rounded mx-auto mt-3 mb-5 mb-md-3" style="
+  <div class="small d-flex flex-column rounded mx-auto mt-5 mb-5 mt-md-3 mb-md-3" style="
     width: 100vw;
-    max-width: 500px;
+    max-width: 600px;
   ">
     <?= $this->fetch("./partials/ver/modal-header.php") ?>
     <?= $this->fetch("./partials/ver/modal-nav.php") ?>
@@ -15,7 +15,7 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
     </section>
 
     <section
-    class="flex-grow-1 overflow-auto bg-body">
+    class="flex-grow-1 bg-body">
       <?= $this->fetch("./partials/ver/tabs/info.php") ?>
       <?= $this->fetch("./partials/ver/tabs/obs.php") ?>
       <?php
@@ -32,7 +32,7 @@ class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex fl
         ])
           // && ($this->isRoute('req.th') || $this->isRoute('req.dir'))
         ) {
-          echo $this->fetch("./partials/ver/tabs/actions.php");
+          // echo $this->fetch("./partials/ver/tabs/actions.php");
         }
       ?>
     </section>

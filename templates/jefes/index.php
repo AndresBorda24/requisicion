@@ -8,7 +8,7 @@
 </head>
 <body>
   <?= $this->fetch("./partials/header.php", [
-    "title" => "Panel de requisiciones | Jefes"
+    "title" => "Panel de requisiciones"
   ]) ?>
   <main class="container container-height py-4">
     <section

@@ -1,22 +1,23 @@
 <div
 x-transition:enter.delay.80ms
 x-show="tab === 1">
-  <p class="lh-sm border-bottom p-3 shadow-sm">
+  <p class="bg-body border-bottom lh-sm p-3 shadow-sm sticky-top">
     <span class="d-flex mb-2 fs-5 gap-2">
-      <span x-text="data.cargo" class="fw-semibold flex-grow-1"></span>
+      <span x-text="data.cargo" class="flex-grow-1 fw-semibold"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
-        <template x-if="canOpenEdit">
-          <button
-          @click="openEdit"
-          title="Modificar requisici&oacute;n"
-          class="btn btn-success btn-sm lh-1 px-1">
-            <?= $this->fetch("./icons/wrench.php") ?>
-          </button>
-        </template>
+      <template x-if="canOpenEdit">
+        <button
+        @click="openEdit"
+        title="Modificar requisici&oacute;n"
+        class="btn btn-success btn-sm lh-1 px-1">
+          <?= $this->fetch("./icons/wrench.php") ?>
+        </button>
+      </template>
     </span>
     <span class="small">
       <span x-text="data.jefe_nombre" class="small fw-semibold"></span><br>
-      <span x-text="data.area_nombre" class="small"></span>
+      <span x-text="data.area_nombre" class="small"></span><br>
+      <span class="small">Cod. <span x-text="data.id"></span></span>
     </span>
   </p>
   <ul class="list-group list-group-flush px-3 mb-3" style="font-size: 0.9em;">
@@ -67,4 +68,8 @@ x-show="tab === 1">
     </li>
     </template>
   </ul>
+
+  <div class="border-top">
+    <?= $this->fetch("./partials/ver/tabs/actions.php") ?>
+  </div>
 </div>

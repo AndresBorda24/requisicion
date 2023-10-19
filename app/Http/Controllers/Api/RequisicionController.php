@@ -202,13 +202,15 @@ class RequisicionController
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validataUpdateState($body + [
-                "by" => $user->getUserType()
+                "by" => $user->getUserType(),
+                "usuario_id" => $user->getId()
             ]);
             $this->estado->create($id, $data);
 
             return new JsonResponse([
                 "by"    => $data["by"],
                 "state" => $data["state"],
+                "state_at" => date("Y-m-d H:i:s"),
                 "_state" => sprintf("%s por %s",
                     \App\Enums\Estados::value($data["state"]),
                     \App\Enums\UserTypes::value($data["by"])

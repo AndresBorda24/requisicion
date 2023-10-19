@@ -32,8 +32,9 @@ class Auth
          * 476 -> Director Administrativo Financiero.
          * 51  -> Director cientifico.
          * 675 -> Jefe Talento Humano.
+         * 3 -> Christopher Robin
         */
-        $id = $this->session->get("usu_id", 136); // 617 // 675 // 476 // 136
+        $id = $this->session->get("usu_id", 675); // 617 // 675 // 476 // 136
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);

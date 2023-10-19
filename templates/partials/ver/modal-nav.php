@@ -37,7 +37,7 @@
     title="Acciones"
     @click="tab = 4"
     :class="{'shadow active': tab === 4}"
-    class="btn btn-sm btn-outline-warning px-3 rounded-5 lh-1">
+    class="btn d-none btn-sm btn-outline-warning px-3 rounded-5 lh-1">
       <?= $this->fetch("./icons/wrench.php") ?>
     </button>
   <?php endif ?>

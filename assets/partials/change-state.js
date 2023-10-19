@@ -47,9 +47,9 @@ export default () => ({
             if (x) {
                 this.submitButtonHtml = x.innerHTML;
                 this.submitButtonColor = x.classList.value.match(/line-(\w+)/)[1]
+                setTimeout(() => this.$el?.querySelector("textarea")?.focus(), 50);
             };
 
-            setTimeout(() => this.$el?.querySelector("textarea")?.focus(), 50);
         });
     },
 
