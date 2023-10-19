@@ -7,6 +7,7 @@ export default () => ({
     show: false,
     tab: 1,
     events: {
+        ["id"]: "ver-requisicion",
         ["@ver-requisicion.document.stop"]: "openModal",
         ["x-transition.opacity"]: "",
         ["x-show"]: "show",
@@ -92,6 +93,9 @@ export default () => ({
      * Aqui se actualiza unicamente el estado.
     */
     updateState({ detail: data } ) {
+        document
+            .getElementById(this.events["id"])
+            ?.scroll(0, 0);
         this.data.by = data.by;
         this.data.state = data.state;
         this.data._state = data._state;

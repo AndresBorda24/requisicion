@@ -7,7 +7,7 @@ class="position-relative">
   title="Filtros"
   class="d-block btn btn-outline-warning btn-small lh-1 p-1">
     <?= $this->fetch("./icons/wrench.php") ?>
-    <span class="small">Filtros</span>
+    <span class="small d-none d-lg-inline-block">Filtros</span>
   </summary>
   <div
   style="width: 250px;"

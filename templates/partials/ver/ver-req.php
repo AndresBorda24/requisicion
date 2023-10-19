@@ -3,7 +3,7 @@ x-data="VerRequisicion"
 x-cloak
 x-bind="events"
 class="vh-100 vw-100 flex fixed-top overflow-auto bg-black bg-opacity-75 flex flex-column">
-  <div class="small d-flex flex-column rounded mx-auto mt-3 mb-5 mb-md-3" style="
+  <div class="small d-flex flex-column rounded mx-auto mt-5 mb-5 mt-md-3 mb-md-3" style="
     width: 100vw;
     max-width: 600px;
   ">
