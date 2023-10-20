@@ -5,7 +5,7 @@ import { getRequisiciones } from "@/requests/RequisicionRequests";
 export default () => ({
     ...grilla,
     pageNum: 0,
-    pageSize: 20,
+    pageSize: 15,
     pagination: null,
     grillaEvents: {
         ...grilla.events,
@@ -25,7 +25,8 @@ export default () => ({
         // ---------------------------------------------------------------------
         this.pagination = new Pagination({
             container: document.getElementById("pagination-grilla"),
-            pageClickCallback: ( pageNum ) => this.pageNum = (pageNum - 1)
+            pageClickCallback: ( pageNum ) => this.pageNum = (pageNum - 1),
+            maxVisibleElements: 10
         });
         // ---------------------------------------------------------------------
         await this.getData();
@@ -61,8 +62,8 @@ export default () => ({
     },
 
     get page() {
-        const start = (this.pageNum * 20) + 1;
-        const end = start + 20;
+        const start = (this.pageNum * this.pageSize) + 1;
+        const end = start + this.pageSize;
 
         return this.__data.slice(start, end);
     },
