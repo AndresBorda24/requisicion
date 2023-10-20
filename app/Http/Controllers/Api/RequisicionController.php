@@ -82,6 +82,16 @@ class RequisicionController
         }
     }
 
+    public function findSimilar(Request $request): Response
+    {
+        try {
+            $x = @$request->getQueryParams()["x"] ?? "";
+            return new JsonResponse($this->req->similar($x));
+        } catch(\Exception $e) {
+            return responseError($e);
+        }
+    }
+
     public function getTh(Request $request): Response
     {
         try {

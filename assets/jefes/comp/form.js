@@ -1,6 +1,5 @@
 import { errorAlert } from "@/partials/alerts"
-import { createRequisicion } from "@/requests/RequisicionRequests";
-import { updateRequisicion } from "@/requests/RequisicionRequests";
+import { createRequisicion, updateRequisicion } from "@/requests/RequisicionRequests";
 
 export default () => ({
     state: {},

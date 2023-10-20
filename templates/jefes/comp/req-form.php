@@ -50,7 +50,10 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
       <div class="mb-2 row g-0">
         <div class="ps-0 p-1 col-md-9 position-relative">
           <label for="cargo" class="form-label small mb-0">Cargo*:</label>
-          <?= $this->fetch("./jefes/comp/sugerencias.php") ?>
+          <div class="d-flex gap-2">
+            <?= $this->fetch("./jefes/comp/sugerencias.php") ?>
+            <?= $this->fetch("./jefes/comp/plantillas.php") ?>
+          </div>
         </div>
         <div class="pe-0 p-1 col-md-3">
           <label for="cantidad" class="form-label small mb-0">Cantidad*:</label>

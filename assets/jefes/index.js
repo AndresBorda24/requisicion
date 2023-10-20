@@ -7,6 +7,7 @@ import ver from "@/partials/ver-req";
 import horarios from "./comp/horarios";
 import updateReq from "@/th/comp/update-req";
 import obsList from "@/partials/obs-list";
+import plantillas from "./comp/plantillas";
 import sugerencias from "./comp/sugerencias";
 import changeState from "@/partials/change-state";
 
@@ -23,6 +24,7 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("VerRequisicion", ver);
     Alpine.data("Sugerencias", sugerencias);
     Alpine.data("ChangeState", changeState);
+    Alpine.data("ReqPlantillas", plantillas);
     Alpine.data("UpdateRequisicion", updateReq);
 });
 
