@@ -10,7 +10,6 @@ class="position-relative flex-grow-1">
   placeholder="Ej: Auxiliar de Sistemas"
   x-model.debounce.400="input"
   @input.debounce.300="searchCargo($event.target.value)"
-  @keyup="$el.value = $el.value.toUpperCase()"
   @keydown.up.prevent="goUp"
   @keydown.tab="sugerencias = []"
   @keydown.down.prevent="goDown"
