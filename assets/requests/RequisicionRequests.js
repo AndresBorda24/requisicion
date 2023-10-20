@@ -45,6 +45,24 @@ export async function getRequisiciones() {
     }
 }
 
+export async function getSimilar(x) {
+    let error = null;
+    let _data = null;
+
+    try {
+        const { data } = await axios
+            .get("/requisicion/get-similar", {
+                params: { x }
+            });
+
+        _data = data;
+    } catch(e) {
+        error = e;
+    } finally {
+        return [error, _data];
+    }
+}
+
 export async function getAllRequisiciones() {
     try {
         showLoader()

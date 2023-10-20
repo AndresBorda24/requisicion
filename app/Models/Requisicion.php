@@ -186,8 +186,14 @@ class Requisicion
     public function similar(string $x): array
     {
         try {
-            $_ = $this->db->get(static::TABLE, "*", [
-                "cargo[~]" => trim($x)
+            $_ = $this->db->select(static::TABLE, [
+                "tipo", "@cargo", "horas", "motivo", "horario", "director",
+                "cantidad", "funciones", "motivo_desc", "conocimientos", "id",
+                "created_at"
+            ], [
+                "cargo[~]" => trim($x),
+                "ORDER" => [ "id" => "DESC" ],
+                "LIMIT" => 4
             ]);
 
             return $_ ?? [];
