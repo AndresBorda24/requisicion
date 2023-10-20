@@ -181,6 +181,22 @@ class Requisicion
     }
 
     /**
+     * Busca una requisicion que tenga un nombre similar a $x
+    */
+    public function similar(string $x): array
+    {
+        try {
+            $_ = $this->db->get(static::TABLE, "*", [
+                "cargo[~]" => trim($x)
+            ]);
+
+            return $_ ?? [];
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
      * Obtiene informacion basica sobre la requisicion. Principalmnete se usa
      * para adjuntar nuevos items a la grilla luego de creados.
     */
