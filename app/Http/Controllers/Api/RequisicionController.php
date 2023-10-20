@@ -38,7 +38,8 @@ class RequisicionController
 
             $new  = $this->req->save($data + [
                 "jefe_id" => $user->getJefeId(),
-                "area_id" => $user->getAreaId()
+                "area_id" => $user->getAreaId(),
+                "usuario_id" => $user->getId()
             ]);
 
             return new JsonResponse([
@@ -50,12 +51,14 @@ class RequisicionController
         }
     }
 
-    public function update(Request $request, int $id): Response
+    public function update(Request $request, int $id, UserInterface $user): Response
     {
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validateInsert($body);
-            $this->req->save($data, $id);
+            $this->req->save($data + [
+                "usuario_id" => $user->getId()
+            ], $id);
 
             return new JsonResponse([
                 "status" => true,
@@ -181,12 +184,14 @@ class RequisicionController
         }
     }
 
-    public function updateTh(Request $request, int $id): Response
+    public function updateTh(Request $request, int $id, UserInterface $user): Response
     {
         try {
             $body = $request->getParsedBody() ?? [];
             $data = $this->validator->validataUpdateTh($body);
-            $this->req->updateTh($id, $data);
+            $this->req->updateTh($id, $data + [
+                "usuario_id" => $user->getId()
+            ]);
 
             return new JsonResponse([
                 "status" => true,

@@ -61,8 +61,8 @@ export default () => ({
         }
     },
 
-    get page() {
-        const start = (this.pageNum * this.pageSize) + 1;
+    page() {
+        const start = (this.pageNum * this.pageSize);
         const end = start + this.pageSize;
 
         return this.__data.slice(start, end);
@@ -78,5 +78,6 @@ export default () => ({
     /** Agrega una requisicion a la tabla */
     addRequisicion({ detail: data }) {
         this.grillaData.unshift(data);
+        this.__data.unshift(data);
     }
 });

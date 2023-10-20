@@ -47,7 +47,8 @@ class Requisicion
                 (new Estado($db))->create($reqId, [
                     "by"     => UserTypes::JEFE,
                     "state"  => Estados::SOLICITUD,
-                    "detail" => @$data["observacion"]
+                    "detail" => @$data["observacion"],
+                    "usuario_id" => $data["usuario_id"]
                 ]);
 
                 $newId = $reqId;
@@ -129,7 +130,8 @@ class Requisicion
                 (new Estado($db))->create($id, [
                     "by"     => UserTypes::TH,
                     "state"  => Estados::APROBADO,
-                    "detail" => @$data["observacion"]
+                    "detail" => @$data["observacion"],
+                    "usuario_id" => $data["usuario_id"]
                 ]);
             } catch(\Exception $e) {
                 $error = $e;
