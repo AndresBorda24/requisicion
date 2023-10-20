@@ -36,9 +36,13 @@ export default () => ({
     /**
      * Construye la paginacion
     */
-    makePagination() {
-        this.pageNum = 0;
+    makePagination( page = null ) {
         this.pagination.make(this.__data.length, this.pageSize);
+        if (page === null) {
+            this.pageNum = 0
+        } else {
+            this.pagination.goToPage(page);
+        }
     },
 
     /**
@@ -79,5 +83,6 @@ export default () => ({
     addRequisicion({ detail: data }) {
         this.grillaData.unshift(data);
         this.__data.unshift(data);
+        this.makePagination( this.pageNum + 1 );
     }
 });
