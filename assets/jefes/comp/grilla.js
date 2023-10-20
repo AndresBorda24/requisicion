@@ -1,16 +1,43 @@
+import Pagination from "s-pagination";
 import { grilla } from "@/partials/grilla";
 import { getRequisiciones } from "@/requests/RequisicionRequests";
 
 export default () => ({
     ...grilla,
+    pageNum: 0,
+    pageSize: 20,
+    pagination: null,
     grillaEvents: {
         ...grilla.events,
         ["@new-requisicion.document"]: "addRequisicion"
     },
 
     async init() {
-        this.grillaState = this.$el.dataset.defEstado || "";
+        this.$watch("filters", () => {
+            console.log("updated filters");
+            this.__data = this.filtered();
+            this.makePagination()
+        });
+        this.$watch("sorting", () => {
+            this.__data = this.sorted();
+            console.log("updated sorting");
+        });
+        // ---------------------------------------------------------------------
+        this.pagination = new Pagination({
+            container: document.getElementById("pagination-grilla"),
+            pageClickCallback: ( pageNum ) => this.pageNum = (pageNum - 1)
+        });
+        // ---------------------------------------------------------------------
         await this.getData();
+        this.makePagination();
+    },
+
+    /**
+     * Construye la paginacion
+    */
+    makePagination() {
+        this.pageNum = 0;
+        this.pagination.make(this.__data.length, this.pageSize);
     },
 
     /**
@@ -19,6 +46,7 @@ export default () => ({
     async getData() {
         try {
             const data = await getRequisiciones();
+            this.__data = Object.values(data);
             this.grillaData = Object.values(data);
             this.$nextTick(() => {
                 this.sort(
@@ -30,6 +58,13 @@ export default () => ({
             errorAlert("Error al cargar las requisiciones.");
             console.error(e);
         }
+    },
+
+    get page() {
+        const start = (this.pageNum * 20) + 1;
+        const end = start + 20;
+
+        return this.__data.slice(start, end);
     },
 
     /**

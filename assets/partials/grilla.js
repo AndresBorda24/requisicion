@@ -9,6 +9,7 @@ document.addEventListener("alpine:init", () => {
 });
 
 export const grilla = {
+    __data: [],
     grillaData: [],
     grillaState: "PENDIENTE",
     filters: {
@@ -16,6 +17,10 @@ export const grilla = {
         cargo: "",
         state: "",
         by: ""
+    },
+    sorting: {
+        dir: false,
+        field: ""
     },
     events: {
         ["@updated-th.document"]: "updateItemTh($event.detail)",
@@ -26,20 +31,30 @@ export const grilla = {
      * Determina si hay datos o no en la grilla
     */
     noData() {
-        return this.filtered().length === 0;
+        return this.__data.length === 0;
     },
 
     sort(key, $el) {
         const d = JSON.parse($el.dataset.dir);
+        $el.dataset.dir = !d;
 
-        if (d) {
-            this.grillaData.sort((a, b) => b[key].localeCompare(a[key], "es"));
-        } else {
-            this.grillaData.sort((a, b) => a[key].localeCompare(b[key], "es"));
+        this.sorting.dir = d;
+        this.sorting.field = key;
+    },
+
+    sorted() {
+        const key = this.sorting.field;
+        if (key === "") return this.__data;
+
+        if (this.sorting.dir) {
+            return this.__data.toSorted((a, b) =>
+                b[key].localeCompare(a[key], "es"));
         }
 
-        $el.dataset.dir = !d;
+        return this.__data.toSorted((a, b) =>
+            a[key].localeCompare(b[key], "es"));
     },
+
 
     removeItem(id) {
         const index = this.grillaData.findIndex(t => t.id == id)
@@ -56,7 +71,6 @@ export const grilla = {
     */
     updateItemTh( data ) {
         const index = this.grillaData.findIndex(t => t.id == data.id)
-        console.log(index, data);
         if (index > -1) {
             this.grillaData[ index ].by     = data.by;
             this.grillaData[ index ]._state = data._state;
@@ -67,6 +81,7 @@ export const grilla = {
 
     /** @return { array } */
     filtered() {
+        console.log("mmm")
         return this.grillaData.filter($i =>
             $i.state.includes(this.filters.state)
             && $i.by.includes(this.filters.by)

@@ -28,7 +28,7 @@ style="height: 500px;">
         </tr>
       </template>
 
-      <template x-for="r in filtered" :key="r.id">
+      <template x-for="r in page" :key="r.id">
         <?= $this->fetch("./partials/grilla/item.php") ?>
       </template>
     </tbody>
