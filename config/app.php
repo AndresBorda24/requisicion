@@ -17,4 +17,14 @@ return [
     "db.port" => $_ENV["DB_PORT"] ?? 3306,
     "db.pass" => $_ENV["DB_PASS"] ?? "",
     "db.name" => $_ENV["DB_NAME"] ?? "mi_app",
+
+    "mail.mailer"   =>  $_ENV["MAIL_MAILER"] ?? "",
+    "mail.host"     =>  $_ENV["MAIL_HOST"] ?? "",
+    "mail.port"     =>  $_ENV["MAIL_PORT"] ?? "",
+    "mail.username" =>  $_ENV["MAIL_USERNAME"] ?? "",
+    "mail.password" =>  $_ENV["MAIL_PASSWORD"] ?? "",
+    "mail.encription" =>  $_ENV["MAIL_ENCRYPTION"] ?? "",
+
+    "wp.token" => $_ENV["WP_TOKEN"] ?? "",
+    "wp.instance" => $_ENV["WP_INSTANCE"] ?? "",
 ];
