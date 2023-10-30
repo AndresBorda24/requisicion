@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Db;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 
 use function App\responseError;
 
