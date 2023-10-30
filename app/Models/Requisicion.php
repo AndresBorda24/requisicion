@@ -181,6 +181,36 @@ class Requisicion
     }
 
     /**
+     * Busca y retorna la informacion de una requisicion.
+     *
+     * @throws Exception Si no encuentra ninguna requisicion que coincida con
+     * el id.
+    */
+    public function findNoty(int $id): array
+    {
+        try {
+            $_ = $this->db->get(static::TABLE." (R)", [
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"],
+                "[>]cv_req_estado_view (E)" => ["id" => "req_id"],
+                "[>]vista_jefes (J)" => "jefe_id"
+            ], [
+                "A.area_servicio_nombre (area_nombre)",
+                "E.state", "E.by", "E.at (state_at)", "E.detail",
+                "R.cargo", "R.director", "R.jefe_id", "R.created_at"
+            ], ["R.id" => $id ]);
+
+            if (!$_) throw new \Exception("Requisicion no encontrada.");
+
+            $_["_state"] = Estados::publicBy($_["state"], $_["by"]);
+
+            return $_;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+
+    /**
      * Busca una requisicion que tenga un nombre similar a $x
     */
     public function similar(string $x): array

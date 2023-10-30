@@ -41,7 +41,7 @@ class NotificacionesService
     public function cambioEstado(int $reqId)
     {
         try {
-            $req = $this->req->find($reqId);
+            $req = $this->req->findNoty($reqId);
 
             if ($req === null) {
                 throw new \Exception("Notificacion Error. No Requisicion.");
@@ -50,19 +50,21 @@ class NotificacionesService
             $contact = $this->user->getContactData((int) $req["jefe_id"]);
             $this->unsetContactsEstados($req, $contact);
 
-            $email = $this->views->fetch("./notificaciones/email.php", [
+            $email = $this->views->fetch("./notificaciones/correo.php", [
                 "cargo"  => $req["cargo"],
                 "estado" => $req["_state"],
                 "f_req"  => $req["created_at"],
+                "detail" => $req["detail"],
                 "area"   =>  $req["area_nombre"],
                 "f_estado"  =>  $req["state_at"]
             ]);
             $wpText = $this->views->fetch("./notificaciones/wp.php", [
                 "cargo"  => $req["cargo"],
+                "detail" => $req["detail"],
                 "estado" => $req["_state"],
                 "f_req"  => $req["created_at"],
                 "area"   =>  $req["area_nombre"],
-                "f_estado"  =>  $req["state_at"]
+                "f_estado"  =>  $req["state_at"],
             ]);;
 
             $this->send( $contact, $wpText, $email );
@@ -80,7 +82,6 @@ class NotificacionesService
     */
     private function send(array $contact, string $wpText, string $email): void
     {
-        $this->wp->sendChatMessage("3209353216", $wpText, 5);
         foreach($contact as $tipo => $info) {
             // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
             $this->email->addAddress($info["email"]);
@@ -91,6 +92,7 @@ class NotificacionesService
         $this->email->Body = $email;
         $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
         $this->email->send();
+        $this->wp->sendChatMessage("3209353216", $wpText, 5);
     }
 
     /**
