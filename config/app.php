@@ -7,6 +7,7 @@ return [
     "app.url"  => $_ENV["APP_URL"] ?? "localhost",
     "app.api"  => $_ENV["APP_API"] ?? "localhost/api",
     "app.ver"  => $_ENV["APP_VER"] ?? "0.0.0",
+    "base.url" => $_ENV["BASE_URL"] ?? "localhost",
 
     "app.templates"   => __DIR__ . '/..' . $_ENV["TEMPLATES"] ?? "/templates",
     "app.entrypoints" => __DIR__ . '/..' . $_ENV["ENTRYPOINTS_PATH"] ?? "/public",

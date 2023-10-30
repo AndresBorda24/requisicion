@@ -96,7 +96,7 @@ class Views extends PhpRenderer
             );
         }
 
-        return $this->routeParser->urlFor($name);
+        return $this->c->get("base.url") . $this->routeParser->urlFor($name);
     }
 
     /**
