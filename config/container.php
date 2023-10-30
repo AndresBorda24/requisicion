@@ -28,7 +28,7 @@ $builder->addDefinitions([
         $mail = new PHPMailer();
         $mail->isSMTP();
 
-        $mail->SMTPDebug  = \PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;
+        $mail->SMTPDebug  = \PHPMailer\PHPMailer\SMTP::DEBUG_OFF;
         $mail->Host       = $c->get("mail.host");
         $mail->SMTPAuth   = true;
         $mail->Port       = $c->get("mail.port");
