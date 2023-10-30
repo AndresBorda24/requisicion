@@ -57,7 +57,13 @@ class NotificacionesService
                 "area"   =>  $req["area_nombre"],
                 "f_estado"  =>  $req["state_at"]
             ]);
-            $wpText = "Hola Mundo";
+            $wpText = $this->views->fetch("./notificaciones/wp.php", [
+                "cargo"  => $req["cargo"],
+                "estado" => $req["_state"],
+                "f_req"  => $req["created_at"],
+                "area"   =>  $req["area_nombre"],
+                "f_estado"  =>  $req["state_at"]
+            ]);;
 
             $this->send( $contact, $wpText, $email );
         } catch(\Exception $e) {
@@ -74,7 +80,7 @@ class NotificacionesService
     */
     private function send(array $contact, string $wpText, string $email): void
     {
-        // $this->wp->sendChatMessage("3209353216", $wpText, 5);
+        $this->wp->sendChatMessage("3209353216", $wpText, 5);
         foreach($contact as $tipo => $info) {
             // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
             $this->email->addAddress($info["email"]);
@@ -83,6 +89,7 @@ class NotificacionesService
         $this->email->isHTML(true);
         $this->email->Subject = "Requisición de Personal";
         $this->email->Body = $email;
+        $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
         $this->email->send();
     }
 
