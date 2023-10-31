@@ -74,7 +74,42 @@ class NotificacionesService
             $this->send( $contact, $wpText, $email );
             $this->logger->info("Notificaciones enviadas: Requisicion $reqId");
         } catch(\Exception $e) {
-            $this->logger->error("Notificaciones" . $e->getMessage());
+            $this->logger->error("Notificaciones: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Se encarga de notificar a los jefes cuando se realiza una observacion a
+     * la requisicion.
+     *
+     * @param int $reqId Requisicion
+    */
+    public function observaciones(int $obsId)
+    {
+        try {
+            $obs = (new \App\Models\Observacion($this->req->db))
+                ->findNoty($obsId);
+
+            if ($obs === null) {
+                throw new \Exception("Notificacion Error. No Observacion.");
+            }
+
+            $contact = $this->user->getContactData(0);
+            $this->unsetContactsEstados($obs, $contact);
+
+            $wpText = $this->views->fetch("./notificaciones/observacion-wp.php", [
+                "id"   => $obs["id"],
+                "body" => $obs["body"],
+                "cargo"  => $obs["cargo"],
+                "req_id" => $obs["req_id"],
+                "author" =>  $obs["author"],
+                "created_at"  => $obs["created_at"]
+            ]);
+
+            $this->send( $contact, $wpText );
+            $this->logger->info("Notificaciones enviadas: Observacion $obsId");
+        } catch(\Exception $e) {
+            $this->logger->error("Notificaciones: " . $e->getMessage());
         }
     }
 
@@ -85,7 +120,7 @@ class NotificacionesService
      * @param string $wpText Mensaje que se enviara por Whatsapp.
      * @param string $email HTML que se enviara por correo.
     */
-    private function send(array $contact, string $wpText, string $email): void
+    private function send(array $contact, string $wpText, ?string $email = null): void
     {
         try {
             $this->wp->sendChatMessage("3209353216", $wpText, 5);
@@ -94,10 +129,12 @@ class NotificacionesService
                 $this->email->addAddress($info["email"]);
             }
 
+            if ($email === null) return;
+
             $this->email->isHTML(true);
             $this->email->Body = $email;
             $this->email->Subject = "Requisición de Personal";
-            $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
+            $this->email->AltBody = preg_replace("#[*_`]#", "", $wpText);
             $this->email->send();
         } catch(\Exception $e) {
             throw $e;

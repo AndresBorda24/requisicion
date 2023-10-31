@@ -21,9 +21,13 @@ function loadApiRoutes(App $app): void {
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
 
             $req->post("/create", [RequisicionController::class, "create"]);
-            $req->post("/{id:[0-9]+}/notify", NotificacionController::class)
+            $req->post("/{id:[0-9]+}/notify", [NotificacionController::class, "cambioEstado"])
                 ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
                 ->setName("noty.estado");
+
+            $req->post("/{id:[0-9]+}/notify-obs", [NotificacionController::class, "observacion"])
+                ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
+                ->setName("noty.obs");
 
             $req->put("/{id:[0-9]+}/update", [RequisicionController::class, "update"]);
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
