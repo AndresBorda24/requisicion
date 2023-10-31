@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 use Medoo\Medoo;
 use DI\ContainerBuilder;
+use Katzgrau\KLogger\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
 use UltraMsg\WhatsAppApi;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 $builder  = new ContainerBuilder;
 
@@ -38,7 +40,8 @@ $builder->addDefinitions([
         // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 
         return $mail;
-    }
+    },
+    LoggerInterface::class => fn() => new Logger(__DIR__."/../logs")
 ]);
 
 return $builder->build();

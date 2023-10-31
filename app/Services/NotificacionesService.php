@@ -9,6 +9,7 @@ use UltraMsg\WhatsAppApi;
 use App\Models\Requisicion;
 use App\Views;
 use PHPMailer\PHPMailer\PHPMailer;
+use Psr\Log\LoggerInterface;
 
 class NotificacionesService
 {
@@ -17,19 +18,22 @@ class NotificacionesService
     private WhatsAppApi $wp;
     private Requisicion $req;
     private PHPMailer $email;
+    private LoggerInterface $logger;
 
     public function __construct(
         User $user,
         Views $views,
         WhatsAppApi $wp,
         Requisicion $req,
-        PHPMailer $email
+        PHPMailer $email,
+        LoggerInterface $logger
     ) {
         $this->wp = $wp;
         $this->req = $req;
         $this->user = $user;
         $this->views = $views;
         $this->email = $email;
+        $this->logger = $logger;
     }
 
     /**
@@ -65,11 +69,12 @@ class NotificacionesService
                 "f_req"  => $req["created_at"],
                 "area"   =>  $req["area_nombre"],
                 "f_estado"  =>  $req["state_at"],
-            ]);;
+            ]);
 
             $this->send( $contact, $wpText, $email );
+            $this->logger->info("Notificaciones enviadas: Requisicion $reqId");
         } catch(\Exception $e) {
-            echo $e->getMessage();
+            $this->logger->error("Notificaciones" . $e->getMessage());
         }
     }
 
@@ -82,18 +87,21 @@ class NotificacionesService
     */
     private function send(array $contact, string $wpText, string $email): void
     {
-        $this->wp->sendChatMessage("3209353216", $wpText, 5);
-        foreach($contact as $tipo => $info) {
-            // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
-            $this->email->addAddress($info["email"]);
+        try {
+            $this->wp->sendChatMessage("3209353216", $wpText, 5);
+            foreach($contact as $tipo => $info) {
+                // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
+                $this->email->addAddress($info["email"]);
+            }
+
+            $this->email->isHTML(true);
+            $this->email->Body = $email;
+            $this->email->Subject = "Requisición de Personal";
+            $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
+            $this->email->send();
+        } catch(\Exception $e) {
+            throw $e;
         }
-
-        $this->email->isHTML(true);
-        $this->email->Subject = "Requisición de Personal";
-        $this->email->Body = $email;
-        $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
-        $this->email->send();
-
     }
 
     /**
@@ -119,12 +127,14 @@ class NotificacionesService
         }
 
         if ($req["by"] === UserTypes::TH || $req["by"] === UserTypes::GERENTE) {
-            $dir = ($req["director"] === UserTypes::DIRECTOR_CIENTIFICO)
-                ? UserTypes::DIRECTOR_ADMINISTRATIVO
-                : UserTypes::DIRECTOR_CIENTIFICO;
+            if ($req["director"] != UserTypes::GERENTE) {
+                $dir = ($req["director"] === UserTypes::DIRECTOR_CIENTIFICO)
+                    ? UserTypes::DIRECTOR_ADMINISTRATIVO
+                    : UserTypes::DIRECTOR_CIENTIFICO;
 
-            unset($contact[$dir]);
-            return;
+                unset($contact[$dir]);
+                return;
+            }
         }
 
         unset(
