@@ -224,7 +224,7 @@
                             <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Source Sans Pro',sans-serif;" align="left">
 
                               <h1 style="margin: 0px; color: #fbeeb8; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px; font-weight: 400;">
-                                <strong><?= $cargo ?></strong>
+                                [<?= $id ?>] <strong><?= $cargo ?></strong>
                               </h1>
 
                             </td>
@@ -303,7 +303,7 @@
 
                               <div style="font-size: 14px; line-height: 220%; text-align: left; word-wrap: break-word;">
                                 <ul>
-                                  <li style="line-height: 30.8px;">Estado: <?= $estado ?>.</li>
+                                  <li style="line-height: 30.8px;">Estado: <strong><?= $estado ?></strong>.</li>
                                   <li style="line-height: 30.8px;">Fecha Requisición: <?= $f_req ?>.</li>
                                   <li style="line-height: 30.8px;">Fecha Cambio Estado: <?= $f_estado ?>.</li>
                                   <li style="line-height: 30.8px;">Area: <?= $area ?>.</li>

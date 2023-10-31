@@ -55,6 +55,7 @@ class NotificacionesService
             $this->unsetContactsEstados($req, $contact);
 
             $email = $this->views->fetch("./notificaciones/correo.php", [
+                "id" => $req["id"],
                 "cargo"  => $req["cargo"],
                 "estado" => $req["_state"],
                 "f_req"  => $req["created_at"],
@@ -63,6 +64,7 @@ class NotificacionesService
                 "f_estado"  =>  $req["state_at"]
             ]);
             $wpText = $this->views->fetch("./notificaciones/wp.php", [
+                "id" => $req["id"],
                 "cargo"  => $req["cargo"],
                 "detail" => $req["detail"],
                 "estado" => $req["_state"],
