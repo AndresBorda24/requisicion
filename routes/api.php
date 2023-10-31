@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\ExtraController;
+use App\Http\Controllers\Api\NotificacionController;
 use Slim\App;
 use App\Http\Controllers\Api\ObservacionController;
 use Slim\Routing\RouteCollectorProxy as Group;
@@ -18,7 +19,11 @@ function loadApiRoutes(App $app): void {
             $req->get("/get-dir", [RequisicionController::class, "getDir"]);
             $req->get("/get-gerencia", [RequisicionController::class, "getGerencia"]);
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
+
             $req->post("/create", [RequisicionController::class, "create"]);
+            $req->post("/{id:[0-9]+}/notify", NotificacionController::class)
+                ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
+                ->setName("noty.estado");
 
             $req->put("/{id:[0-9]+}/update", [RequisicionController::class, "update"]);
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);

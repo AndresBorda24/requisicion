@@ -164,3 +164,22 @@ export async function updateState(id, body) {
         return [_, error];
     }
 }
+
+/**
+ * Realiza la solicitud que desencadena las solicitudes.
+ *
+ * @param {string|int} id Representa el id de la requisicion.
+ * @return {Array} Informacion del error [1] y la data [0]
+*/
+export async function notyCambioEstado(id) {
+    let [_, error] = [null, null];
+
+    try {
+        const { data } = await axios.post(`/requisicion/${id}/notify`);
+        _ = data;
+    } catch(e) {
+        error = e;
+    } finally {
+        return [_, error];
+    }
+}

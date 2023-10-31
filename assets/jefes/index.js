@@ -10,6 +10,7 @@ import obsList from "@/partials/obs-list";
 import plantillas from "./comp/plantillas";
 import sugerencias from "./comp/sugerencias";
 import changeState from "@/partials/change-state";
+import notificaciones from "@/partials/notificaciones";
 
 import "@/stores/meta-store";
 import "@/stores/auth-store";
@@ -26,6 +27,7 @@ document.addEventListener("alpine:init", () => {
     Alpine.data("ChangeState", changeState);
     Alpine.data("ReqPlantillas", plantillas);
     Alpine.data("UpdateRequisicion", updateReq);
+    Alpine.data("NotificacionesService", notificaciones);
 });
 
 document.addEventListener("DOMContentLoaded", Alpine.start);

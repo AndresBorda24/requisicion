@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Estado;
 use App\Enums\UserTypes;
 use App\Models\Requisicion;
+use App\Services\AsyncService;
 use App\Contracts\UserInterface;
 use App\Http\Requests\RequisicionRequest;
 use Laminas\Diactoros\Response\JsonResponse;
@@ -19,14 +20,17 @@ class RequisicionController
     private Estado $estado;
     private Requisicion $req;
     private RequisicionRequest $validator;
+    private AsyncService $async;
 
     public function __construct(
         Estado $estado,
         Requisicion $req,
+        AsyncService $asyncService,
         RequisicionRequest $validator
     ) {
         $this->req = $req;
         $this->estado = $estado;
+        $this->async = $asyncService;
         $this->validator = $validator;
     }
 
@@ -42,6 +46,7 @@ class RequisicionController
                 "usuario_id" => $user->getId()
             ]);
 
+            $this->async->notificarCambioEstado($new);
             return new JsonResponse([
                 "status" => true,
                 "data" => $this->req->findBasic($new)
@@ -60,6 +65,7 @@ class RequisicionController
                 "usuario_id" => $user->getId()
             ], $id);
 
+            $this->async->notificarCambioEstado($id);
             return new JsonResponse([
                 "status" => true,
                 "data" => $this->req->findBasic($id)
@@ -198,11 +204,12 @@ class RequisicionController
     {
         try {
             $body = $request->getParsedBody() ?? [];
-            $data = $this->validator->validataUpdateTh($body);
-            $this->req->updateTh($id, $data + [
+            $data = $this->validator->validataUpdateTh($body + [
                 "usuario_id" => $user->getId()
             ]);
+            $this->req->updateTh($id, $data);
 
+            $this->async->notificarCambioEstado($id);
             return new JsonResponse([
                 "status" => true,
                 "__ctrl" => $this->req->findBasic($id)
@@ -222,6 +229,7 @@ class RequisicionController
             ]);
             $this->estado->create($id, $data);
 
+            $this->async->notificarCambioEstado($id);
             return new JsonResponse([
                 "by"    => $data["by"],
                 "state" => $data["state"],
@@ -239,7 +247,6 @@ class RequisicionController
     public function observaciones(int $id): Response
     {
         try {
-            // return new JsonResponse($this->req->getObservaciones($id));
             return new JsonResponse($this->req->getAllObs($id));
         } catch(\Exception $e) {
             return responseError($e);

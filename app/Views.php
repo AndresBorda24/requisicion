@@ -56,7 +56,7 @@ class Views extends PhpRenderer
         */
         $types = [
             "css" => "<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\">",
-            "js"  => "<script src=\"%s\" type=\"text/javascript\"></script>",
+            "js"  => "<script src=\"%s\" type=\"text/javascript\" defer></script>",
         ];
 
         foreach ($ep["entrypoints"][$k] as $type => $assets) {
@@ -96,7 +96,7 @@ class Views extends PhpRenderer
             );
         }
 
-        return $this->routeParser->urlFor($name);
+        return $this->c->get("base.url") . $this->routeParser->urlFor($name);
     }
 
     /**

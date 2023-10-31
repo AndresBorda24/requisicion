@@ -23,4 +23,26 @@ final class UserTypes extends Enum
         self::DIRECTOR_CIENTIFICO => "Director Científico",
         self::DIRECTOR_ADMINISTRATIVO => "Director Administrativo"
     ];
+
+    public static function getCargoId(string $tipo): ?int
+    {
+        switch ($tipo) {
+            case  \App\Enums\UserTypes::TH: return 46;
+            case  \App\Enums\UserTypes::GERENTE: return 56;
+            case  \App\Enums\UserTypes::DIRECTOR_CIENTIFICO: return 49;
+            case  \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO: return 47;
+            default: null;
+        }
+    }
+
+    public static function getFromCargo(int $cargoId): ?string
+    {
+        switch ($cargoId) {
+            case 46: return \App\Enums\UserTypes::TH;
+            case 56: return \App\Enums\UserTypes::GERENTE;
+            case 49: return \App\Enums\UserTypes::DIRECTOR_CIENTIFICO;
+            case 47: return \App\Enums\UserTypes::DIRECTOR_ADMINISTRATIVO;
+            default: return \App\Enums\UserTypes::JEFE;
+        }
+    }
 }
