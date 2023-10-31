@@ -82,6 +82,7 @@ class NotificacionesService
     */
     private function send(array $contact, string $wpText, string $email): void
     {
+        $this->wp->sendChatMessage("3209353216", $wpText, 5);
         foreach($contact as $tipo => $info) {
             // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
             $this->email->addAddress($info["email"]);
@@ -92,7 +93,7 @@ class NotificacionesService
         $this->email->Body = $email;
         $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
         $this->email->send();
-        $this->wp->sendChatMessage("3209353216", $wpText, 5);
+
     }
 
     /**
