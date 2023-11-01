@@ -48,4 +48,14 @@ class ViewController
         $this->views->addAttribute("user", $user);
         return $this->views->render($response, "jefes/index.php");
     }
+
+    /**
+     * En esta vista se muestran todas las requisiciones pero si permitir
+     * ninguna accion CRUD
+    */
+    public function control(Response $response, UserInterface $user): Response
+    {
+        $this->views->addAttribute("user", $user);
+        return $this->views->render($response, "control/index.php");
+    }
 }

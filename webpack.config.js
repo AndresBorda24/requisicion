@@ -13,6 +13,7 @@ Encore
     .setPublicPath(process.env.APP_URL + 'build')
     .setManifestKeyPrefix('build/')
     .addEntry('jefes/app', './assets/jefes/index.js')
+    .addEntry('control/app', './assets/control/index.js')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()

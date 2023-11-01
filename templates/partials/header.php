@@ -12,8 +12,16 @@
   <div
   class="container nav-scroller p-1 d-flex container justify-content-between align-items-center">
     <span class="fs-5"><?=  $title ?? "Cl&iacute;nica Asotrauma" ?></span>
-    <span class="fs-6">
-      <?= \App\Enums\UserTypes::value(  $user->getUserType() ) ?>
-    </span>
+    <div class="d-flex gap-1">
+      <?php if(
+        $user->getUserType() !== \App\Enums\UserTypes::JEFE
+        || $user->getAreaId() == 20
+      )
+        echo $this->fetch("./partials/header-links.php")
+      ?>
+      <span class="fs-6">
+        / <?= \App\Enums\UserTypes::value(  $user->getUserType() ) ?>
+      </span>
+    </div>
   </div>
 </div>
