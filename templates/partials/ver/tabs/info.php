@@ -5,14 +5,16 @@ x-show="tab === 1">
     <span class="d-flex mb-2 fs-5 gap-2">
       <span x-text="data.cargo" class="flex-grow-1 fw-semibold"></span>
       <span x-text="'x '+data.cantidad" class="fw-semibold text-nowrap"></span>
-      <template x-if="canOpenEdit">
-        <button
-        @click="openEdit"
-        title="Modificar requisici&oacute;n"
-        class="btn btn-success btn-sm lh-1 px-1">
-          <?= $this->fetch("./icons/wrench.php") ?>
-        </button>
-      </template>
+      <?php if ($this->isRoute("req.jefes")): ?>
+        <template x-if="canOpenEdit">
+          <button
+          @click="openEdit"
+          title="Modificar requisici&oacute;n"
+          class="btn btn-success btn-sm lh-1 px-1">
+            <?= $this->fetch("./icons/wrench.php") ?>
+          </button>
+        </template>
+      <?php endif ?>
     </span>
     <span class="small">
       <span x-text="data.jefe_nombre" class="small fw-semibold"></span><br>
@@ -69,7 +71,9 @@ x-show="tab === 1">
     </template>
   </ul>
 
-  <div class="border-top">
-    <?= $this->fetch("./partials/ver/tabs/actions.php") ?>
-  </div>
+  <?php if ($this->isRoute("req.jefes")): ?>
+    <div class="border-top">
+      <?= $this->fetch("./partials/ver/tabs/actions.php") ?>
+    </div>
+  <?php endif ?>
 </div>

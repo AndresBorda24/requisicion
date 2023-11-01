@@ -11,6 +11,8 @@ function loadWebRoutes(\Slim\App $app) {
     $app->group("", function(Group $app) {
         $app->get("/", [ViewController::class, "jefes"])
             ->setName("req.jefes");
+        $app->get("/control", [ViewController::class, "control"])
+            ->setName("req.control");
         $app->get("/th", [ViewController::class, "th"])
             ->setName("req.th");
         $app->get("/direccion", [ViewController::class, "dir"])

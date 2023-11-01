@@ -13,7 +13,6 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
     </button>
   </template>
 
-
   <form
   @submit.prevent="save"
   class="small d-flex flex-column rounded overflow-auto mx-auto mt-4 mb-auto" style="

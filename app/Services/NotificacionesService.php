@@ -134,7 +134,7 @@ class NotificacionesService
             if ($email === null) return;
 
             $this->email->addAddress("anjart24@gmail.com");
-            $this->email->addAddress("soporte@asotrauma.com.co");
+            // $this->email->addAddress("soporte@asotrauma.com.co");
             $this->email->isHTML(true);
             $this->email->Body = $email;
             $this->email->Subject = "Requisición de Personal";
