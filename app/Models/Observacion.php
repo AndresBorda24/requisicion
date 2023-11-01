@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\UserTypes;
 use Medoo\Medoo;
 
 class Observacion
@@ -75,6 +76,35 @@ class Observacion
                 "author" => Medoo::raw("CONCAT_WS(' ', usuario_apellido1, usuario_nombre1)"),
                 "O.id", "O.body", "O.created_at"
             ], ["O.id" => $id]);
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * Encuentra una obsrvacion dependiendo de su ID. Especialmente para las
+     * notificaciones.
+     *
+     * @param int $id
+    */
+    public function findNoty(int $id): ?array
+    {
+        try {
+            $data = $this->db->get(static::TABLE."(O)", [
+                "[>]usuario (U)" => ["quien" => "usuario_id"],
+                "[>]".Requisicion::TABLE." (R)" => ["req_id" => "id"]
+            ], [
+                "R.cargo", "R.jefe_id", "R.director",
+                "O.id", "O.req_id", "O.body", "O.created_at",
+                "author" => Medoo::raw("CONCAT_WS(' ', usuario_apellido1, usuario_nombre1)"),
+                "U.cargo_id"
+            ], ["O.id" => $id]);
+
+            if ($data !== null) {
+                $data["by"] = UserTypes::getFromCargo((int) $data["cargo_id"]);
+            }
 
             return $data;
         } catch(\Exception $e) {

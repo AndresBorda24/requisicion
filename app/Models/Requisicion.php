@@ -196,7 +196,7 @@ class Requisicion
             ], [
                 "A.area_servicio_nombre (area_nombre)",
                 "E.state", "E.by", "E.at (state_at)", "E.detail",
-                "R.cargo", "R.director", "R.jefe_id", "R.created_at"
+                "R.id", "R.cargo", "R.director", "R.jefe_id", "R.created_at"
             ], ["R.id" => $id ]);
 
             if (!$_) throw new \Exception("Requisicion no encontrada.");

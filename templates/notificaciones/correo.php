@@ -143,7 +143,7 @@
                                 <tr>
                                   <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-                                    <img align="center" border="0" src="https://asotrauma.com.co/wp-content/uploads/2021/09/Asotrauma-logo-w.svg" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 39%;max-width: 179.4px;" width="179.4" />
+                                    <img align="center" border="0" src="https://intranet.asotrauma.com.co/carros-de-paro/img/logo-blanco.png" alt="Aso-logo" title="Aso-Logo" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 39%;max-width: 179.4px;" width="179.4" />
 
                                   </td>
                                 </tr>
@@ -224,7 +224,7 @@
                             <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Source Sans Pro',sans-serif;" align="left">
 
                               <h1 style="margin: 0px; color: #fbeeb8; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 22px; font-weight: 400;">
-                                <strong><?= $cargo ?></strong>
+                                [<?= $id ?>] <strong><?= $cargo ?></strong>
                               </h1>
 
                             </td>
@@ -303,7 +303,7 @@
 
                               <div style="font-size: 14px; line-height: 220%; text-align: left; word-wrap: break-word;">
                                 <ul>
-                                  <li style="line-height: 30.8px;">Estado: <?= $estado ?>.</li>
+                                  <li style="line-height: 30.8px;">Estado: <strong><?= $estado ?></strong>.</li>
                                   <li style="line-height: 30.8px;">Fecha Requisición: <?= $f_req ?>.</li>
                                   <li style="line-height: 30.8px;">Fecha Cambio Estado: <?= $f_estado ?>.</li>
                                   <li style="line-height: 30.8px;">Area: <?= $area ?>.</li>

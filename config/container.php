@@ -29,15 +29,14 @@ $builder->addDefinitions([
     PHPMailer::class => function (ContainerInterface $c) {
         $mail = new PHPMailer();
         $mail->isSMTP();
-
-        $mail->SMTPDebug  = \PHPMailer\PHPMailer\SMTP::DEBUG_OFF;
+        $mail->SMTPDebug  = \PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;
         $mail->Host       = $c->get("mail.host");
-        $mail->SMTPAuth   = true;
         $mail->Port       = $c->get("mail.port");
+        $mail->CharSet    = "UTF-8";
+        $mail->SMTPAuth   = true;
         $mail->Username   = $c->get("mail.username");
         $mail->Password   = $c->get("mail.password");
-        $mail->CharSet    = "UTF-8";
-        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPSecure = $c->get("mail.encription");
 
         return $mail;
     },

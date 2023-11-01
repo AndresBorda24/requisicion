@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Views;
 use App\Models\User;
 use App\Enums\UserTypes;
 use UltraMsg\WhatsAppApi;
 use App\Models\Requisicion;
-use App\Views;
-use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class NotificacionesService
 {
@@ -55,6 +55,7 @@ class NotificacionesService
             $this->unsetContactsEstados($req, $contact);
 
             $email = $this->views->fetch("./notificaciones/correo.php", [
+                "id" => $req["id"],
                 "cargo"  => $req["cargo"],
                 "estado" => $req["_state"],
                 "f_req"  => $req["created_at"],
@@ -63,6 +64,7 @@ class NotificacionesService
                 "f_estado"  =>  $req["state_at"]
             ]);
             $wpText = $this->views->fetch("./notificaciones/wp.php", [
+                "id" => $req["id"],
                 "cargo"  => $req["cargo"],
                 "detail" => $req["detail"],
                 "estado" => $req["_state"],
@@ -74,7 +76,42 @@ class NotificacionesService
             $this->send( $contact, $wpText, $email );
             $this->logger->info("Notificaciones enviadas: Requisicion $reqId");
         } catch(\Exception $e) {
-            $this->logger->error("Notificaciones" . $e->getMessage());
+            $this->logger->error("Notificaciones: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Se encarga de notificar a los jefes cuando se realiza una observacion a
+     * la requisicion.
+     *
+     * @param int $reqId Requisicion
+    */
+    public function observaciones(int $obsId)
+    {
+        try {
+            $obs = (new \App\Models\Observacion($this->req->db))
+                ->findNoty($obsId);
+
+            if ($obs === null) {
+                throw new \Exception("Notificacion Error. No Observacion.");
+            }
+
+            $contact = $this->user->getContactData(0);
+            $this->unsetContactsEstados($obs, $contact);
+
+            $wpText = $this->views->fetch("./notificaciones/observacion-wp.php", [
+                "id"   => $obs["id"],
+                "body" => $obs["body"],
+                "cargo"  => $obs["cargo"],
+                "req_id" => $obs["req_id"],
+                "author" =>  $obs["author"],
+                "created_at"  => $obs["created_at"]
+            ]);
+
+            $this->send( $contact, $wpText );
+            $this->logger->info("Notificaciones enviadas: Observacion $obsId");
+        } catch(\Exception $e) {
+            $this->logger->error("Notificaciones: " . $e->getMessage());
         }
     }
 
@@ -85,20 +122,27 @@ class NotificacionesService
      * @param string $wpText Mensaje que se enviara por Whatsapp.
      * @param string $email HTML que se enviara por correo.
     */
-    private function send(array $contact, string $wpText, string $email): void
+    private function send(array $contact, string $wpText, ?string $email = null): void
     {
         try {
             $this->wp->sendChatMessage("3209353216", $wpText, 5);
             foreach($contact as $tipo => $info) {
                 // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
-                $this->email->addAddress($info["email"]);
+                // $this->email->addAddress($info["email"]);
             }
 
+            if ($email === null) return;
+
+            $this->email->addAddress("anjart24@gmail.com");
+            $this->email->addAddress("soporte@asotrauma.com.co");
             $this->email->isHTML(true);
             $this->email->Body = $email;
             $this->email->Subject = "Requisición de Personal";
-            $this->email->AltBody = preg_replace("#[*_]#", "", $wpText);
-            $this->email->send();
+            $this->email->AltBody = preg_replace("#[*_`]#", "", $wpText);
+
+            if (! $this->email->send()) {
+                throw new \Exception("Email :" . $this->email->ErrorInfo);
+            }
         } catch(\Exception $e) {
             throw $e;
         }
