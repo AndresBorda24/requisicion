@@ -1,4 +1,4 @@
-<nav>
+<nav class="flex-fill">
   <a
     class="btn btn-sm btn-outline-warning <?=
       $this->isRoute('req.jefes') ? 'active pe-none' : '' ?>"

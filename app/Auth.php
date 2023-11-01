@@ -31,10 +31,10 @@ class Auth
          * 38  -> Gerente Botero.
          * 476 -> Director Administrativo Financiero.
          * 51  -> Director cientifico.
-         * 675 -> Jefe Talento Humano.
+         * 675 -> Jefe TalentoH umano.
          * 3 -> Christopher Robin
         */
-        $id = $this->session->get("usu_id", 3); // 617 // 675 // 476 // 136
+        $id = $this->session->get("usu_id", 675); // 617 // 675 // 476 // 136
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);
