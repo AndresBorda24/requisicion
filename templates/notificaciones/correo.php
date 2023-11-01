@@ -143,7 +143,7 @@
                                 <tr>
                                   <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-                                    <img align="center" border="0" src="https://asotrauma.com.co/wp-content/uploads/2021/09/Asotrauma-logo-w.svg" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 39%;max-width: 179.4px;" width="179.4" />
+                                    <img align="center" border="0" src="https://intranet.asotrauma.com.co/carros-de-paro/img/logo-blanco.png" alt="Aso-logo" title="Aso-Logo" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;width: 39%;max-width: 179.4px;" width="179.4" />
 
                                   </td>
                                 </tr>

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Services;
 
 use Slim\App;
-use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Container\ContainerInterface;
 use Slim\Interfaces\RouteParserInterface;
 
 class AsyncService
@@ -15,8 +15,8 @@ class AsyncService
     private RouteParserInterface $rutas;
 
     public function __construct(
-        ContainerInterface $c,
         App $app,
+        ContainerInterface $c,
         LoggerInterface $logger
     ) {
         $this->c = $c;
@@ -36,17 +36,7 @@ class AsyncService
             $url = $this->c->get("base.url") . $this->rutas
                 ->urlFor("noty.estado", ["id" => $id]);
 
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                pclose(
-                    popen(sprintf("start /B wget --post-data -O - -q -b %s",
-                        escapeshellarg($url)
-                    ), "r")
-                );
-            } else {
-                shell_exec(sprintf("wget --post-data -O - -q -b %s",
-                    escapeshellarg($url)
-                ));
-            }
+            $this->call($url);
         } catch(\Exception $e) {
             $this->logger->error("Async Error: " . $e->getMessage());
         }
@@ -65,14 +55,28 @@ class AsyncService
             $url = $this->c->get("base.url") . $this->rutas
                 ->urlFor("noty.obs", ["id" => $id]);
 
+            $this->call($url);
+        } catch(\Exception $e) {
+            $this->logger->error("Async Error Obs: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Realiza la llamada HTTP de forma asyncrona.
+     *
+     * @param string $url
+    */
+    public function call(string $url): void
+    {
+        try {
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 pclose(
-                    popen(sprintf("start /B wget --post-data -O - -q -b %s",
+                    popen(sprintf("start /B wget -O NUL --method=POST --quiet -b %s",
                         escapeshellarg($url)
                     ), "r")
                 );
             } else {
-                shell_exec(sprintf("wget --post-data -O - -q -b %s",
+                shell_exec(sprintf("wget --post-data=\"\" -q -b -O - %s",
                     escapeshellarg($url)
                 ));
             }
