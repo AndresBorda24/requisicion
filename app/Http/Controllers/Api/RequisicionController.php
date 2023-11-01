@@ -103,9 +103,7 @@ class RequisicionController
         try {
             $_ = $request->getQueryParams()["state"] ?? "";
 
-            return new JsonResponse([
-                "data" => $this->req->getAll($_)
-            ]);
+            return new JsonResponse($this->req->getAll($_));
         } catch(\Exception $e) {
             return responseError($e);
         }
