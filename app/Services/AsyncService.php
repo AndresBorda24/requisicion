@@ -3,21 +3,25 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Slim\App;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Interfaces\RouteParserInterface;
 
 class AsyncService
 {
     private ContainerInterface $c;
+    private LoggerInterface $logger;
     private RouteParserInterface $rutas;
 
-    public function __construct(ContainerInterface $c, App $app)
-    {
+    public function __construct(
+        ContainerInterface $c,
+        App $app,
+        LoggerInterface $logger
+    ) {
         $this->c = $c;
         $this->rutas = $app->getRouteCollector()->getRouteParser();
+        $this->logger = $logger;
     }
 
     /**
@@ -34,17 +38,17 @@ class AsyncService
 
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 pclose(
-                    popen(sprintf("start /B wget --method=POST -q -O - %s",
+                    popen(sprintf("start /B wget --post-data -O - -q -b %s",
                         escapeshellarg($url)
                     ), "r")
                 );
             } else {
-                shell_exec(sprintf("wget --method=POST -O last -q -b %s",
+                shell_exec(sprintf("wget --post-data -O - -q -b %s",
                     escapeshellarg($url)
                 ));
             }
         } catch(\Exception $e) {
-            // Implementar. Podria ser simplemente el log a un archivo.
+            $this->logger->error("Async Error: " . $e->getMessage());
         }
     }
 
@@ -63,17 +67,17 @@ class AsyncService
 
             if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                 pclose(
-                    popen(sprintf("start /B wget --method=POST -q -O - %s",
+                    popen(sprintf("start /B wget --post-data -O - -q -b %s",
                         escapeshellarg($url)
                     ), "r")
                 );
             } else {
-                shell_exec(sprintf("wget --method=POST -O last -q -b %s",
+                shell_exec(sprintf("wget --post-data -O - -q -b %s",
                     escapeshellarg($url)
                 ));
             }
         } catch(\Exception $e) {
-            // Implementar. Podria ser simplemente el log a un archivo.
+            $this->logger->error("Async Error Obs: " . $e->getMessage());
         }
     }
 }

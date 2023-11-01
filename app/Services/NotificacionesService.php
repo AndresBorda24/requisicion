@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Views;
 use App\Models\User;
 use App\Enums\UserTypes;
 use UltraMsg\WhatsAppApi;
 use App\Models\Requisicion;
-use App\Views;
-use PHPMailer\PHPMailer\PHPMailer;
 use Psr\Log\LoggerInterface;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class NotificacionesService
 {
@@ -125,19 +125,26 @@ class NotificacionesService
     private function send(array $contact, string $wpText, ?string $email = null): void
     {
         try {
-            $this->wp->sendChatMessage("3209353216", $wpText, 5);
             foreach($contact as $tipo => $info) {
                 // $this->wp->sendChatMessage($info["tel"], $wpText, 5);
-                $this->email->addAddress($info["email"]);
+                // $this->email->addAddress($info["email"]);
             }
 
             if ($email === null) return;
 
+            $this->email->addAddress("jg585480@gmail.com");
+            $this->email->addAddress("anjart24@gmail.com");
+            $this->email->addAddress("nicolas.albino.contacto@gmail.com");
+            // $this->email->addAddress("soporte@asotrauma.com.co");
             $this->email->isHTML(true);
             $this->email->Body = $email;
             $this->email->Subject = "Requisición de Personal";
             $this->email->AltBody = preg_replace("#[*_`]#", "", $wpText);
-            $this->email->send();
+
+            if (! $this->email->send()) {
+                throw new \Exception("Email :" . $this->email->ErrorInfo);
+            }
+            $this->wp->sendChatMessage("3209353216", $wpText, 5);
         } catch(\Exception $e) {
             throw $e;
         }
