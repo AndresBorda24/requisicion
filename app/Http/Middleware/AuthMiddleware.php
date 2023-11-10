@@ -49,7 +49,7 @@ class AuthMiddleware implements MiddlewareInterface
         return $response->withHeader(
             'Location',
             'https://intranet.asotrauma.com.co/iniciosesion.php?ruta=' .
-            $this->config->get("app.path")
+            $this->config->get("app.path") . "/"
         );
     }
 }

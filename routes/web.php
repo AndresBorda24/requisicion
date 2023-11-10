@@ -17,5 +17,6 @@ function loadWebRoutes(\Slim\App $app) {
             ->add(NoJefeMiddleware::class);
         $app->get("/th", [ViewController::class, "th"])
             ->setName("req.th");
-    })->add(\App\Http\Middleware\SetRouteContextMiddleware::class);
+    })->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
+    ->add(\App\Http\Middleware\AuthMiddleware::class);
 }

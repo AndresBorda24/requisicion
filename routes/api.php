@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use App\Http\Controllers\Api\ExtraController;
-use App\Http\Controllers\Api\NotificacionController;
 use Slim\App;
-use App\Http\Controllers\Api\ObservacionController;
 use Slim\Routing\RouteCollectorProxy as Group;
 use App\Http\Middleware\JsonBodyParserMiddleware;
+use App\Http\Controllers\Api\ExtraController;
+use App\Http\Controllers\Api\NotificacionController;
+use App\Http\Controllers\Api\ObservacionController;
 use App\Http\Controllers\Api\RequisicionController;
 
 function loadApiRoutes(App $app): void {
@@ -21,13 +21,6 @@ function loadApiRoutes(App $app): void {
             $req->get("/get-jefe", [RequisicionController::class, "getJefe"]);
 
             $req->post("/create", [RequisicionController::class, "create"]);
-            $req->post("/{id:[0-9]+}/notify", [NotificacionController::class, "cambioEstado"])
-                ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
-                ->setName("noty.estado");
-
-            $req->post("/{id:[0-9]+}/notify-obs", [NotificacionController::class, "observacion"])
-                ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
-                ->setName("noty.obs");
 
             $req->put("/{id:[0-9]+}/update", [RequisicionController::class, "update"]);
             $req->put("/{id:[0-9]+}/update-th", [RequisicionController::class, "updateTh"]);
@@ -46,6 +39,17 @@ function loadApiRoutes(App $app): void {
         });
 
         $api->get("/auth/info", [ExtraController::class, "getAuthInfo"]);
-    })->add(JsonBodyParserMiddleware::class);
+    })->add(JsonBodyParserMiddleware::class)
+    ->add(\App\Http\Middleware\AuthMiddleware::class);
+
+
+    // Estas dos rutas no requieren Auth asi que por eso estan separadas, solas...
+    $app->post("/api/requisicion/{id:[0-9]+}/notify", [NotificacionController::class, "cambioEstado"])
+        ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
+        ->setName("noty.estado");
+
+    $app->post("/api/requisicion/{id:[0-9]+}/notify-obs", [NotificacionController::class, "observacion"])
+        ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
+        ->setName("noty.obs");
 }
 
