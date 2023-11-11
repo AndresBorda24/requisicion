@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 use Medoo\Medoo;
 use DI\ContainerBuilder;
+use UltraMsg\WhatsAppApi;
+use Psr\Log\LoggerInterface;
 use Katzgrau\KLogger\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
-use UltraMsg\WhatsAppApi;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 
 $builder  = new ContainerBuilder;
 
@@ -28,15 +28,16 @@ $builder->addDefinitions([
     ),
     PHPMailer::class => function (ContainerInterface $c) {
         $mail = new PHPMailer();
-        $mail->isSMTP();
+        // $mail->isSMTP();
         $mail->SMTPDebug  = \PHPMailer\PHPMailer\SMTP::DEBUG_SERVER;
-        $mail->Host       = $c->get("mail.host");
-        $mail->Port       = $c->get("mail.port");
+        // $mail->Host       = $c->get("mail.host");
+        // $mail->Port       = $c->get("mail.port");
         $mail->CharSet    = "UTF-8";
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $c->get("mail.username");
-        $mail->Password   = $c->get("mail.password");
-        $mail->SMTPSecure = $c->get("mail.encription");
+        // $mail->SMTPAuth   = true;
+        // $mail->Username   = $c->get("mail.username");
+        // $mail->Password   = $c->get("mail.password");
+        // $mail->SMTPSecure = $c->get("mail.encription");
+        $mail->setFrom('envio.correos@asotrauma.com.co', 'Correos Asotrauma');
 
         return $mail;
     },
