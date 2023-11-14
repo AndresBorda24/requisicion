@@ -8,7 +8,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
     <button
     type="button"
     @click="openForm(null)"
-    class="btn btn-sm btn-warning">
+    class="btn btn-sm btn-warning shadow">
       Formulario Requisici&oacute;n
     </button>
   </template>
@@ -16,7 +16,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
   <form
   @submit.prevent="save"
   class="small d-flex flex-column rounded overflow-auto mx-auto mt-4 mb-auto" style="
-    width: 500px;
+    width: 600px;
   ">
     <section class="bg-primary p-2">
       <span class="text-light fw-bold ms-3">
@@ -61,7 +61,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
           required
           type="number"
           placeholder="Ej: 1"
-          x-model="state.cantidad"
+          x-model.number="state.cantidad"
           class="form-control form-control-sm" id="cantidad">
         </div>
       </div>
@@ -113,7 +113,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
           id="horas"
           required
           placeholder="Ej: 47"
-          x-model="state.horas"
+          x-model.number="state.horas"
           class="form-control form-select-sm">
         </div>
       </div>
