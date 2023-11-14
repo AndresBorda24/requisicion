@@ -81,7 +81,7 @@ x-show="tab === 2">
               <input
               type="number"
               :readonly="! canUpdate"
-              x-model="state.sector_anios"
+              x-model.number="state.sector_anios"
               min="0"
               id="sector_anios"
               required
@@ -108,7 +108,7 @@ x-show="tab === 2">
               type="number"
               :readonly="! canUpdate"
               min="0"
-              x-model="state.area_anios"
+              x-model.number="state.area_anios"
               id="area_anios"
               required
               class="form-control form-control-sm">

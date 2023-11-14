@@ -1,5 +1,6 @@
-import { updateThRequisicion } from "@/requests/RequisicionRequests";
 import { errorAlert } from "@/partials/alerts"
+import { updateThRequisicion } from "@/requests/RequisicionRequests";
+import { setInvalid, removeInvalid } from "@/partials/form-validation";
 
 export default () => ({
     state: {},
@@ -36,6 +37,7 @@ export default () => ({
      * Realiza la solicutud y actualiza los datos.
     */
     async save() {
+        removeInvalid();
         try {
             const data = await updateThRequisicion(
                 this.getReq('id'),
@@ -47,6 +49,7 @@ export default () => ({
                 id: this.getReq('id')
             });
         } catch(e) {
+            setInvalid(e?.response?.data?.fields || {});
             errorAlert(e.message);
         }
     },

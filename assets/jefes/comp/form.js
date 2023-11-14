@@ -1,4 +1,5 @@
 import { errorAlert } from "@/partials/alerts"
+import { setInvalid, removeInvalid } from "@/partials/form-validation";
 import { createRequisicion, updateRequisicion } from "@/requests/RequisicionRequests";
 
 export default () => ({
@@ -13,6 +14,7 @@ export default () => ({
     */
     async save() {
         try {
+            removeInvalid();
             if ( this.isEdit ) {
                 const data = await updateRequisicion(this.state.id, this.state);
                 this.$dispatch("updated-state", data.data);
@@ -22,6 +24,7 @@ export default () => ({
             }
             this.closeForm();
         } catch(e) {
+            setInvalid(e?.response?.data?.fields || {});
             errorAlert("No se pudo realizar la solicitud");
             console.error("Create Req: ", e);
         }

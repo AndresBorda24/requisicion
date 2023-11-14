@@ -61,7 +61,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
           required
           type="number"
           placeholder="Ej: 1"
-          x-model="state.cantidad"
+          x-model.number="state.cantidad"
           class="form-control form-control-sm" id="cantidad">
         </div>
       </div>
@@ -113,7 +113,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
           id="horas"
           required
           placeholder="Ej: 47"
-          x-model="state.horas"
+          x-model.number="state.horas"
           class="form-control form-select-sm">
         </div>
       </div>
