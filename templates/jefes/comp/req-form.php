@@ -8,7 +8,7 @@ class="fixed-top bg-black bg-opacity-50 vh-100 vw-100 flex overflow-auto">
     <button
     type="button"
     @click="openForm(null)"
-    class="btn btn-sm btn-warning">
+    class="btn btn-sm btn-warning shadow">
       Formulario Requisici&oacute;n
     </button>
   </template>

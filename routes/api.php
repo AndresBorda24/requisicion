@@ -53,6 +53,7 @@ function loadApiRoutes(App $app): void {
         ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
         ->setName("noty.obs");
 
-    $app->get("/api/get-excel", ExcelController::class);
+    $app->get("/api/get-excel", ExcelController::class)
+        ->setName("excel");
 }
 

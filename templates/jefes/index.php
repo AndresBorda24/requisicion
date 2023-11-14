@@ -12,8 +12,16 @@
   ]) ?>
   <main class="container container-height py-4">
     <section
-    class="mb-3"
-    id="buttons-container"></section>
+    class="mb-3 d-flex justify-content-between"
+    id="buttons-container">
+
+      <a
+        target="_blank"
+        href="<?= $this->link("excel") ?>"
+        class="btn btn-sm btn-success shadow"
+        style="order: 2;"
+      > Generar Excel </a>
+    </section>
 
     <?= $this->fetch("./jefes/comp/grilla.php") ?>
   </main>
