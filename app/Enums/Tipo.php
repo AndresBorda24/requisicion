@@ -16,7 +16,7 @@ final class Tipo extends Enum
 
     protected static array $values = [
         self::TEMPORAL    => "Temporal",
-        self::DIRECTO     => "Directo con Cl&iacute;nica",
+        self::DIRECTO     => "Directo con Clínica",
         self::MANDATO     => "Contrato de Mandato",
         self::APRENDIZ    => "Contrato de Aprendizaje",
         self::OUTSOURCING => "Outsourcing"

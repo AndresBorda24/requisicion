@@ -14,7 +14,7 @@ final class Motivo extends Enum
     public const TRASLADO = "TD";
 
     protected static array $values = [
-        self::CREACION => "Creaci&oacute;n",
+        self::CREACION => "Creación",
         self::RETIRO   => "Retiro",
         self::LICVAC   => "Lic. Vac.",
         self::TRASLADO => "Traslado",

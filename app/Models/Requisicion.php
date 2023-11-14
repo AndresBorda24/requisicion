@@ -475,4 +475,39 @@ class Requisicion
             throw $e;
         }
     }
+
+    /**
+     * Obtiene la informacion necesaria para generar el excel.
+    */
+    public function excel(): array
+    {
+        try {
+            $data = [];
+            $this->db->select(self::TABLE." (R)", [
+                "[>]vista_jefes (J)" => "jefe_id",
+                "[>]cv_req_estados_full (E)" => ["id" => "req_id"],
+                "[>]area_servicio (A)" => ["area_id" => "area_servicio_id"]
+            ], [
+                "R.id (cod)", "R.cargo", "R.cantidad", "R.director", "R.motivo",
+                "R.tipo",
+                "J.usuario_nombrec (jefe)",
+                "A.area_servicio_nombre (area)",
+                "E.solicitud",
+                "E.apro_th (aprobado_TH)",
+                "E.apro_dr (aprobado_director)",
+                "E.apro_gt (aprobado_gerencia)",
+                "E.cumplido", "E.rechazado", "E.anulado",
+            ], function($item) use (&$data) {
+                $item["tipo"] = Tipo::tryValue($item["tipo"]);
+                $item["motivo"] = Motivo::tryValue($item["motivo"]);
+                $item["director"] = UserTypes::tryValue($item["director"]);
+
+                array_push($data, $item);
+            });
+
+            return $data;
+        } catch(\Exception $e) {
+            throw $e;
+        }
+    }
 }

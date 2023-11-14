@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\ExcelController;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy as Group;
 use App\Http\Middleware\JsonBodyParserMiddleware;
@@ -51,5 +52,7 @@ function loadApiRoutes(App $app): void {
     $app->post("/api/requisicion/{id:[0-9]+}/notify-obs", [NotificacionController::class, "observacion"])
         ->add(\App\Http\Middleware\SetRouteContextMiddleware::class)
         ->setName("noty.obs");
+
+    $app->get("/api/get-excel", ExcelController::class);
 }
 
