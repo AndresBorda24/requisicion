@@ -16,7 +16,7 @@ final class Motivo extends Enum
     protected static array $values = [
         self::CREACION => "Creación",
         self::RETIRO   => "Retiro",
-        self::LICVAC   => "Lic. Vac.",
+        self::LICVAC   => "Licencia - Vacaciones",
         self::TRASLADO => "Traslado",
     ];
 }
