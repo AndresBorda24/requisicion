@@ -34,7 +34,7 @@ class Auth
          * 675 -> Jefe TalentoH umano.
          * 3 -> Christopher Robin
         */
-        $id = $this->session->get("usu_id", 675); // 617 // 675 // 476 // 136
+        $id = $this->session->get("usu_id", 121); // 617 // 675 // 476 // 136
         if(! $id) return null;
 
         $this->user = $this->userDb->find((int) $id);

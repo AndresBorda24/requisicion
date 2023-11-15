@@ -15,12 +15,14 @@
     class="mb-3 d-flex justify-content-between"
     id="buttons-container">
 
-      <a
-        target="_blank"
-        href="<?= $this->link("excel") ?>"
-        class="btn btn-sm btn-success shadow"
-        style="order: 2;"
-      > Generar Excel </a>
+      <?php if ($user->getUserType() === \App\Enums\UserTypes::TH): ?>
+        <a
+          target="_blank"
+          href="<?= $this->link("excel") ?>"
+          class="btn btn-sm btn-success shadow"
+          style="order: 2;"
+        > Generar Excel </a>
+      <?php endif ?>
     </section>
 
     <?= $this->fetch("./jefes/comp/grilla.php") ?>

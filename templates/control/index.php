@@ -12,6 +12,15 @@
   ]) ?>
   <main class="container container-height py-4">
     <p>Listado completo de requisiciones:</p>
+    <div class="mb-3">
+      <a
+        target="_blank"
+        href="<?= $this->link("excel") ?>"
+        class="btn btn-sm btn-success shadow"
+        style="order: 2;"
+      > Generar Excel </a>
+    </div>
+
     <?= $this->fetch("./control/comp/grilla.php") ?>
   </main>
   <?= $this->fetch("./partials/footer.php") ?>
